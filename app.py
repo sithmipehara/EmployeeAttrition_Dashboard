@@ -114,10 +114,10 @@ with col7:
 st.write("---")
 
 # Create two new charts in another row
-col8, col9 = st.columns(2)
+col8, col9 , col10= st.columns(3)
 
 # Chart 4: Stacked Bar Chart for Response vs Categorical Variable
-with col8:
+with col9:
     st.markdown("<h4 style='text-align: center;'>Response vs Categorical Variable</h4>", unsafe_allow_html=True)
     
     selected_cat_var_2 = st.selectbox("Select Categorical Variable for Stacked Bar Chart:", categorical_cols)
@@ -137,7 +137,7 @@ with col8:
     st.altair_chart(stacked_bar_chart, use_container_width=True)
 
 # Chart 5: Box Plot for Response vs Numerical Variable
-with col9:
+with col10:
     st.markdown("<h4 style='text-align: center;'>Response vs Numerical Variable</h4>", unsafe_allow_html=True)
     
     selected_num_var_2 = st.selectbox("Select Numerical Variable for Box Plot:", numerical_cols)
