@@ -47,9 +47,8 @@ col5, col6, col7 = st.columns(3)
 
 # Chart 1: Response Variable - Donut Chart
 with col5:
-    st.write("---")
-    st.write("---")
     st.subheader("Attrition Distribution")
+    st.write("---")
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
     
