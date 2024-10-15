@@ -61,6 +61,8 @@ with col5:
 
 # Chart 2: Categorical Variables - Bar Chart with Filter
 with col6:
+    st.write("---")
+    st.write("---")
     st.subheader("Categorical Variable Distribution")
     categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
     selected_cat_var = st.selectbox("Select Categorical Variable:", categorical_cols)
