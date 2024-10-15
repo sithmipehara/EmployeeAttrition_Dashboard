@@ -11,8 +11,7 @@ data_url = "https://raw.githubusercontent.com/sithmipehara/EmployeeAttrition_Das
 @st.cache_data
 def load_data():
     df = pd.read_csv(data_url)
-    # Remove the first column (ID column)
-    df = df.iloc[:, 1:]  # Assuming the first column is the ID column
+    df = df.iloc[:, 1:]  # Remove the first column (ID column)
     return df
 
 # Load data
@@ -28,31 +27,30 @@ response_variable = "Attrition"
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    st.markdown(f"<h4 style='text-align: center;'>Number of Data Points</h4>", unsafe_allow_html=True)
-    st.markdown(f"<h2 style='text-align: center;'>{num_data_points}</h2>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: #2BCDD5;'>Number of Data Points</h4>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='text-align: center; color: #203864;'>{num_data_points}</h2>", unsafe_allow_html=True)
 
 with col2:
-    st.markdown(f"<h4 style='text-align: center;'>Number of Categorical Variables</h4>", unsafe_allow_html=True)
-    st.markdown(f"<h2 style='text-align: center;'>{num_categorical_vars}</h2>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: #2BCDD5;'>Number of Categorical Variables</h4>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='text-align: center; color: #203864;'>{num_categorical_vars}</h2>", unsafe_allow_html=True)
 
 with col3:
-    st.markdown(f"<h4 style='text-align: center;'>Number of Numerical Variables</h4>", unsafe_allow_html=True)
-    st.markdown(f"<h2 style='text-align: center;'>{num_numerical_vars}</h2>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: #2BCDD5;'>Number of Numerical Variables</h4>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='text-align: center; color: #203864;'>{num_numerical_vars}</h2>", unsafe_allow_html=True)
 
 with col4:
-    st.markdown(f"<h4 style='text-align: center;'>Response Variable</h4>", unsafe_allow_html=True)
-    st.markdown(f"<h2 style='text-align: center;'>{response_variable}</h2>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: #2BCDD5;'>Response Variable</h4>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='text-align: center; color: #203864;'>{response_variable}</h2>", unsafe_allow_html=True)
 
 # Add space between the header and charts
 st.write("---")
-
 
 # Create three charts in one row
 col5, col6, col7 = st.columns(3)
 
 # Chart 1: Response Variable - Donut Chart
 with col5:
-    st.markdown("<h4 style='text-align: center;'>Attrition Distribution</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: #C00000;'>Attrition Distribution</h4>", unsafe_allow_html=True)
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
     
@@ -66,7 +64,7 @@ with col5:
 
 # Chart 2: Categorical Variables - Bar Chart with Filter (excluding Attrition)
 with col6:
-    st.markdown("<h4 style='text-align: center;'>Categorical Variable Distribution</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: #C00000;'>Categorical Variable Distribution</h4>", unsafe_allow_html=True)
     
     categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
     categorical_cols.remove('Attrition')  # Remove Attrition from options
@@ -87,7 +85,7 @@ with col6:
 
 # Chart 3: Numerical Variables - Histogram with Filter
 with col7:
-    st.markdown("<h4 style='text-align: center;'>Numerical Variable Distribution</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: #C00000;'>Numerical Variable Distribution</h4>", unsafe_allow_html=True)
     
     numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
     selected_num_var = st.selectbox("Select Numerical Variable:", numerical_cols)
