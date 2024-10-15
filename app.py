@@ -45,19 +45,19 @@ st.write("---")
 # Create three charts in one row
 col5, col6, col7 = st.columns(3)
 
-# Chart 1: Response Variable - Pie Chart
+# Chart 1: Response Variable - Donut Chart
 with col5:
     st.subheader("Attrition Distribution")
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
     
-    pie_chart = alt.Chart(attrition_counts).mark_arc().encode(
+    donut_chart = alt.Chart(attrition_counts).mark_arc(innerRadius=50).encode(
         theta=alt.Theta(field='Count', type='quantitative'),
         color=alt.Color(field='Attrition', type='nominal', legend=None),
         tooltip=['Attrition', 'Count']
     ).properties(width=300, height=300)
     
-    st.altair_chart(pie_chart, use_container_width=True)
+    st.altair_chart(donut_chart, use_container_width=True)
 
 # Chart 2: Categorical Variables - Bar Chart with Filter
 with col6:
