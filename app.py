@@ -52,7 +52,7 @@ col5, col6, col7 = st.columns(3)
 
 # Chart 1: Response Variable - Donut Chart
 with col5:
-    st.subheader("Attrition Distribution")
+    st.markdown("<h4 style='text-align: center;'>Attrition Distribution</h4>", unsafe_allow_html=True)
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
     
@@ -66,7 +66,7 @@ with col5:
 
 # Chart 2: Categorical Variables - Bar Chart with Filter (excluding Attrition)
 with col6:
-    st.subheader("Categorical Variable Distribution")
+    st.markdown("<h4 style='text-align: center;'>Categorical Variable Distribution</h4>", unsafe_allow_html=True)
     
     categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
     categorical_cols.remove('Attrition')  # Remove Attrition from options
@@ -87,7 +87,7 @@ with col6:
 
 # Chart 3: Numerical Variables - Histogram with Filter
 with col7:
-    st.subheader("Numerical Variable Distribution")
+    st.markdown("<h4 style='text-align: center;'>Numerical Variable Distribution</h4>", unsafe_allow_html=True)
     
     numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
     selected_num_var = st.selectbox("Select Numerical Variable:", numerical_cols)
