@@ -47,6 +47,8 @@ col5, col6, col7 = st.columns(3)
 
 # Chart 1: Response Variable - Donut Chart
 with col5:
+    st.write("---")
+    st.write("---")
     st.subheader("Attrition Distribution")
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
@@ -61,8 +63,6 @@ with col5:
 
 # Chart 2: Categorical Variables - Bar Chart with Filter
 with col6:
-    st.write("---")
-    st.write("---")
     st.subheader("Categorical Variable Distribution")
     categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
     selected_cat_var = st.selectbox("Select Categorical Variable:", categorical_cols)
