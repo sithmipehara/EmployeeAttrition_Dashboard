@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Set the theme to dark
 st.set_page_config(page_title="Employee Attrition Dashboard", layout="wide", initial_sidebar_state="expanded")
@@ -20,7 +21,7 @@ num_categorical_vars = df.select_dtypes(include=['object']).shape[1]
 num_numerical_vars = df.select_dtypes(include=['int64', 'float64']).shape[1]
 response_variable = "Attrition"
 
-# Create a horizontal row with three containers
+# Create a horizontal row with four containers
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
@@ -38,18 +39,45 @@ with col4:
 # Add space between the header and charts
 st.write("---")
 
-# Create two charts below the containers
-col5, col6 = st.columns(2)
+# Create three charts in one row
+col5, col6, col7 = st.columns(3)
 
-# Example Chart 1: Distribution of Age
+# Chart 1: Response Variable - Pie Chart
 with col5:
-    st.subheader("Age Distribution")
-    st.bar_chart(df['Age'].value_counts())
+    st.subheader("Attrition Distribution")
+    attrition_counts = df['Attrition'].value_counts()
+    fig1, ax1 = plt.subplots()
+    ax1.pie(attrition_counts, labels=attrition_counts.index, autopct='%1.1f%%', startangle=90)
+    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    st.pyplot(fig1)
 
-# Example Chart 2: Monthly Income Distribution
+# Chart 2: Categorical Variables - Bar Chart with Filter
 with col6:
-    st.subheader("Monthly Income Distribution")
-    st.bar_chart(df['Monthly Income'].value_counts())
+    st.subheader("Categorical Variable Distribution")
+    categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
+    selected_cat_var = st.selectbox("Select Categorical Variable:", categorical_cols)
+    
+    cat_counts = df[selected_cat_var].value_counts()
+    fig2, ax2 = plt.subplots()
+    ax2.bar(cat_counts.index, cat_counts.values)
+    ax2.set_title(selected_cat_var)
+    ax2.set_xlabel(selected_cat_var)
+    ax2.set_ylabel("Count")
+    plt.xticks(rotation=45)
+    st.pyplot(fig2)
+
+# Chart 3: Numerical Variables - Histogram with Filter
+with col7:
+    st.subheader("Numerical Variable Distribution")
+    numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
+    selected_num_var = st.selectbox("Select Numerical Variable:", numerical_cols)
+    
+    fig3, ax3 = plt.subplots()
+    ax3.hist(df[selected_num_var], bins=30, color='blue', alpha=0.7)
+    ax3.set_title(f"Histogram of {selected_num_var}")
+    ax3.set_xlabel(selected_num_var)
+    ax3.set_ylabel("Frequency")
+    st.pyplot(fig3)
 
 st.write("### Additional Insights")
 st.write("This dashboard visualizes employee attrition data, providing insights into various attributes.")
