@@ -59,12 +59,12 @@ st.write("---")
 # Create three charts in one row with background colors
 col5, col6, col7 = st.columns(3)
 
-chart_background_color = "#C00000"  # Red for charts
+chart_background_color = " #2BCDD5"  # Red for charts
 
 # Chart 1: Response Variable - Donut Chart
 with col5:
-    st.markdown(f"<div style='background-color: {chart_background_color}; padding: 20px; border-radius: 10px;'>"
-                f"<h4 style='text-align: center; color: #FFFFFF;'>Attrition Distribution</h4></div>", 
+    st.markdown(f"<div style='background-color: {chart_background_color}; padding: 20px; border-radius: 10px;height: 55px;'>"
+                f"<h5 style='text-align: center; color: #FFFFFF;'>Attrition Distribution</h5></div>", 
                 unsafe_allow_html=True)
     
     attrition_counts = df['Attrition'].value_counts().reset_index()
@@ -80,8 +80,8 @@ with col5:
 
 # Chart 2: Categorical Variables - Bar Chart with Filter (excluding Attrition)
 with col6:
-    st.markdown(f"<div style='background-color: {chart_background_color}; padding: 20px; border-radius: 10px;'>"
-                f"<h4 style='text-align: center; color: #FFFFFF;'>Categorical Variable Distribution</h4></div>", 
+    st.markdown(f"<div style='background-color: {chart_background_color}; padding: 20px; border-radius: 10px;height: 55px;'>"
+                f"<h5 style='text-align: center; color: #FFFFFF;'>Categorical Variable Distribution</h5></div>", 
                 unsafe_allow_html=True)
     
     categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
@@ -103,8 +103,8 @@ with col6:
 
 # Chart 3: Numerical Variables - Histogram with Filter
 with col7:
-    st.markdown(f"<div style='background-color: {chart_background_color}; padding: 20px; border-radius: 10px;'>"
-                f"<h4 style='text-align: center; color: #FFFFFF;'>Numerical Variable Distribution</h4></div>", 
+    st.markdown(f"<div style='background-color: {chart_background_color}; padding: 20px; border-radius: 10px;height: 55px;'>"
+                f"<h5 style='text-align: center; color: #FFFFFF;'>Numerical Variable Distribution</h5></div>", 
                 unsafe_allow_html=True)
     
     numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
