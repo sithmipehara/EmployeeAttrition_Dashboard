@@ -48,7 +48,7 @@ with col3:
                 unsafe_allow_html=True)
 
 with col4:
-    st.markdown(f"<div style='background-color: {background_color}; padding: 20px; border-radius: 10px; height: 1000px'>"
+    st.markdown(f"<div style='background-color: {background_color}; padding: 20px; border-radius: 10px; height: 500px'>"
                 f"<h5 style='text-align: center; color: #FFFFFF;'>Response Variable</h5>"
                 f"<h2 style='text-align: center; color: #FFFFFF;'>{response_variable}</h2></div>", 
                 unsafe_allow_html=True)
