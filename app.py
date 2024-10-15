@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
+import altair as alt
 
 # Set the theme to dark
 st.set_page_config(page_title="Employee Attrition Dashboard", layout="wide", initial_sidebar_state="expanded")
@@ -48,11 +48,16 @@ col5, col6, col7 = st.columns(3)
 # Chart 1: Response Variable - Pie Chart
 with col5:
     st.subheader("Attrition Distribution")
-    attrition_counts = df['Attrition'].value_counts()
-    fig1, ax1 = plt.subplots()
-    ax1.pie(attrition_counts, labels=attrition_counts.index, autopct='%1.1f%%', startangle=90)
-    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-    st.pyplot(fig1)
+    attrition_counts = df['Attrition'].value_counts().reset_index()
+    attrition_counts.columns = ['Attrition', 'Count']
+    
+    pie_chart = alt.Chart(attrition_counts).mark_arc().encode(
+        theta=alt.Theta(field='Count', type='quantitative'),
+        color=alt.Color(field='Attrition', type='nominal', legend=None),
+        tooltip=['Attrition', 'Count']
+    ).properties(width=300, height=300)
+    
+    st.altair_chart(pie_chart, use_container_width=True)
 
 # Chart 2: Categorical Variables - Bar Chart with Filter
 with col6:
@@ -60,14 +65,17 @@ with col6:
     categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
     selected_cat_var = st.selectbox("Select Categorical Variable:", categorical_cols)
     
-    cat_counts = df[selected_cat_var].value_counts()
-    fig2, ax2 = plt.subplots()
-    ax2.bar(cat_counts.index, cat_counts.values)
-    ax2.set_title(selected_cat_var)
-    ax2.set_xlabel(selected_cat_var)
-    ax2.set_ylabel("Count")
-    plt.xticks(rotation=45)
-    st.pyplot(fig2)
+    cat_counts = df[selected_cat_var].value_counts().reset_index()
+    cat_counts.columns = [selected_cat_var, 'Count']
+    
+    bar_chart = alt.Chart(cat_counts).mark_bar().encode(
+        x=alt.X(selected_cat_var, sort='-y'),
+        y='Count',
+        color=alt.Color(selected_cat_var, legend=None),
+        tooltip=[selected_cat_var, 'Count']
+    ).properties(width=300, height=300)
+    
+    st.altair_chart(bar_chart, use_container_width=True)
 
 # Chart 3: Numerical Variables - Histogram with Filter
 with col7:
@@ -75,12 +83,13 @@ with col7:
     numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
     selected_num_var = st.selectbox("Select Numerical Variable:", numerical_cols)
     
-    fig3, ax3 = plt.subplots()
-    ax3.hist(df[selected_num_var], bins=30, color='blue', alpha=0.7)
-    ax3.set_title(f"Histogram of {selected_num_var}")
-    ax3.set_xlabel(selected_num_var)
-    ax3.set_ylabel("Frequency")
-    st.pyplot(fig3)
+    histogram = alt.Chart(df).mark_bar().encode(
+        x=alt.X(selected_num_var, bin=True),
+        y='count()',
+        tooltip=[selected_num_var, 'count()']
+    ).properties(width=300, height=300)
+    
+    st.altair_chart(histogram, use_container_width=True)
 
 st.write("### Additional Insights")
 st.write("This dashboard visualizes employee attrition data, providing insights into various attributes.")
