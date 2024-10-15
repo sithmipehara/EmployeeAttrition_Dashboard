@@ -74,14 +74,14 @@ with col5:
     
     st.altair_chart(donut_chart, use_container_width=True)
 
-# Chart 2: Categorical Variables - Bar Chart with Filter (excluding Attrition)
+# Chart 2 & Filter for Categorical Variables - Bar Chart with Filter (excluding Attrition)
 with col6:
     st.markdown("<h4 style='text-align: center;'>Categorical Variable Distribution</h4>", unsafe_allow_html=True)
     
     categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
     categorical_cols.remove('Attrition')  # Remove Attrition from options
     
-    selected_cat_var = st.selectbox("Select Categorical Variable:", categorical_cols)
+    selected_cat_var = st.selectbox("Select Categorical Variable:", categorical_cols, key="cat_var")
     
     cat_counts = df[selected_cat_var].value_counts().reset_index()
     cat_counts.columns = [selected_cat_var, 'Count']
@@ -95,12 +95,13 @@ with col6:
     
     st.altair_chart(bar_chart, use_container_width=True)
 
-# Chart 3: Numerical Variables - Histogram with Filter
+# Chart 3 & Filter for Numerical Variables - Histogram with Filter
 with col7:
     st.markdown("<h4 style='text-align: center;'>Numerical Variable Distribution</h4>", unsafe_allow_html=True)
     
     numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
-    selected_num_var = st.selectbox("Select Numerical Variable:", numerical_cols)
+    
+    selected_num_var = st.selectbox("Select Numerical Variable:", numerical_cols, key="num_var")
     
     histogram = alt.Chart(df).mark_bar().encode(
         x=alt.X(selected_num_var, bin=True),
@@ -120,7 +121,7 @@ col8, col9 , col10= st.columns(3)
 with col9:
     st.markdown("<h4 style='text-align: center;'>Response vs Categorical Variable</h4>", unsafe_allow_html=True)
     
-    selected_cat_var_2 = st.selectbox("Select Categorical Variable for Stacked Bar Chart:", categorical_cols)
+    selected_cat_var_2 = st.selectbox("Select Categorical Variable for Stacked Bar Chart:", categorical_cols, key="cat_var_2")
     
     stacked_data = df.groupby([selected_cat_var_2, 'Attrition']).size().reset_index(name='Count')
     
@@ -140,7 +141,7 @@ with col9:
 with col10:
     st.markdown("<h4 style='text-align: center;'>Response vs Numerical Variable</h4>", unsafe_allow_html=True)
     
-    selected_num_var_2 = st.selectbox("Select Numerical Variable for Box Plot:", numerical_cols)
+    selected_num_var_2 = st.selectbox("Select Numerical Variable for Box Plot:", numerical_cols, key="num_var_2")
     
     box_plot = alt.Chart(df).mark_boxplot().encode(
         x=alt.X('Attrition:N'),
