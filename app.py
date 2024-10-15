@@ -56,17 +56,12 @@ with col4:
 # Add space between the header and charts
 st.write("---")
 
-# Create three charts in one row with background colors
+# Create three charts in one row
 col5, col6, col7 = st.columns(3)
-
-chart_background_color = " #2BCDD5"  # Red for charts
 
 # Chart 1: Response Variable - Donut Chart
 with col5:
-    st.markdown(f"<div style='background-color: {chart_background_color}; padding: 20px; border-radius: 10px;height: 55px;'>"
-                f"<h5 style='text-align: center; color: #FFFFFF;'>Attrition Distribution</h5></div>", 
-                unsafe_allow_html=True)
-    
+    st.markdown("<h4 style='text-align: center;'>Attrition Distribution</h4>", unsafe_allow_html=True)
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
     
@@ -80,14 +75,12 @@ with col5:
 
 # Chart 2: Categorical Variables - Bar Chart with Filter (excluding Attrition)
 with col6:
-    st.markdown(f"<div style='background-color: {chart_background_color}; padding: 20px; border-radius: 10px;height: 55px;'>"
-                f"<h5 style='text-align: center; color: #FFFFFF;'>Categorical Variable Distribution</h5></div>", 
-                unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center;'>Categorical Variable Distribution</h4>", unsafe_allow_html=True)
     
     categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
     categorical_cols.remove('Attrition')  # Remove Attrition from options
     
-    selected_cat_var = st.selectbox("Select Categorical Variable:", categorical_cols)
+    selected_cat_var = st.selectbox(":", categorical_cols)
     
     cat_counts = df[selected_cat_var].value_counts().reset_index()
     cat_counts.columns = [selected_cat_var, 'Count']
@@ -103,12 +96,10 @@ with col6:
 
 # Chart 3: Numerical Variables - Histogram with Filter
 with col7:
-    st.markdown(f"<div style='background-color: {chart_background_color}; padding: 20px; border-radius: 10px;height: 55px;'>"
-                f"<h5 style='text-align: center; color: #FFFFFF;'>Numerical Variable Distribution</h5></div>", 
-                unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center;'>Numerical Variable Distribution</h4>", unsafe_allow_html=True)
     
     numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
-    selected_num_var = st.selectbox("Select Numerical Variable:", numerical_cols)
+    selected_num_var = st.selectbox("", numerical_cols)
     
     histogram = alt.Chart(df).mark_bar().encode(
         x=alt.X(selected_num_var, bin=True),
