@@ -64,7 +64,7 @@ with col5:
 with col6:
     st.subheader("Categorical Variable Distribution")
     categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
-    selected_cat_var = st.selectbox("Select Categorical Variable:", categorical_cols)
+    selected_cat_var = st.selectbox("", categorical_cols)
     
     cat_counts = df[selected_cat_var].value_counts().reset_index()
     cat_counts.columns = [selected_cat_var, 'Count']
@@ -82,7 +82,7 @@ with col6:
 with col7:
     st.subheader("Numerical Variable Distribution")
     numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
-    selected_num_var = st.selectbox("Select Numerical Variable:", numerical_cols)
+    selected_num_var = st.selectbox("", numerical_cols)
     
     histogram = alt.Chart(df).mark_bar().encode(
         x=alt.X(selected_num_var, bin=True),
