@@ -10,7 +10,10 @@ data_url = "https://raw.githubusercontent.com/sithmipehara/EmployeeAttrition_Das
 
 @st.cache_data
 def load_data():
-    return pd.read_csv(data_url)
+    df = pd.read_csv(data_url)
+    # Remove the first column (ID column)
+    df = df.iloc[:, 1:]  # Assuming the first column is the ID column
+    return df
 
 # Load data
 df = load_data()
