@@ -30,25 +30,25 @@ col1, col2, col3, col4 = st.columns(4)
 background_color = "#2c2c2e" 
 
 with col1:
-    st.markdown(f"<div style='background-color: {background_color}; padding: 20px; border-radius: 10px;'>"
+    st.markdown(f"<div style='background-color: {background_color}; padding: 20px; border-radius: 10px;height: 155px;'>"
                 f"<h5 style='text-align: center; color: #FFFFFF;'>Number of Data Points</h5>"
                 f"<h2 style='text-align: center; color: #FFFFFF;'>{num_data_points}</h2></div>", 
                 unsafe_allow_html=True)
 
 with col2:
-    st.markdown(f"<div style='background-color: {background_color}; padding: 20px; border-radius: 10px;height: 150px'>"
+    st.markdown(f"<div style='background-color: {background_color}; padding: 20px; border-radius: 10px;height: 155px;'>"
                 f"<h5 style='text-align: center; color: #FFFFFF;'>Number of Categorical Variables</h5>"
                 f"<h2 style='text-align: center; color: #FFFFFF;'>{num_categorical_vars}</h2></div>", 
                 unsafe_allow_html=True)
 
 with col3:
-    st.markdown(f"<div style='background-color: {background_color}; padding: 20px; border-radius: 10px;height: 150px'>"
+    st.markdown(f"<div style='background-color: {background_color}; padding: 20px; border-radius: 10px;height: 155px;'>"
                 f"<h5 style='text-align: center; color: #FFFFFF;'>Number of Numerical Variables</h5>"
                 f"<h2 style='text-align: center; color: #FFFFFF;'>{num_numerical_vars}</h2></div>", 
                 unsafe_allow_html=True)
 
 with col4:
-    st.markdown(f"<div style='background-color: {background_color}; padding: 20px; border-radius: 10px; height: 150px'>"
+    st.markdown(f"<div style='background-color: {background_color}; padding: 20px; border-radius: 10px; height: 155px;'>"
                 f"<h5 style='text-align: center; color: #FFFFFF;'>Response Variable</h5>"
                 f"<h2 style='text-align: center; color: #FFFFFF;'>{response_variable}</h2></div>", 
                 unsafe_allow_html=True)
