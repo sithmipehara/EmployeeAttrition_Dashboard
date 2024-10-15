@@ -48,41 +48,16 @@ col5, col6, col7 = st.columns(3)
 # Chart 1: Response Variable - Donut Chart
 with col5:
     st.subheader("Attrition Distribution")
-    
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
-    
-    # Calculate percentages for labels
-    attrition_counts['Percentage'] = (attrition_counts['Count'] / num_data_points) * 100
     
     donut_chart = alt.Chart(attrition_counts).mark_arc(innerRadius=70).encode(
         theta=alt.Theta(field='Count', type='quantitative'),
         color=alt.Color(field='Attrition', type='nominal', legend=None),
-        tooltip=['Attrition', 'Count', 'Percentage:Q']
+        tooltip=['Attrition', 'Count']
     ).properties(width=300, height=300)
     
-    # Adding labels to donut chart with percentage and count
-    text = donut_chart.mark_text(radius=90, size=12).encode(
-        text=alt.Text('Attrition:N', format=','),
-        angle=alt.Angle('Attrition:N', axis=None),
-        color=alt.condition(
-            alt.datum.Count > 0,
-            alt.value('white'),  # Text color for visible segments
-            alt.value('transparent')  # Hide text for invisible segments
-        )
-    )
-    
-    percentage_text = donut_chart.mark_text(radius=50, size=10).encode(
-        text=alt.Text('Percentage:Q', format='.1f'),
-        angle=alt.Angle('Attrition:N', axis=None),
-        color=alt.condition(
-            alt.datum.Count > 0,
-            alt.value('black'),  # Text color for visible segments
-            alt.value('transparent')  # Hide text for invisible segments
-        )
-    )
-    
-    st.altair_chart(donut_chart + text + percentage_text, use_container_width=True)
+    st.altair_chart(donut_chart, use_container_width=True)
 
 # Chart 2: Categorical Variables - Bar Chart with Filter (excluding Attrition)
 with col6:
