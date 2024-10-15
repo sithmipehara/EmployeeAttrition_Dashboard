@@ -20,7 +20,7 @@ df = load_data()
 
 # Calculate metrics for display in containers
 num_data_points = df.shape[0]
-num_categorical_vars = df.select_dtypes(include=['object']).shape[1]
+num_categorical_vars = df.select_dtypes(include=['object']).shape[1] - 1  # Exclude Attrition
 num_numerical_vars = df.select_dtypes(include=['int64', 'float64']).shape[1]
 response_variable = "Attrition"
 
@@ -48,23 +48,34 @@ col5, col6, col7 = st.columns(3)
 # Chart 1: Response Variable - Donut Chart
 with col5:
     st.subheader("Attrition Distribution")
-    st.write("---")
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
     
     donut_chart = alt.Chart(attrition_counts).mark_arc(innerRadius=70).encode(
         theta=alt.Theta(field='Count', type='quantitative'),
         color=alt.Color(field='Attrition', type='nominal', legend=None),
-        tooltip=['Attrition', 'Count']
+        tooltip=['Attrition', 'Count'],
     ).properties(width=300, height=300)
-    
-    st.altair_chart(donut_chart, use_container_width=True)
 
-# Chart 2: Categorical Variables - Bar Chart with Filter
+    # Adding labels to donut chart
+    text = donut_chart.mark_text(radius=90, size=12).encode(
+        text=alt.Text('Count:Q', format=','),
+        angle=alt.Angle('Attrition:N', axis=None),
+        color=alt.condition(
+            alt.datum.Count > 0,
+            alt.value('white'),  # Text color for visible segments
+            alt.value('transparent')  # Hide text for invisible segments
+        )
+    )
+    
+    st.altair_chart(donut_chart + text, use_container_width=True)
+
+# Chart 2: Categorical Variables - Bar Chart with Filter (excluding Attrition)
 with col6:
     st.subheader("Categorical Variable Distribution")
     categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
-    selected_cat_var = st.selectbox("", categorical_cols)
+    categorical_cols.remove('Attrition')  # Remove Attrition from options
+    selected_cat_var = st.selectbox("Select Categorical Variable:", categorical_cols)
     
     cat_counts = df[selected_cat_var].value_counts().reset_index()
     cat_counts.columns = [selected_cat_var, 'Count']
@@ -82,7 +93,7 @@ with col6:
 with col7:
     st.subheader("Numerical Variable Distribution")
     numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
-    selected_num_var = st.selectbox("", numerical_cols)
+    selected_num_var = st.selectbox("Select Numerical Variable:", numerical_cols)
     
     histogram = alt.Chart(df).mark_bar().encode(
         x=alt.X(selected_num_var, bin=True),
