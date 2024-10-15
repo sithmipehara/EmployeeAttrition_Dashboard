@@ -28,26 +28,24 @@ response_variable = "Attrition"
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    st.markdown(f"<h3 style='text-align: center;'>Number of Data Points</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h4 style='text-align: center;'>Number of Data Points</h4>", unsafe_allow_html=True)
     st.markdown(f"<h2 style='text-align: center;'>{num_data_points}</h2>", unsafe_allow_html=True)
 
 with col2:
-    st.markdown(f"<h3 style='text-align: center;'>Number of Categorical Variables</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h4 style='text-align: center;'>Number of Categorical Variables</h4>", unsafe_allow_html=True)
     st.markdown(f"<h2 style='text-align: center;'>{num_categorical_vars}</h2>", unsafe_allow_html=True)
 
 with col3:
-    st.markdown(f"<h3 style='text-align: center;'>Number of Numerical Variables</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h4 style='text-align: center;'>Number of Numerical Variables</h4>", unsafe_allow_html=True)
     st.markdown(f"<h2 style='text-align: center;'>{num_numerical_vars}</h2>", unsafe_allow_html=True)
 
 with col4:
-    st.markdown(f"<h3 style='text-align: center;'>Response Variable</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h4 style='text-align: center;'>Response Variable</h4>", unsafe_allow_html=True)
     st.markdown(f"<h2 style='text-align: center;'>{response_variable}</h2>", unsafe_allow_html=True)
 
 # Add space between the header and charts
 st.write("---")
 
-# Centering the charts using markdown with HTML
-st.markdown("<h2 style='text-align: center;'>Charts Overview</h2>", unsafe_allow_html=True)
 
 # Create three charts in one row
 col5, col6, col7 = st.columns(3)
