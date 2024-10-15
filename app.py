@@ -48,16 +48,17 @@ col5, col6, col7 = st.columns(3)
 # Chart 1: Response Variable - Donut Chart
 with col5:
     st.subheader("Attrition Distribution")
+    
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
     
     donut_chart = alt.Chart(attrition_counts).mark_arc(innerRadius=70).encode(
         theta=alt.Theta(field='Count', type='quantitative'),
         color=alt.Color(field='Attrition', type='nominal', legend=None),
-        tooltip=['Attrition', 'Count'],
+        tooltip=['Attrition', 'Count']
     ).properties(width=300, height=300)
 
-    # Adding labels to donut chart
+    # Adding labels to donut chart with percentage and count
     text = donut_chart.mark_text(radius=90, size=12).encode(
         text=alt.Text('Count:Q', format=','),
         angle=alt.Angle('Attrition:N', axis=None),
@@ -73,8 +74,10 @@ with col5:
 # Chart 2: Categorical Variables - Bar Chart with Filter (excluding Attrition)
 with col6:
     st.subheader("Categorical Variable Distribution")
+    
     categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
     categorical_cols.remove('Attrition')  # Remove Attrition from options
+    
     selected_cat_var = st.selectbox("Select Categorical Variable:", categorical_cols)
     
     cat_counts = df[selected_cat_var].value_counts().reset_index()
@@ -92,6 +95,7 @@ with col6:
 # Chart 3: Numerical Variables - Histogram with Filter
 with col7:
     st.subheader("Numerical Variable Distribution")
+    
     numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
     selected_num_var = st.selectbox("Select Numerical Variable:", numerical_cols)
     
