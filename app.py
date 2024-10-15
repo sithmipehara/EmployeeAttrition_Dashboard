@@ -81,7 +81,7 @@ with col6:
     categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
     categorical_cols.remove('Attrition')  # Remove Attrition from options
     
-    selected_cat_var = st.selectbox("Select Categorical Variable:", categorical_cols)
+    selected_cat_var = st.selectbox("", categorical_cols)
     
     cat_counts = df[selected_cat_var].value_counts().reset_index()
     cat_counts.columns = [selected_cat_var, 'Count']
@@ -97,7 +97,10 @@ with col6:
 
 # Stacked Bar Chart for Response vs Categorical Variable
 with col7:
+    st.write("---")
+
     stacked_data = df.groupby([selected_cat_var, 'Attrition']).size().reset_index(name='Count')
+    st.markdown("<h5 style='text-align: center;'>Categorical Variable Vs Response Variable</h5>", unsafe_allow_html=True)
     
     stacked_bar_chart = alt.Chart(stacked_data).mark_bar().encode(
         x=alt.X(selected_cat_var),
@@ -123,7 +126,7 @@ with col9:
     
     numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
     
-    selected_num_var = st.selectbox("Select Numerical Variable:", numerical_cols)
+    selected_num_var = st.selectbox("", numerical_cols)
     
     histogram = alt.Chart(df).mark_bar().encode(
         x=alt.X(selected_num_var, bin=True),
@@ -135,7 +138,10 @@ with col9:
 
 # Box Plot for Response vs Numerical Variable using the same numerical variable filter
 with col10:
+    st.write("---")
+
     st.markdown("<h4 style='text-align: center;'>Response vs Numerical Variable</h4>", unsafe_allow_html=True)
+    st.markdown("<h5 style='text-align: center;'>Numerical Variable Vs Response Variable</h5>", unsafe_allow_html=True)
     
     box_plot = alt.Chart(df).mark_boxplot().encode(
         x=alt.X('Attrition:N'),
