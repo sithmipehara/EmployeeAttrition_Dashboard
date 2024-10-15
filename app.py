@@ -81,7 +81,7 @@ with col6:
     categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
     categorical_cols.remove('Attrition')  # Remove Attrition from options
     
-    selected_cat_var = st.selectbox("", categorical_cols)
+    selected_cat_var = st.selectbox("Select Categorical Variable:", categorical_cols)
     
     cat_counts = df[selected_cat_var].value_counts().reset_index()
     cat_counts.columns = [selected_cat_var, 'Count']
@@ -100,7 +100,7 @@ with col7:
     st.markdown("<h4 style='text-align: center;'>Numerical Variable Distribution</h4>", unsafe_allow_html=True)
     
     numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
-    selected_num_var = st.selectbox("", numerical_cols)
+    selected_num_var = st.selectbox("Select Numerical Variable:", numerical_cols)
     
     histogram = alt.Chart(df).mark_bar().encode(
         x=alt.X(selected_num_var, bin=True),
@@ -109,6 +109,46 @@ with col7:
     ).properties(width=300, height=300)
     
     st.altair_chart(histogram, use_container_width=True)
+
+# Add space between the first and second rows of charts
+st.write("---")
+
+# Create two new charts in another row
+col8, col9 = st.columns(2)
+
+# Chart 4: Stacked Bar Chart for Response vs Categorical Variable
+with col8:
+    st.markdown("<h4 style='text-align: center;'>Response vs Categorical Variable</h4>", unsafe_allow_html=True)
+    
+    selected_cat_var_2 = st.selectbox("Select Categorical Variable for Stacked Bar Chart:", categorical_cols)
+    
+    stacked_data = df.groupby([selected_cat_var_2, 'Attrition']).size().reset_index(name='Count')
+    
+    stacked_bar_chart = alt.Chart(stacked_data).mark_bar().encode(
+        x=alt.X(selected_cat_var_2),
+        y='Count',
+        color=alt.Color('Attrition:N', legend=None),
+        tooltip=[selected_cat_var_2, 'Attrition', 'Count']
+    ).properties(width=300, height=300).configure_mark(
+        opacity=0.8,
+        strokeWidth=0
+    )
+    
+    st.altair_chart(stacked_bar_chart, use_container_width=True)
+
+# Chart 5: Box Plot for Response vs Numerical Variable
+with col9:
+    st.markdown("<h4 style='text-align: center;'>Response vs Numerical Variable</h4>", unsafe_allow_html=True)
+    
+    selected_num_var_2 = st.selectbox("Select Numerical Variable for Box Plot:", numerical_cols)
+    
+    box_plot = alt.Chart(df).mark_boxplot().encode(
+        x=alt.X('Attrition:N'),
+        y=alt.Y(selected_num_var_2),
+        tooltip=['Attrition', selected_num_var_2]
+    ).properties(width=300, height=300)
+    
+    st.altair_chart(box_plot, use_container_width=True)
 
 st.write("### Additional Insights")
 st.write("This dashboard visualizes employee attrition data, providing insights into various attributes.")
