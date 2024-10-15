@@ -51,7 +51,7 @@ with col5:
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
     
-    donut_chart = alt.Chart(attrition_counts).mark_arc(innerRadius=50).encode(
+    donut_chart = alt.Chart(attrition_counts).mark_arc(innerRadius=90).encode(
         theta=alt.Theta(field='Count', type='quantitative'),
         color=alt.Color(field='Attrition', type='nominal', legend=None),
         tooltip=['Attrition', 'Count']
