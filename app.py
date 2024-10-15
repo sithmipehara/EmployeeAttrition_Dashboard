@@ -62,6 +62,7 @@ col5, col6, col7 = st.columns(3)
 # Chart 1: Response Variable - Donut Chart
 with col5:
     st.markdown("<h4 style='text-align: center;'>Attrition Distribution</h4>", unsafe_allow_html=True)
+    st.write("---")
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
     
@@ -76,7 +77,6 @@ with col5:
 # Chart 2: Categorical Variables - Bar Chart with Filter (excluding Attrition)
 with col6:
     st.markdown("<h4 style='text-align: center;'>Categorical Variable Distribution</h4>", unsafe_allow_html=True)
-    st.write("---")
     
     categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
     categorical_cols.remove('Attrition')  # Remove Attrition from options
