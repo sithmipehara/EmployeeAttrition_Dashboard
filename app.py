@@ -61,6 +61,11 @@ st.markdown("""
     border-radius: 0px;
     margin: 5px;
 }
+.stSelectbox {
+    background-color: #2b2b55; /* Change this to your desired color */
+    border-radius: 0px; /* Optional: rounded corners */
+    padding: 10px; /* Optional: padding inside the selectbox */
+}
 </style>
 """, unsafe_allow_html=True)
 
