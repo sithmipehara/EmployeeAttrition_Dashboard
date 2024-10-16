@@ -88,13 +88,18 @@ center_text = alt.Chart(pd.DataFrame({'text': [total_count]})).mark_text(
     text='text:N'
 )
 
-# Labels for each segment of the donut
-segment_labels = donut_chart.mark_text(radius=90, size=14, color="white").encode(
+# Add labels to each section of the donut (white color, not bold)
+labels = donut_chart.mark_text(radius=130, size=14, color='white', fontWeight='normal').encode(
+    text=alt.Text('Attrition:N')
+)
+
+# Add count labels to each section (white color, not bold)
+count_labels = donut_chart.mark_text(radius=90, size=12, color='white', fontWeight='normal').encode(
     text=alt.Text('Count:Q')
 )
 
-# Combine the donut chart with center text and segment labels
-response_donut_chart = donut_chart + center_text + segment_labels
+# Combine charts
+response_donut_chart = donut_chart + center_text + labels + count_labels
 
 # Categorical Variable Bar Chart
 cat_data = df[cat_var].value_counts().reset_index()
