@@ -10,10 +10,6 @@ st.markdown("""
 .stApp {
     background-color: #111122;  /* Change this to your desired color */
 }
-[data-testid=column] {
-    padding: 0; /* Removes default padding */
-    margin:0; /* Removes default margin */
-}
 .container {
     background-color: #2b2b55; /* Dark background for metric containers */
     padding: 10px;  /* Reduced padding */
@@ -65,7 +61,7 @@ num_numerical_vars = df.select_dtypes(include=['int64', 'float64']).shape[1]
 response_variable = "Attrition"
 
 # Create columns with different widths
-col1, col2, col3, col4 = st.columns([1, 1.5, 2, 2])  # Adjust ratios as needed
+col1, spacer1, col2, spacer2, col3, spacer3, col4 = st.columns([1, 0.05, 1.5, 0.05, 2, 0.05, 2])
 
 # First column: Metrics containers stacked vertically
 with col1:
