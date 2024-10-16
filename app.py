@@ -10,6 +10,10 @@ st.markdown("""
 .stApp {
     background-color: #111122;  /* Change this to your desired color */
 }
+[data-testid=column] {
+    padding: 0; /* Removes default padding */
+    margin: 5px; /* Removes default margin */
+}
 .container {
     background-color: #2b2b55; /* Dark background for metric containers */
     padding: 10px;  /* Reduced padding */
