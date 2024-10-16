@@ -70,27 +70,27 @@ with col2:
     # Container for Donut Chart
     st.markdown("<div class='container'>", unsafe_allow_html=True)
 
-# Add heading
-st.markdown("<h4>Attrition Distribution</h4>", unsafe_allow_html=True)
+    # Add heading
+    st.markdown("<h4>Attrition Distribution</h4>", unsafe_allow_html=True)
 
-# Create and display the donut chart
-attrition_counts = df['Attrition'].value_counts().reset_index()
-attrition_counts.columns = ['Attrition', 'Count']
+    # Create and display the donut chart
+    attrition_counts = df['Attrition'].value_counts().reset_index()
+    attrition_counts.columns = ['Attrition', 'Count']
 
-donut_chart = alt.Chart(attrition_counts).mark_arc(innerRadius=50).encode(
-    theta=alt.Theta(field='Count', type='quantitative'),
-    color=alt.Color(field='Attrition', type='nominal', 
-                    scale=alt.Scale(domain=['Stayed', 'Left'], 
-                                    range=['#00b3b3', '#ff6666']),  # Custom colors for each category
-                    legend=alt.Legend(title="Attrition Status")), 
-    tooltip=['Attrition', 'Count']
-).properties(width=200, height=200).configure(background='#2b2b55')
+    donut_chart = alt.Chart(attrition_counts).mark_arc(innerRadius=50).encode(
+        theta=alt.Theta(field='Count', type='quantitative'),
+        color=alt.Color(field='Attrition', type='nominal', 
+                        scale=alt.Scale(domain=['Stayed', 'Left'], 
+                                        range=['#00b3b3', '#ff6666']),  # Custom colors for each category
+                        legend=alt.Legend(title="Attrition Status")), 
+        tooltip=['Attrition', 'Count']
+    ).properties(width=200, height=200).configure(background='#2b2b55')
 
-# Display the chart inside the container
-st.altair_chart(donut_chart, theme=None, use_container_width=True)
+    # Display the chart inside the container
+    st.altair_chart(donut_chart, theme=None, use_container_width=True)
 
-# Close the container
-st.markdown("</div>", unsafe_allow_html=True)
+    # Close the container
+    st.markdown("</div>", unsafe_allow_html=True)
 
     # Calculate counts and percentages for response variable
     total_count = attrition_counts['Count'].sum()
