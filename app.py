@@ -77,10 +77,6 @@ response_chart = alt.Chart(response_data).mark_arc(innerRadius=50).encode(
     tooltip=["Attrition", "Count"]
 ).properties(width=200, height=200)
 
-# Dataset Preview
-st.markdown("## Dataset Preview")
-st.dataframe(df.head())
-
 # Categorical Variable Bar Chart
 cat_data = df[cat_var].value_counts().reset_index()
 cat_data.columns = [cat_var, "Count"]
