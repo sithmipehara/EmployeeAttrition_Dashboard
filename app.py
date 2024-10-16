@@ -24,7 +24,7 @@ num_numerical_vars = df.select_dtypes(include=['int64', 'float64']).shape[1]
 response_variable = "Attrition"
 
 # Create two columns for the new layout
-col1, col2 = st.columns(2)
+col1, col2,col3,col4 = st.columns(4)
 
 # First column: Metrics containers stacked vertically
 with col1:
@@ -61,13 +61,7 @@ with col2:
         percentage = (row['Count'] / total_count) * 100
         st.markdown(f"<div style='text-align: center;'><strong>{row['Attrition']}</strong>: {row['Count']} ({percentage:.2f}%)</div>", unsafe_allow_html=True)
 
-# Add space between the header and charts
-st.write("---")
-
-# Create two columns for the charts
-col3, col4 = st.columns(2)
-
-# First column of charts
+# Third column of charts
 with col3:
     # Chart 1: Categorical Variable Distribution
     st.markdown("<h4 style='text-align: center;'>Categorical Variable Distribution</h4>", unsafe_allow_html=True)
@@ -103,7 +97,7 @@ with col3:
     
     st.altair_chart(histogram, use_container_width=True)
 
-# Second column of charts
+# Fourth column of charts
 with col4:
     # Chart 4: Stacked Bar Chart for Response vs Categorical Variable
     st.markdown("<h4 style='text-align: center;'>Response vs Categorical Variable</h4>", unsafe_allow_html=True)
