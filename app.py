@@ -78,13 +78,12 @@ donut_chart = alt.Chart(response_data).mark_arc(innerRadius=50).encode(
     tooltip=["Attrition", "Count"]
 ).properties(width=200, height=200)
 
-# Center text overlay
+# Center text overlay (total count)
 total_count = response_data["Count"].sum()
-text = alt.Chart(pd.DataFrame({'text': [total_count]})).mark_text(
+center_text = alt.Chart(pd.DataFrame({'text': [total_count]})).mark_text(
     text=str(total_count),
     size=28,
-    color='white',
-    dx=0, dy=-10
+    color='white'
 ).encode(
     text='text:N'
 )
