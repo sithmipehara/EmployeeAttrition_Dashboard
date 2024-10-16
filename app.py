@@ -33,7 +33,7 @@ st.markdown("""
         .box1 { background-color: #b3d9ff; }
         .box2 { background-color: #66b3ff; }
         .box3 { background-color: #ff6666; }
-        .box4 { background-color: #ff6666; }
+        .box4 { background-color: #ff9999; }
         
         /* Color Scheme for Main Title */
         .title {
