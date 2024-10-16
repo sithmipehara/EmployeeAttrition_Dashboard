@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import altair as alt
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 # Load dataset from GitHub
 data_url = "https://raw.githubusercontent.com/sithmipehara/EmployeeAttrition_Dashboard/refs/heads/main/train.csv"
@@ -67,22 +69,21 @@ with col1:
 
 # Second Column
 with col2:
-    # Prepare data for Altair chart
-    response_counts = data[response_variable].value_counts().reset_index()
-    response_counts.columns = [response_variable, 'count']
+    # Prepare data for Seaborn plot
+    response_counts = data[response_variable].value_counts()
     
-    # Create a donut chart using Altair with customized background
-    donut_chart = alt.Chart(response_counts).mark_arc(innerRadius=50).encode(
-        theta=alt.Theta(field='count', type='quantitative'),
-        color=alt.Color(field=response_variable, type='nominal', 
-                        scale=alt.Scale(domain=['Left', 'Stayed'], 
-                                        range=['#ff6666', '#00b3b3'])),
-        tooltip=[response_variable, 'count']
-    ).properties(
-        title='Response Variable Distribution',
-        width=300,
-        height=300
-    )
+    # Set background colors
+    sns.set(rc={'axes.facecolor':'#2b2b55', 'figure.facecolor':'#2b2b55'})
+    
+    # Create a pie chart (donut chart)
+    fig, ax = plt.subplots()
+    wedges, texts, autotexts = ax.pie(response_counts, labels=response_counts.index, autopct='%1.1f%%', startangle=90, colors=['#ff6666', '#00b3b3'])
+    
+    # Draw a circle at the center to create a donut effect
+    centre_circle = plt.Circle((0, 0), 0.70, fc='#2b2b55')
+    fig.gca().add_artist(centre_circle)
+    
+    ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
     
     # Display the donut chart in a styled box
     st.markdown(
@@ -93,8 +94,8 @@ with col2:
         unsafe_allow_html=True
     )
     
-    # Display the Altair chart inside the box
-    st.altair_chart(donut_chart, use_container_width=True)
+    # Display the  chart inside the box
+    st.pyplot(fig)
 
     # Close the styled box after displaying the chart
     st.markdown("</div>", unsafe_allow_html=True)
