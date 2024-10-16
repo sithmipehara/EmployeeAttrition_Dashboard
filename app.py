@@ -27,20 +27,8 @@ col4.metric("Response Variable", response_variable)
 
 # Sidebar filters
 st.sidebar.header("Filters")
-year = st.sidebar.selectbox("Year", options=["All"] + list(df["Year"].unique()))
-location = st.sidebar.selectbox("Location", options=["All"] + list(df["Location"].unique()))
-organization = st.sidebar.selectbox("Organization", options=["All"] + list(df["Organization"].unique()))
-group = st.sidebar.multiselect("Group", options=df["Group"].unique())
-
-# Filter data based on selections
-if year != "All":
-    df = df[df["Year"] == year]
-if location != "All":
-    df = df[df["Location"] == location]
-if organization != "All":
-    df = df[df["Organization"] == organization]
-if group:
-    df = df[df["Group"].isin(group)]
+cat_var = st.sidebar.selectbox("Select Categorical Variable", options=df.select_dtypes(include='object').columns)
+num_var = st.sidebar.selectbox("Select Numerical Variable", options=df.select_dtypes(include='number').columns)
 
 # Response Variable Distribution (Donut Chart)
 response_data = df["Attrition"].value_counts().reset_index()
@@ -51,69 +39,35 @@ response_chart = alt.Chart(response_data).mark_arc(innerRadius=50).encode(
     tooltip=["Attrition", "Count"]
 ).properties(width=200, height=200)
 
-# Open Position by Business Unit (Stacked Bar Chart)
-business_data = df.groupby(["Business Unit", "Employment Type"]).size().reset_index(name="Count")
-business_chart = alt.Chart(business_data).mark_bar().encode(
-    x="Count:Q",
-    y=alt.Y("Business Unit:N", sort="-x"),
-    color="Employment Type:N",
-    tooltip=["Business Unit", "Employment Type", "Count"]
-).properties(width=250)
+# Dataset Preview
+st.markdown("## Dataset Preview")
+st.dataframe(df.head())
 
-# Open Position by Grade (Grouped Bar Chart)
-grade_data = df.groupby(["Grade", "Gender"]).size().reset_index(name="Count")
-grade_chart = alt.Chart(grade_data).mark_bar().encode(
-    x=alt.X("Grade:N", title=None),
+# Bar Chart for Selected Categorical Variable
+st.markdown("## Categorical Variable Distribution")
+cat_data = df[cat_var].value_counts().reset_index()
+cat_data.columns = [cat_var, "Count"]
+cat_chart = alt.Chart(cat_data).mark_bar().encode(
+    x=alt.X(cat_var, sort="-y"),
     y="Count:Q",
-    color="Gender:N",
-    column="Gender:N",
-    tooltip=["Grade", "Gender", "Count"]
-).properties(width=100)
+    tooltip=[cat_var, "Count"]
+).properties(width=300, height=300)
 
-# Open Position by Job Function (Bar Chart)
-job_data = df.groupby(["Job Function", "Gender"]).size().reset_index(name="Count")
-job_chart = alt.Chart(job_data).mark_bar().encode(
-    x="Count:Q",
-    y=alt.Y("Job Function:N", sort="-x"),
-    color="Gender:N",
-    tooltip=["Job Function", "Gender", "Count"]
-).properties(width=250)
-
-# Open Position by Position (Tree Map)
-position_data = df["Position"].value_counts().reset_index()
-position_chart = alt.Chart(position_data).mark_rect().encode(
-    x="index:N",
-    y="Position:Q",
-    color="index:N",
-    tooltip=["index", "Position"]
-).properties(width=200, height=200)
-
-# Open Position by Diversity (Bar Chart)
-diversity_level_data = df["Diversity Level"].value_counts().reset_index()
-diversity_level_chart = alt.Chart(diversity_level_data).mark_bar().encode(
-    x="Diversity Level:Q",
-    y="index:N",
-    color="index:N",
-    tooltip=["index", "Diversity Level"]
-).properties(width=200, height=200)
+# Histogram for Selected Numerical Variable
+st.markdown("## Numerical Variable Distribution")
+num_chart = alt.Chart(df).mark_bar().encode(
+    x=alt.X(num_var, bin=True),
+    y='count()',
+    tooltip=[num_var, 'count()']
+).properties(width=300, height=300)
 
 # Layout for visualizations
-st.markdown("## Diversity by Organization Type")
-st.altair_chart(diversity_chart, use_container_width=True)
+col1, col2, col3 = st.columns(3)
+col1.markdown("### Response Variable (Attrition)")
+col1.altair_chart(response_chart, use_container_width=True)
 
-st.markdown("## Open Position by Business Unit")
-st.altair_chart(business_chart, use_container_width=True)
+col2.markdown("### Categorical Variable Distribution")
+col2.altair_chart(cat_chart, use_container_width=True)
 
-st.markdown("## Open Position by Grade")
-st.altair_chart(grade_chart, use_container_width=True)
-
-st.markdown("## Open Position by Job Function")
-st.altair_chart(job_chart, use_container_width=True)
-
-st.markdown("## Open Position by Position")
-st.altair_chart(position_chart, use_container_width=True)
-
-st.markdown("## Open Position by Diversity")
-st.altair_chart(diversity_level_chart, use_container_width=True)
-
-# Run the app with: streamlit run app.py
+col3.markdown("### Numerical Variable Distribution")
+col3.altair_chart(num_chart, use_container_width=True)
