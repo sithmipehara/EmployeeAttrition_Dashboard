@@ -61,6 +61,24 @@ num_chart = alt.Chart(df).mark_bar().encode(
     tooltip=[num_var, 'count()']
 ).properties(width=300, height=300)
 
+# Response vs Categorical Variable (Stacked Bar Chart)
+st.markdown("## Response vs Categorical Variable")
+stacked_cat_chart = alt.Chart(df).mark_bar().encode(
+    y=alt.Y(cat_var, title=cat_var, sort='-x'),
+    x=alt.X('count()', title='Count'),
+    color=alt.Color('Attrition', scale=alt.Scale(scheme="tableau20")),
+    tooltip=[cat_var, 'Attrition', 'count()']
+).properties(width=300, height=300)
+
+# Response vs Numerical Variable (Box Plot)
+st.markdown("## Response vs Numerical Variable")
+box_plot = alt.Chart(df).mark_boxplot().encode(
+    x=alt.X("Attrition:N", title="Attrition"),
+    y=alt.Y(num_var, title=num_var),
+    color=alt.Color("Attrition", scale=alt.Scale(scheme="tableau20")),
+    tooltip=["Attrition", num_var]
+).properties(width=300, height=300)
+
 # Layout for visualizations
 col1, col2, col3 = st.columns(3)
 col1.markdown("### Response Variable (Attrition)")
@@ -71,3 +89,14 @@ col2.altair_chart(cat_chart, use_container_width=True)
 
 col3.markdown("### Numerical Variable Distribution")
 col3.altair_chart(num_chart, use_container_width=True)
+
+# Additional Row for New Graphs
+col4, col5, col6 = st.columns(3)
+col4.markdown("### Dataset Preview")
+col4.dataframe(df.head(), height=300)
+
+col5.markdown("### Response vs Categorical Variable")
+col5.altair_chart(stacked_cat_chart, use_container_width=True)
+
+col6.markdown("### Response vs Numerical Variable")
+col6.altair_chart(box_plot, use_container_width=True)
