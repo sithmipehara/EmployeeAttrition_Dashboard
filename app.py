@@ -27,7 +27,6 @@ st.markdown("""
     background-color: #2b2b55; /* Darker background for donut chart */
     padding: 10px;  /* Reduced padding */
     border-radius: 0px;
-    margin: 0px;
 }
 .stSelectbox {
     background-color: #2b2b55; /* Change this to your desired color */
@@ -76,9 +75,8 @@ with col1:
 
 # Second column: Three containers for donut chart and response details
 with col2:
-    st.markdown("<div class='container'>", unsafe_allow_html=True)
     # Container for Donut Chart
-    st.markdown("<div class='container1'><h4 style='text-align: center;'>Attrition Distribution</h4>", unsafe_allow_html=True)
+    st.markdown("<div class='container'><h4 style='text-align: center;'>Attrition Distribution</h4>", unsafe_allow_html=True)
     
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
@@ -94,7 +92,6 @@ with col2:
     
     st.altair_chart(donut_chart, theme=None, use_container_width=True)
     
-    st.markdown("</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
     # Calculate counts and percentages for response variable
@@ -116,7 +113,7 @@ with col2:
     
 # Third column of charts in one container
 with col3:
-    st.markdown("<div class='container'><h4 style='text-align: center;'>Categorical Variable Distribution</h4></div>", unsafe_allow_html=True)
+    st.markdown("<div class='container'><h4 style='text-align: center;'>Categorical Variable Distribution</h4>", unsafe_allow_html=True)
     
     categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
     categorical_cols.remove('Attrition')  # Remove Attrition from options
@@ -136,8 +133,10 @@ with col3:
     
     st.altair_chart(bar_chart, theme=None, use_container_width=True)
 
+    st.markdown("</div>", unsafe_allow_html=True)
+
     # Chart 3: Numerical Variable Distribution - Histogram with Filter
-    st.markdown("<div class='container'><h4 style='text-align: center;'>Numerical Variable Distribution</h4></div>", unsafe_allow_html=True)
+    st.markdown("<div class='container'><h4 style='text-align: center;'>Numerical Variable Distribution</h4>", unsafe_allow_html=True)
     
     numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
     selected_num_var = st.selectbox("Select Numerical Variable:", numerical_cols)
@@ -151,10 +150,11 @@ with col3:
     
     st.altair_chart(histogram, theme=None, use_container_width=True)
 
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # Fourth column of charts in one container
 with col4:
-    st.markdown("<div class='container'><h4 style='text-align: center;'>Response vs Categorical Variable</h4></div>", unsafe_allow_html=True)
+    st.markdown("<div class='container'><h4 style='text-align: center;'>Response vs Categorical Variable</h4>", unsafe_allow_html=True)
     
     selected_cat_var_2 = st.selectbox("Select Categorical Variable for Stacked Bar Chart:", categorical_cols)
     
@@ -172,8 +172,10 @@ with col4:
     
     st.altair_chart(stacked_bar_chart, theme=None, use_container_width=True)
 
+    st.markdown("</div>", unsafe_allow_html=True)
+    
     # Chart 5: Box Plot for Response vs Numerical Variable
-    st.markdown("<div class='container'><h4 style='text-align: center;'>Response vs Numerical Variable</h4></div>", unsafe_allow_html=True)
+    st.markdown("<div class='container'><h4 style='text-align: center;'>Response vs Numerical Variable</h4>", unsafe_allow_html=True)
     
     selected_num_var_2 = st.selectbox("Select Numerical Variable for Box Plot:", numerical_cols)
     
@@ -186,5 +188,7 @@ with col4:
     
     st.altair_chart(box_plot, theme=None, use_container_width=True)
 
+    st.markdown("</div>", unsafe_allow_html=True)
+    
 st.markdown("</div>", unsafe_allow_html=True)
 
