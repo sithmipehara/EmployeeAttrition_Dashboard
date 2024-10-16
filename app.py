@@ -52,8 +52,6 @@ st.markdown("""
     padding: 10px;
     border-radius: 0px;
     margin: 5px;
-    height: 300px; 
-    width: 300px;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -101,15 +99,15 @@ with col2:
     first_response_category = attrition_counts.iloc[0]
     percentage_first = (first_response_category['Count'] / total_count) * 100
     
-    st.markdown("<div class='response-container'><h6 style='text-align: center;'><strong>{}</strong></h6>"
-                f"<h2 style='text-align: center;'>{first_response_category['Count']} <br> ({percentage_first:.2f}%) </h2></div>".format(first_response_category['Attrition']), unsafe_allow_html=True)
+    st.markdown("<div class='response-container'><h5 style='text-align: center;'><strong>{}</strong></h5>"
+                f"<h3 style='text-align: center;'>{first_response_category['Count']} <br> ({percentage_first:.2f}%) </h3></div>".format(first_response_category['Attrition']), unsafe_allow_html=True)
 
     # Container for Second Response Category Details
     second_response_category = attrition_counts.iloc[1]
     percentage_second = (second_response_category['Count'] / total_count) * 100
     
-    st.markdown("<div class='response-container'><h6 style='text-align: center;'><strong>{}</strong></h6>"
-                f"<h2 style='text-align: center;'>{second_response_category['Count']} <br> ({percentage_second:.2f}%) </h2></div>".format(second_response_category['Attrition']), unsafe_allow_html=True)
+    st.markdown("<div class='response-container'><h5 style='text-align: center;'><strong>{}</strong></h5>"
+                f"<h3 style='text-align: center;'>{second_response_category['Count']} <br> ({percentage_second:.2f}%) </h3></div>".format(second_response_category['Attrition']), unsafe_allow_html=True)
 
 # Third column of charts in one container
 with col3:
