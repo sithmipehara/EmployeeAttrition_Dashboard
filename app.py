@@ -30,7 +30,8 @@ st.markdown("""
     background-color: #323267; /* Dark background for metric containers */
     padding: 20px;
     border-radius: 0px;
-
+    height: 200px; /* Adjust height to auto for flexibility */
+    width: auto;
     color: white; /* Text color */
     margin: 5px;
 }
