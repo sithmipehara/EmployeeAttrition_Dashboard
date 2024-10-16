@@ -79,10 +79,9 @@ with col2:
                                         range=['#ff6666', '#00b3b3'])),
         tooltip=[response_variable, 'count']
     ).properties(
-        title='Response Variable Distribution',
         width=300,
         height=300
-    )
+    ).configure_background('#2b2b55')
 
     # Display the donut chart in a styled box
     st.markdown(
