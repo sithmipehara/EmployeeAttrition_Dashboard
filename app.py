@@ -31,7 +31,7 @@ st.markdown("""
     padding: 20px;
     border-radius: 0px;
     height: auto; /* Adjust height to auto for flexibility */
-    width: 120px;
+    width: 300px;
     color: white; /* Text color */
 }
 .donut-container {
