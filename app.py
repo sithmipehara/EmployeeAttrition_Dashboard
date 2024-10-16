@@ -83,7 +83,8 @@ with col2:
         theta=alt.Theta(field='Count', type='quantitative'),
         color=alt.Color(field='Attrition', type='nominal', legend=None),
         tooltip=['Attrition', 'Count']
-    ).properties(width=300, height=300)
+    ).properties(width=300,height=300
+    ).configure(background='#323267')
     
     st.altair_chart(donut_chart, theme=None, use_container_width=True)
     
@@ -125,7 +126,7 @@ with col3:
         tooltip=[selected_cat_var, 'Count']
     ).properties(width=300, height=300)
     
-    st.altair_chart(bar_chart, use_container_width=True)
+    st.altair_chart(bar_chart, theme=None, use_container_width=True)
 
 # Fourth column of charts in one container
 with col4:
@@ -145,7 +146,7 @@ with col4:
         strokeWidth=0
     )
     
-    st.altair_chart(stacked_bar_chart, use_container_width=True)
+    st.altair_chart(stacked_bar_chart, theme=None, use_container_width=True)
 
 st.write("### Additional Insights")
 st.write("This dashboard visualizes employee attrition data, providing insights into various attributes.")
