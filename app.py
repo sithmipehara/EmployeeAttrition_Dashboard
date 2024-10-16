@@ -19,11 +19,8 @@ num_categorical_vars = len(data.select_dtypes(include=['object']).columns)
 num_numerical_vars = len(data.select_dtypes(include=['number']).columns)
 response_variable = 'Attrition'  # Assuming 'Attrition' is the response variable
 
-# Create a title for the dashboard
-st.title("Employee Attrition Dashboard")
-
-# Create four boxes in the first column
-col1, col2, col3, col4 = st.columns(1)
+# Create a single column for boxes
+col1 = st.container()
 
 with col1:
     st.markdown(
