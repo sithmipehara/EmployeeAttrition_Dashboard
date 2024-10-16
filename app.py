@@ -60,6 +60,7 @@ col2.markdown(f"<div class='metric-box box2'>No. of Categorical Variables<br><sp
 col3.markdown(f"<div class='metric-box box3'>No. of Numerical Variables<br><span style='font-size: 24px;'>{num_numerical}</span></div>", unsafe_allow_html=True)
 col4.markdown(f"<div class='metric-box box4'>Response Variable<br><span style='font-size: 24px;'>{response_variable}</span></div>", unsafe_allow_html=True)
 
+st.write(" ")
 
 # Sidebar filters
 st.sidebar.header("Filters")
@@ -113,21 +114,21 @@ col1, col2, col3 = st.columns(3)
 col1.markdown("<h4 style='text-align: center;'>Response variable Distribution</h4>", unsafe_allow_html=True)
 col1.altair_chart(response_chart, use_container_width=True)
 
-col2.markdown("### Categorical Variable Distribution")
+col2.markdown("<h4 style='text-align: center;'>Categorical Variables Distribution</h4>", unsafe_allow_html=True)
 col2.altair_chart(cat_chart, use_container_width=True)
 
-col3.markdown("### Numerical Variable Distribution")
+col3.markdown("<h4 style='text-align: center;'>Numerical Variables Distribution</h4>", unsafe_allow_html=True)
 col3.altair_chart(num_chart, use_container_width=True)
 
 # Additional Row for New Graphs
 col4, col5, col6 = st.columns(3)
-col4.markdown("### Dataset Preview")
+col4.markdown("<h4 style='text-align: center;'>Data Preview</h4>", unsafe_allow_html=True)
 col4.dataframe(df.head(), height=300)
 
-col5.markdown("### Response vs Categorical Variable")
+col5.markdown("<h4 style='text-align: center;'>Response vs Categorical Variables</h4>", unsafe_allow_html=True)
 col5.altair_chart(stacked_cat_chart, use_container_width=True)
 
-col6.markdown("### Response vs Numerical Variable")
+col6.markdown("<h4 style='text-align: center;'>Response vs Numerical Variables</h4>", unsafe_allow_html=True)
 col6.altair_chart(box_plot, use_container_width=True)
 
 # Run the app with: streamlit run app.py
