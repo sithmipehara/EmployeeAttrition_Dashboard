@@ -27,19 +27,19 @@ response_variable = "Attrition"
 st.markdown("""
 <style>
 .container {
-    background-color: #2c2c2e; /* Dark background for metric containers */
+    background-color: #323267; /* Dark background for metric containers */
     padding: 20px;
     border-radius: 10px;
     height: auto; /* Adjust height to auto for flexibility */
     color: white; /* Text color */
 }
 .donut-container {
-    background-color: #4a4a4a; /* Darker background for donut chart */
+    background-color: #323267; /* Darker background for donut chart */
     padding: 20px;
     border-radius: 10px;
 }
 .chart-container {
-    background-color: #3b3b3b; /* Medium dark background for charts */
+    background-color:#323267; /* Medium dark background for charts */
     padding: 20px;
     border-radius: 10px;
 }
