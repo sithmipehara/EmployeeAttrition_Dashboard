@@ -53,16 +53,16 @@ col1, col2, col3, col4 = st.columns(4)
 
 # First column: Metrics containers stacked vertically
 with col1:
-    st.markdown("<div class='container'><h6 style='text-align: center;'>Number of Data Points</h6>"
+    st.markdown("<div class='container'><h6 style='text-align: justify;'>Number of Data Points</h6>"
                 f"<h2 style='text-align: center;'>{num_data_points}</h2></div>", unsafe_allow_html=True)
 
-    st.markdown("<div class='container'><h6 style='text-align: center;'>Number of Categorical Variables</h6>"
+    st.markdown("<div class='container'><h6 style='text-align: justify;'>Number of Categorical Variables</h6>"
                 f"<h2 style='text-align: center;'>{num_categorical_vars}</h2></div>", unsafe_allow_html=True)
 
-    st.markdown("<div class='container'><h6 style='text-align: center;'>Number of Numerical Variables</h6>"
+    st.markdown("<div class='container'><h6 style='text-align: justify;'>Number of Numerical Variables</h6>"
                 f"<h2 style='text-align: center;'>{num_numerical_vars}</h2></div>", unsafe_allow_html=True)
 
-    st.markdown("<div class='container'><h6 style='text-align: center;'>Response Variable</h6>"
+    st.markdown("<div class='container'><h6 style='text-align: justify;'>Response Variable</h6>"
                 f"<h2 style='text-align: center;'>{response_variable}</h2></div>", unsafe_allow_html=True)
 
 # Second column: Donut chart and additional metrics in one container
