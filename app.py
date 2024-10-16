@@ -23,6 +23,12 @@ st.markdown("""
     border-radius: 0px;
     margin: 5px;
 }
+.container1 {
+    background-color: #2b2b55; /* Darker background for donut chart */
+    padding: 10px;  /* Reduced padding */
+    border-radius: 0px;
+    margin: 0px;
+}
 .stSelectbox {
     background-color: #2b2b55; /* Change this to your desired color */
     border-radius: 0px; /* Optional: rounded corners */
@@ -70,8 +76,9 @@ with col1:
 
 # Second column: Three containers for donut chart and response details
 with col2:
+    st.markdown("<div class='container'>", unsafe_allow_html=True)
     # Container for Donut Chart
-    st.markdown("<div class='container'><h4 style='text-align: center;'>Attrition Distribution</h4>", unsafe_allow_html=True)
+    st.markdown("<div class='container1'><h4 style='text-align: center;'>Attrition Distribution</h4>", unsafe_allow_html=True)
     
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
@@ -87,6 +94,7 @@ with col2:
     
     st.altair_chart(donut_chart, theme=None, use_container_width=True)
     
+    st.markdown("</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
     # Calculate counts and percentages for response variable
