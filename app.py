@@ -52,8 +52,8 @@ st.markdown("""
     padding: 10px;
     border-radius: 0px;
     margin: 5px;
-    height: 200px; 
-    width: 200px;
+    height: 300px; 
+    width: 300px;
 }
 </style>
 """, unsafe_allow_html=True)
