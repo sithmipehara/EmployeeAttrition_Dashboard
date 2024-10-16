@@ -88,29 +88,19 @@ center_text = alt.Chart(pd.DataFrame({'text': [total_count]})).mark_text(
     text='text:N'
 )
 
-# Left label
-left_label = donut_chart.mark_text(radius=70, size=14, color="white").encode(
-    text=alt.Text('Count:Q'),
-    x=alt.X('Count:Q', scale=alt.Scale(domain=[0, 40]), title=''),  # Adjust x position
-    y=alt.Y('Count:Q', scale=alt.Scale(domain=[0, 40]), title='')   # Adjust y position
-).transform_calculate(
-    Count='datum.Count'
-).transform_filter(
-    alt.datum.Category == 'Stayed'
+# Add percentage labels positioned near their respective segments
+text_labels = (
+    alt.Chart(data)
+    .mark_text(size=14, color="black")
+    .encode(
+        text=alt.Text('Percentage:Q', format=".1f"),
+        x=alt.X('cos(Angle * pi / 180) * 70:Q', title=None),  # Adjust x position based on angle
+        y=alt.Y('sin(Angle * pi / 180) * -70:Q', title=None)  # Adjust y position based on angle
+    )
 )
 
-# Right label
-right_label = donut_chart.mark_text(radius=70, size=14, color="white").encode(
-    text=alt.Text('Count:Q'),
-    x=alt.X('Count:Q', scale=alt.Scale(domain=[0, 40]), title=''),  # Adjust x position
-    y=alt.Y('Count:Q', scale=alt.Scale(domain=[0, 40]), title='')   # Adjust y position
-).transform_calculate(
-    Count='datum.Count'
-).transform_filter(
-    alt.datum.Category == 'Left'  
-)
 # Combine the donut chart with center text and segment labels
-response_donut_chart = donut_chart + center_text + left_label + right_label
+response_donut_chart = donut_chart + center_text + text_labels
 
 # Categorical Variable Bar Chart
 cat_data = df[cat_var].value_counts().reset_index()
