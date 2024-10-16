@@ -20,6 +20,7 @@ st.markdown("""
     height: 160px; /* Adjust height to auto for flexibility */
     color: white; /* Text color */
     margin: 5px;  /* Reduced margin */
+    text-align: center;
 }
 .stSelectbox {
     background-color: #2b2b55; /* Change this to your desired color */
@@ -68,7 +69,7 @@ with col1:
 with col2:
     # Container for Donut Chart
     st.markdown("<div class='container'>" , unsafe_allow_html=True)
-    st.markdown("<h4 style='text-align: center;'>Attrition Distribution</h4>", unsafe_allow_html=True)
+    <h4>Attrition Distribution</h4>
     
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
