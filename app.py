@@ -83,13 +83,19 @@ total_count = response_data["Count"].sum()
 text = alt.Chart(pd.DataFrame({'text': [total_count]})).mark_text(
     text=str(total_count),
     size=28,
+    color='white',
     dx=0, dy=-10
 ).encode(
     text='text:N'
 )
 
-# Combined chart
-response_donut_chart = donut_chart + text
+# Labels for each segment of the donut
+segment_labels = donut_chart.mark_text(radius=90, size=14, color="white").encode(
+    text=alt.Text('Count:Q')
+)
+
+# Combine the donut chart with center text and segment labels
+response_donut_chart = donut_chart + center_text + segment_labels
 
 # Categorical Variable Bar Chart
 cat_data = df[cat_var].value_counts().reset_index()
