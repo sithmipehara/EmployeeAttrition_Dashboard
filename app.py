@@ -30,7 +30,7 @@ st.markdown("""
     background-color: #2c2c2e; /* Dark background for metric containers */
     padding: 20px;
     border-radius: 10px;
-    height: 155px;
+    height: auto; /* Adjust height to auto for flexibility */
     color: white; /* Text color */
 }
 .donut-container {
@@ -63,9 +63,9 @@ with col1:
     st.markdown("<div class='container'><h5 style='text-align: center;'>Response Variable</h5>"
                 f"<h2 style='text-align: center;'>{response_variable}</h2></div>", unsafe_allow_html=True)
 
-# Second column: Donut chart and additional metrics
+# Second column: Donut chart and additional metrics in one container
 with col2:
-    st.markdown("<div class='donut-container'><h4 style='text-align: center;'>Attrition Distribution</h4></div>", unsafe_allow_html=True)
+    st.markdown("<div class='donut-container'><h4 style='text-align: center;'>Attrition Distribution</h4>", unsafe_allow_html=True)
     
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
@@ -83,10 +83,11 @@ with col2:
     for index, row in attrition_counts.iterrows():
         percentage = (row['Count'] / total_count) * 100
         st.markdown(f"<div style='text-align: center;'><strong>{row['Attrition']}</strong>: {row['Count']} ({percentage:.2f}%)</div>", unsafe_allow_html=True)
+    
+    st.markdown("</div>", unsafe_allow_html=True)  # Close donut container
 
-# Third column of charts
+# Third column of charts in one container
 with col3:
-    # Chart 1: Categorical Variable Distribution
     st.markdown("<div class='chart-container'><h4 style='text-align: center;'>Categorical Variable Distribution</h4></div>", unsafe_allow_html=True)
     
     categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
@@ -120,9 +121,8 @@ with col3:
     
     st.altair_chart(histogram, use_container_width=True)
 
-# Fourth column of charts
+# Fourth column of charts in one container
 with col4:
-    # Chart 4: Stacked Bar Chart for Response vs Categorical Variable
     st.markdown("<div class='chart-container'><h4 style='text-align: center;'>Response vs Categorical Variable</h4></div>", unsafe_allow_html=True)
     
     selected_cat_var_2 = st.selectbox("Select Categorical Variable for Stacked Bar Chart:", categorical_cols)
