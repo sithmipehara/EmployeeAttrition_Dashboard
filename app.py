@@ -28,10 +28,10 @@ st.markdown("""
 <style>
 .container {
     background-color: #323267; /* Dark background for metric containers */
-    padding: 20px;
+    padding: 120px;
     border-radius: 0px;
-    height: auto; /* Adjust height to auto for flexibility */
-    width: 300px;
+    height: 150px; /* Adjust height to auto for flexibility */
+    width: 200px;
     color: white; /* Text color */
 }
 .donut-container {
