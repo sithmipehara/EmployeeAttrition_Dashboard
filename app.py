@@ -23,26 +23,49 @@ num_categorical_vars = df.select_dtypes(include=['object']).shape[1] - 1  # Excl
 num_numerical_vars = df.select_dtypes(include=['int64', 'float64']).shape[1]
 response_variable = "Attrition"
 
+# Custom CSS for container styles
+st.markdown("""
+<style>
+.container {
+    background-color: #2c2c2e; /* Dark background for metric containers */
+    padding: 20px;
+    border-radius: 10px;
+    height: 155px;
+    color: white; /* Text color */
+}
+.donut-container {
+    background-color: #4a4a4a; /* Darker background for donut chart */
+    padding: 20px;
+    border-radius: 10px;
+}
+.chart-container {
+    background-color: #3b3b3b; /* Medium dark background for charts */
+    padding: 20px;
+    border-radius: 10px;
+}
+</style>
+""", unsafe_allow_html=True)
+
 # Create two columns for the new layout
-col1, col2,col3,col4 = st.columns(4)
+col1, col2, col3, col4 = st.columns(4)
 
 # First column: Metrics containers stacked vertically
 with col1:
-    st.markdown("<h5 style='text-align: center;'>Number of Data Points</h5>", unsafe_allow_html=True)
-    st.markdown(f"<h2 style='text-align: center;'>{num_data_points}</h2>", unsafe_allow_html=True)
+    st.markdown("<div class='container'><h5 style='text-align: center;'>Number of Data Points</h5>"
+                f"<h2 style='text-align: center;'>{num_data_points}</h2></div>", unsafe_allow_html=True)
 
-    st.markdown("<h5 style='text-align: center;'>Number of Categorical Variables</h5>", unsafe_allow_html=True)
-    st.markdown(f"<h2 style='text-align: center;'>{num_categorical_vars}</h2>", unsafe_allow_html=True)
+    st.markdown("<div class='container'><h5 style='text-align: center;'>Number of Categorical Variables</h5>"
+                f"<h2 style='text-align: center;'>{num_categorical_vars}</h2></div>", unsafe_allow_html=True)
 
-    st.markdown("<h5 style='text-align: center;'>Number of Numerical Variables</h5>", unsafe_allow_html=True)
-    st.markdown(f"<h2 style='text-align: center;'>{num_numerical_vars}</h2>", unsafe_allow_html=True)
+    st.markdown("<div class='container'><h5 style='text-align: center;'>Number of Numerical Variables</h5>"
+                f"<h2 style='text-align: center;'>{num_numerical_vars}</h2></div>", unsafe_allow_html=True)
 
-    st.markdown("<h5 style='text-align: center;'>Response Variable</h5>", unsafe_allow_html=True)
-    st.markdown(f"<h2 style='text-align: center;'>{response_variable}</h2>", unsafe_allow_html=True)
+    st.markdown("<div class='container'><h5 style='text-align: center;'>Response Variable</h5>"
+                f"<h2 style='text-align: center;'>{response_variable}</h2></div>", unsafe_allow_html=True)
 
 # Second column: Donut chart and additional metrics
 with col2:
-    st.markdown("<h4 style='text-align: center;'>Attrition Distribution</h4>", unsafe_allow_html=True)
+    st.markdown("<div class='donut-container'><h4 style='text-align: center;'>Attrition Distribution</h4></div>", unsafe_allow_html=True)
     
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
@@ -64,7 +87,7 @@ with col2:
 # Third column of charts
 with col3:
     # Chart 1: Categorical Variable Distribution
-    st.markdown("<h4 style='text-align: center;'>Categorical Variable Distribution</h4>", unsafe_allow_html=True)
+    st.markdown("<div class='chart-container'><h4 style='text-align: center;'>Categorical Variable Distribution</h4></div>", unsafe_allow_html=True)
     
     categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
     categorical_cols.remove('Attrition')  # Remove Attrition from options
@@ -84,7 +107,7 @@ with col3:
     st.altair_chart(bar_chart, use_container_width=True)
 
     # Chart 3: Numerical Variable Distribution - Histogram with Filter
-    st.markdown("<h4 style='text-align: center;'>Numerical Variable Distribution</h4>", unsafe_allow_html=True)
+    st.markdown("<div class='chart-container'><h4 style='text-align: center;'>Numerical Variable Distribution</h4></div>", unsafe_allow_html=True)
     
     numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
     selected_num_var = st.selectbox("Select Numerical Variable:", numerical_cols)
@@ -100,7 +123,7 @@ with col3:
 # Fourth column of charts
 with col4:
     # Chart 4: Stacked Bar Chart for Response vs Categorical Variable
-    st.markdown("<h4 style='text-align: center;'>Response vs Categorical Variable</h4>", unsafe_allow_html=True)
+    st.markdown("<div class='chart-container'><h4 style='text-align: center;'>Response vs Categorical Variable</h4></div>", unsafe_allow_html=True)
     
     selected_cat_var_2 = st.selectbox("Select Categorical Variable for Stacked Bar Chart:", categorical_cols)
     
@@ -119,7 +142,7 @@ with col4:
     st.altair_chart(stacked_bar_chart, use_container_width=True)
 
     # Chart 5: Box Plot for Response vs Numerical Variable
-    st.markdown("<h4 style='text-align: center;'>Response vs Numerical Variable</h4>", unsafe_allow_html=True)
+    st.markdown("<div class='chart-container'><h4 style='text-align: center;'>Response vs Numerical Variable</h4></div>", unsafe_allow_html=True)
     
     selected_num_var_2 = st.selectbox("Select Numerical Variable for Box Plot:", numerical_cols)
     
