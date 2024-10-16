@@ -137,7 +137,8 @@ with col3:
         y='Count',
         color=alt.Color(selected_cat_var, legend=None),
         tooltip=[selected_cat_var, 'Count']
-    ).properties(width=300, height=300)
+    ).properties(width=300, height=300
+    ).configure(background='#2b2b55')
     
     st.altair_chart(bar_chart, theme=None, use_container_width=True)
 
@@ -151,7 +152,8 @@ with col3:
         x=alt.X(selected_num_var, bin=True),
         y='count()',
         tooltip=[selected_num_var, 'count()']
-    ).properties(width=300, height=300)
+    ).properties(width=300, height=300
+    ).configure(background='#2b2b55')
     
     st.altair_chart(histogram, theme=None, use_container_width=True)
 
@@ -172,7 +174,7 @@ with col4:
     ).properties(width=300, height=300).configure_mark(
         opacity=0.8,
         strokeWidth=0
-    )
+    ).configure(background='#2b2b55')
     
     st.altair_chart(stacked_bar_chart, theme=None, use_container_width=True)
 
@@ -185,7 +187,8 @@ with col4:
         x=alt.X('Attrition:N'),
         y=alt.Y(selected_num_var_2),
         tooltip=['Attrition', selected_num_var_2]
-    ).properties(width=300, height=300)
+    ).properties(width=300, height=300
+    ).configure(background='#2b2b55')
     
     st.altair_chart(box_plot, theme=None, use_container_width=True)
 
