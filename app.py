@@ -71,7 +71,7 @@ with col2:
     response_counts = data[response_variable].value_counts().reset_index()
     response_counts.columns = [response_variable, 'count']
     
-    # Create a donut chart using Altair
+    # Create a donut chart using Altair with customized background
     donut_chart = alt.Chart(response_counts).mark_arc(innerRadius=50).encode(
         theta=alt.Theta(field='count', type='quantitative'),
         color=alt.Color(field=response_variable, type='nominal', 
@@ -79,9 +79,10 @@ with col2:
                                         range=['#ff6666', '#00b3b3'])),
         tooltip=[response_variable, 'count']
     ).properties(
+        title='Response Variable Distribution',
         width=300,
         height=300
-    ).configure_background('#2b2b55')
+    ).configure_background('#2b2b55')  # Set the background color of the chart
 
     # Display the donut chart in a styled box
     st.markdown(
