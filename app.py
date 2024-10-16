@@ -126,7 +126,7 @@ box_plot = alt.Chart(df).mark_boxplot().encode(
 # Layout for visualizations
 col1, col2, col3 = st.columns(3)
 col1.markdown("<h4 style='text-align: center;'>Response variable Distribution</h4>", unsafe_allow_html=True)
-col1.st.altair_chart(response_donut_chart, use_container_width=True)
+col1.altair_chart(response_donut_chart, use_container_width=True)
 
 col2.markdown("<h4 style='text-align: center;'>Categorical Variables Distribution</h4>", unsafe_allow_html=True)
 col2.altair_chart(cat_chart, use_container_width=True)
