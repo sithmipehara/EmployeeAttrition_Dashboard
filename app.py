@@ -35,7 +35,7 @@ response_variable = "Attrition"
 st.markdown("""
 <style>
 .container {
-    background-color: #323267; /* Dark background for metric containers */
+    background-color: #2b2b55; /* Dark background for metric containers */
     padding: 20px;
     border-radius: 0px;
     height: 160px; /* Adjust height to auto for flexibility */
@@ -44,19 +44,19 @@ st.markdown("""
     margin: 5px;
 }
 .donut-container {
-    background-color: #323267; /* Darker background for donut chart */
+    background-color: #2b2b55; /* Darker background for donut chart */
     padding: 20px;
     border-radius: 0px;
     
 }
 .chart-container {
-    background-color:#323267; /* Medium dark background for charts */
+    background-color:#2b2b55; /* Medium dark background for charts */
     padding: 20px;
     border-radius: 0px;
     margin: 5px;
 }
 .response-container {
-    background-color: #323267; /* Darker background for response details */
+    background-color: #2b2b55; /* Darker background for response details */
     padding: 10px;
     border-radius: 0px;
     margin: 5px;
