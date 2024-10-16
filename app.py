@@ -88,15 +88,8 @@ center_text = alt.Chart(pd.DataFrame({'text': [total_count]})).mark_text(
     text='text:N'
 )
 
-# Add percentage labels positioned near their respective segments
-text_labels = (
-    alt.Chart(response_data)
-    .mark_text(size=14, color="white")
-    
-)
-
 # Combine the donut chart with center text and segment labels
-response_donut_chart = donut_chart + center_text + text_labels
+response_donut_chart = donut_chart + center_text
 
 # Categorical Variable Bar Chart
 cat_data = df[cat_var].value_counts().reset_index()
