@@ -52,7 +52,7 @@ response_variable = "Attrition"
 st.markdown("<div class='big-container'>", unsafe_allow_html=True)
 
 # Create columns with different widths
-col1, spacer1, col2, spacer2, col3, spacer3, col4 = st.columns([1, 0.01, 1.5, 0.01, 2, 0.01, 2])
+col1,  col2, col3,  col4 = st.columns([1, 1.5,  2,  2])
 
 # First column: Metrics containers stacked vertically
 with col1:
