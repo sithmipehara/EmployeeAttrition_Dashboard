@@ -91,7 +91,9 @@ with col2:
     
     donut_chart = alt.Chart(attrition_counts).mark_arc(innerRadius=50).encode(
         theta=alt.Theta(field='Count', type='quantitative'),
-        color=alt.Color(field='Attrition', type='nominal', legend=None),
+        color=alt.Color(field='Attrition', type='nominal', 
+                    scale=alt.Scale(domain=['Stayed', 'Left'], 
+                                    range=['#00b3b3', '#ff6666']),
         tooltip=['Attrition', 'Count']
     ).properties(width=200,height=200
     ).configure(background='#2b2b55')
