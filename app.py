@@ -14,17 +14,16 @@ st.set_page_config(page_title="Filled Positions Dashboard", layout="wide")
 
 # Header metrics
 num_data_points = df.shape[0]
-num_categorical = df.select_dtypes(include='object').shape[1]
-num_numerical = df.select_dtypes(include='number').shape[1]
+num_categorical = df.select_dtypes(include=['object']).shape[1]
+num_numerical = df.select_dtypes(include=['int64', 'float64']).shape[1]
 response_variable = "Attrition"
 
 # Display the metrics
-col1, col2, col3, col4, col5 = st.columns(5)
-col1.metric("Filled", filled)
-col2.metric("Addition", addition)
-col3.metric("Replacement", replacement)
-col4.metric("Reg.", reg)
-col5.metric("Temp", temp)
+col1, col2, col3, col4 = st.columns(4)
+col1.metric("No. of Data Points", num_data_points)
+col2.metric("No. of Categorical Variables", num_categorical)
+col3.metric("No. of Numerical Variables", num_numerical)
+col4.metric("Response Variable", response_variable)
 
 # Sidebar filters
 st.sidebar.header("Filters")
