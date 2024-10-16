@@ -93,7 +93,8 @@ with col2:
         theta=alt.Theta(field='Count', type='quantitative'),
         color=alt.Color(field='Attrition', type='nominal', 
                     scale=alt.Scale(domain=['Stayed', 'Left'], 
-                                    range=['#00b3b3', '#ff6666']),
+                                    range=['#00b3b3', '#ff6666']),  # Custom colors for each category
+                    legend=alt.Legend(title="Attrition Status")), 
         tooltip=['Attrition', 'Count']
     ).properties(width=200,height=200
     ).configure(background='#2b2b55')
