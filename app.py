@@ -12,7 +12,7 @@ st.markdown("""
 }
 [data-testid=column] {
     padding: 0; /* Removes default padding */
-    margin: 5px; /* Removes default margin */
+    margin:0; /* Removes default margin */
 }
 .container {
     background-color: #2b2b55; /* Dark background for metric containers */
