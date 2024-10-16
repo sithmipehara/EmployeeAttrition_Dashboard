@@ -46,7 +46,6 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # Dashboard title
-st.markdown("<h1 class='title'>Employee Attrition Dashboard</h1>", unsafe_allow_html=True)
 
 # Header metrics
 num_data_points = df.shape[0]
@@ -111,7 +110,7 @@ box_plot = alt.Chart(df).mark_boxplot().encode(
 
 # Layout for visualizations
 col1, col2, col3 = st.columns(3)
-col1.markdown("### Response Variable (Attrition)")
+col1.markdown("<h4 style='text-align: center;'>Response variable Distribution</h4>", unsafe_allow_html=True)
 col1.altair_chart(response_chart, use_container_width=True)
 
 col2.markdown("### Categorical Variable Distribution")
