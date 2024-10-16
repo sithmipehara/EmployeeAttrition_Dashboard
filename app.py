@@ -8,7 +8,7 @@ st.set_page_config(page_title="Employee Attrition Dashboard", layout="wide", ini
 st.markdown("""
 <style>
 .stApp {
-    background-color:#212145;  /* Change this to your desired color */
+    background-color:#111122;  /* Change this to your desired color */
 }
 </style>
 """, unsafe_allow_html=True)
