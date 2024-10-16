@@ -49,17 +49,27 @@ st.markdown("""
     background-color: #323267; /* Darker background for response details */
     padding: 10px;
     border-radius: 0px;
+    margin: 5px;
 }
 </style>
 """, unsafe_allow_html=True)
 
 # Create columns with different widths
-col1, col2, col3, col4 = st.columns([1, 2, 2, 1])  # Adjust ratios as needed
+col1, col2, col3, col4 = st.columns([1, 1, 2, 2])  # Adjust ratios as needed
 
 # First column: Metrics containers stacked vertically
 with col1:
     st.markdown("<div class='container'><h6 style='text-align: center;'>Number of Data Points</h6>"
                 f"<h2 style='text-align: center;'>{num_data_points}</h2></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='container'><h6 style='text-align: center;'>Number of Categorical Variables</h6>"
+                f"<h2 style='text-align: center;'>{num_categorical_vars}</h2></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='container'><h6 style='text-align: center;'>Number of Numerical Variables</h6>"
+                f"<h2 style='text-align: center;'>{num_numerical_vars}</h2></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='container'><h6 style='text-align: center;'>Response Variable</h6>"
+                f"<h2 style='text-align: center;'>{response_variable}</h2></div>", unsafe_allow_html=True)
 
 # Second column: Three containers for donut chart and response details
 with col2:
@@ -75,7 +85,7 @@ with col2:
         tooltip=['Attrition', 'Count']
     ).properties(width=300, height=300)
     
-    st.altair_chart(donut_chart, use_container_width=True)
+    st.altair_chart(donut_chart, theme=None, use_container_width=True)
     
     st.markdown("</div>", unsafe_allow_html=True)
 
