@@ -1,4 +1,18 @@
 import streamlit as st
+import pandas as pd
+
+# Load the dataset
+data_url = "https://raw.githubusercontent.com/sithmipehara/EmployeeAttrition_Dashboard/refs/heads/main/train.csv"
+df = pd.read_csv(data_url)
+
+# Remove the first column (ID)
+df.drop(df.columns[0], axis=1, inplace=True)
+
+# Calculate required metrics
+num_observations = df.shape[0]
+num_categorical = df.select_dtypes(include=['object']).shape[1]
+num_numerical = df.select_dtypes(exclude=['object']).shape[1]
+response_variable = 'Attrition'  # Assuming 'Attrition' is the response variable
 
 # Set the background color for the app
 st.markdown("""
@@ -36,8 +50,10 @@ st.markdown('<div class="container">', unsafe_allow_html=True)
 
 # First column with 4 equal sized containers
 st.markdown('<div class="column">', unsafe_allow_html=True)
-for i in range(4):
-    st.markdown(f'<div>Container {i + 1}</div>', unsafe_allow_html=True)
+st.markdown(f'<div>No. of Observations: {num_observations}</div>', unsafe_allow_html=True)
+st.markdown(f'<div>No. of Categorical Variables: {num_categorical}</div>', unsafe_allow_html=True)
+st.markdown(f'<div>No. of Numerical Variables: {num_numerical}</div>', unsafe_allow_html=True)
+st.markdown(f'<div>Response Variable: {response_variable}</div>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
 # Second column with 3 containers (first one big, other two same size)
