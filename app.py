@@ -11,6 +11,9 @@ st.markdown("""
     background-color: #111122;  /* Change this to your desired color */
 }
 .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #2b2b55; /* Dark background for metric containers */
     padding: 10px;  /* Reduced padding */
     border-radius: 0px;
@@ -65,7 +68,7 @@ with col1:
 with col2:
     # Container for Donut Chart
     st.markdown("<div class='container'>" , unsafe_allow_html=True)
-    st.markdown("<h4 style='text-align: center;'>Attrition Distribution</h4>")
+    st.markdown("<h4 style='text-align: center;'>Attrition Distribution</h4>", unsafe_allow_html=True)
     
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
