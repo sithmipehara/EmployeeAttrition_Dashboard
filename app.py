@@ -73,6 +73,11 @@ with col2:
     sizes = response_counts.values.tolist()
     
     fig, ax = plt.subplots()
+    
+    # Set background color for the figure and axes
+    fig.patch.set_facecolor('#2b2b55')
+    ax.set_facecolor('#2b2b55')
+    
     ax.pie(sizes, labels=labels, colors=['#00b3b3', '#ff6666'], startangle=90, counterclock=False, autopct='%1.1f%%')
     
     # Draw a circle at the center of pie to make it look like a donut
