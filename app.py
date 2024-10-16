@@ -82,12 +82,8 @@ with col2:
         title='Response Variable Distribution',
         width=300,
         height=300
-    ).configure_view(
-        stroke=None  # Removes the border around the chart
-    ).configure_background(
-        color='#2b2b55'  # Set the background color of the chart area
-    )  # Set the background color of the chart
-
+    )
+    
     # Display the donut chart in a styled box
     st.markdown(
         """
