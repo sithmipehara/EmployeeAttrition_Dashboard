@@ -10,14 +10,13 @@ df = pd.read_csv(data_url).iloc[:, 1:]  # Remove the first column (ID)
 st.set_page_config(page_title="Filled Positions Dashboard", layout="wide")
 
 # Dashboard title
-st.title("Filled Positions")
+
 
 # Header metrics
-filled = 900
-addition = 560
-replacement = 200
-reg = 300
-temp = 400
+num_data_points = df.shape[0]
+num_categorical = df.select_dtypes(include='object').shape[1]
+num_numerical = df.select_dtypes(include='number').shape[1]
+response_variable = "Attrition"
 
 # Display the metrics
 col1, col2, col3, col4, col5 = st.columns(5)
@@ -44,12 +43,13 @@ if organization != "All":
 if group:
     df = df[df["Group"].isin(group)]
 
-# Diversity by Organization Type (Donut Chart)
-diversity_data = df["Organization Type"].value_counts().reset_index()
-diversity_chart = alt.Chart(diversity_data).mark_arc(innerRadius=50).encode(
-    theta=alt.Theta(field="Organization Type", type="quantitative"),
-    color=alt.Color(field="index", type="nominal"),
-    tooltip=["index", "Organization Type"]
+# Response Variable Distribution (Donut Chart)
+response_data = df["Attrition"].value_counts().reset_index()
+response_data.columns = ["Attrition", "Count"]
+response_chart = alt.Chart(response_data).mark_arc(innerRadius=50).encode(
+    theta=alt.Theta(field="Count", type="quantitative"),
+    color=alt.Color(field="Attrition", type="nominal", scale=alt.Scale(scheme="tableau20")),
+    tooltip=["Attrition", "Count"]
 ).properties(width=200, height=200)
 
 # Open Position by Business Unit (Stacked Bar Chart)
