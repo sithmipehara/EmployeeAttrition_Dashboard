@@ -93,9 +93,11 @@ with col2:
         unsafe_allow_html=True
     )
     
+    # Display the Altair chart inside the box
     st.altair_chart(donut_chart, use_container_width=True)
 
-    st.markdown("</div>", unsafe_allow_html=True)  # Close the styled box
+    # Close the styled box after displaying the chart
+    st.markdown("</div>", unsafe_allow_html=True)
 
     # Count and Percentage for each category of response variable
     for label in response_counts[response_variable]:
