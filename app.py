@@ -53,7 +53,7 @@ st.markdown("""
     background-color:#2b2b55; /* Medium dark background for charts */
     padding: 20px;
     border-radius: 0px;
-    
+    margin: 0px;
 }
 .response-container {
     background-color: #2b2b55; /* Darker background for response details */
@@ -65,6 +65,7 @@ st.markdown("""
     background-color: #2b2b55; /* Change this to your desired color */
     border-radius: 0px; /* Optional: rounded corners */
     padding: 10px; /* Optional: padding inside the selectbox */
+    margin: 0px;
 }
 </style>
 """, unsafe_allow_html=True)
