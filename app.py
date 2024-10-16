@@ -88,14 +88,29 @@ center_text = alt.Chart(pd.DataFrame({'text': [total_count]})).mark_text(
     text='text:N'
 )
 
-# Labels for each segment of the donut
-segment_labels = donut_chart.mark_text(radius=90, size=14, color="white").encode(
+# Left label
+left_label = donut_chart.mark_text(radius=70, size=14, color="black").encode(
     text=alt.Text('Count:Q'),
-    angle=alt.Angle(field='Count', type='quantitative', stack=True) 
+    x=alt.X('Count:Q', scale=alt.Scale(domain=[0, 40]), title=''),  # Adjust x position
+    y=alt.Y('Count:Q', scale=alt.Scale(domain=[0, 40]), title='')   # Adjust y position
+).transform_calculate(
+    Count='datum.Count'
+).transform_filter(
+    alt.datum.Category == 'A'  # Change this to select which segment to label
 )
 
+# Right label
+right_label = donut_chart.mark_text(radius=70, size=14, color="black").encode(
+    text=alt.Text('Count:Q'),
+    x=alt.X('Count:Q', scale=alt.Scale(domain=[0, 40]), title=''),  # Adjust x position
+    y=alt.Y('Count:Q', scale=alt.Scale(domain=[0, 40]), title='')   # Adjust y position
+).transform_calculate(
+    Count='datum.Count'
+).transform_filter(
+    alt.datum.Category == 'B'  # Change this to select which segment to label
+)
 # Combine the donut chart with center text and segment labels
-response_donut_chart = donut_chart + center_text + segment_labels
+response_donut_chart = donut_chart + center_text + left_label + right_label
 
 # Categorical Variable Bar Chart
 cat_data = df[cat_var].value_counts().reset_index()
