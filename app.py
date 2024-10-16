@@ -96,7 +96,7 @@ with col2:
                                     range=['#00b3b3', '#ff6666']),  # Custom colors for each category
                     legend=alt.Legend(title="Attrition Status")), 
         tooltip=['Attrition', 'Count']
-   
+    ).properties(width=210,height=200
     ).configure(background='#2b2b55')
     
     st.altair_chart(donut_chart, theme=None, use_container_width=True)
