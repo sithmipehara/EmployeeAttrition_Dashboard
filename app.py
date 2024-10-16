@@ -92,11 +92,7 @@ center_text = alt.Chart(pd.DataFrame({'text': [total_count]})).mark_text(
 text_labels = (
     alt.Chart(response_data)
     .mark_text(size=14, color="white")
-    .encode(
-        text=alt.Text('Percentage:Q', format=".1f"),
-        x=alt.X('cos(Angle * pi / 180) * 70:Q', title=None),  # Adjust x position based on angle
-        y=alt.Y('sin(Angle * pi / 180) * -70:Q', title=None)  # Adjust y position based on angle
-    )
+    
 )
 
 # Combine the donut chart with center text and segment labels
