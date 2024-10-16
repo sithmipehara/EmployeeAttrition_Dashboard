@@ -96,7 +96,7 @@ with col2:
                                     range=['#00b3b3', '#ff6666']),  # Custom colors for each category
                     legend=alt.Legend(title="Attrition Status")), 
         tooltip=['Attrition', 'Count']
-    ).properties(width=210,height=200
+    ).properties(width=200,height=200
     ).configure(background='#2b2b55')
     
     st.altair_chart(donut_chart, theme=None, use_container_width=True)
@@ -141,6 +141,21 @@ with col3:
     
     st.altair_chart(bar_chart, theme=None, use_container_width=True)
 
+    # Chart 3: Numerical Variable Distribution - Histogram with Filter
+    st.markdown("<div class='chart-container'><h4 style='text-align: center;'>Numerical Variable Distribution</h4></div>", unsafe_allow_html=True)
+    
+    numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
+    selected_num_var = st.selectbox("Select Numerical Variable:", numerical_cols)
+    
+    histogram = alt.Chart(df).mark_bar().encode(
+        x=alt.X(selected_num_var, bin=True),
+        y='count()',
+        tooltip=[selected_num_var, 'count()']
+    ).properties(width=300, height=300)
+    
+    st.altair_chart(histogram, use_container_width=True)
+
+
 # Fourth column of charts in one container
 with col4:
     st.markdown("<div class='chart-container'><h4 style='text-align: center;'>Response vs Categorical Variable</h4></div>", unsafe_allow_html=True)
@@ -161,5 +176,18 @@ with col4:
     
     st.altair_chart(stacked_bar_chart, theme=None, use_container_width=True)
 
-st.write("### Additional Insights")
-st.write("This dashboard visualizes employee attrition data, providing insights into various attributes.")
+    # Chart 5: Box Plot for Response vs Numerical Variable
+    st.markdown("<div class='chart-container'><h4 style='text-align: center;'>Response vs Numerical Variable</h4></div>", unsafe_allow_html=True)
+    
+    selected_num_var_2 = st.selectbox("Select Numerical Variable for Box Plot:", numerical_cols)
+    
+    box_plot = alt.Chart(df).mark_boxplot().encode(
+        x=alt.X('Attrition:N'),
+        y=alt.Y(selected_num_var_2),
+        tooltip=['Attrition', selected_num_var_2]
+    ).properties(width=300, height=300)
+    
+    st.altair_chart(box_plot, use_container_width=Tr
+
+st.write("")
+
