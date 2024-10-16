@@ -19,16 +19,21 @@ st.markdown("""
         .sidebar .sidebar-content {
             background-color: #1A1A3D;
         }
-        
-        /* Style for metric boxes */
-        .metric-container {
-            background-color: #27566B;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            color: #FFFFFF;
+
+        /* Style for individual metric boxes */
+        .metric-box {
+            padding: 20px;
+            border-radius: 8px;
+            color: white;
             text-align: center;
+            font-size: 16px;
+            font-weight: bold;
         }
+        
+        .box1 { background-color: #0073e6; }
+        .box2 { background-color: #00b33c; }
+        .box3 { background-color: #ffa31a; }
+        .box4 { background-color: #ff4d4d; }
         
         /* Color Scheme for Main Title */
         .title {
@@ -36,25 +41,6 @@ st.markdown("""
             font-size: 30px;
             font-weight: bold;
             text-align: center;
-        }
-        
-        /* Style for Altair Charts */
-        .chart-container {
-            background-color: #2D2F5F;
-            padding: 15px;
-            border-radius: 10px;
-        }
-        
-        /* Adjusting Data Preview Table Style */
-        .dataframe {
-            background-color: #2D2F5F;
-            color: #FFFFFF;
-            border-radius: 5px;
-        }
-        
-        /* Filter Header */
-        .sidebar .sidebar-content .css-1aumxhk {
-            color: #FFFFFF;
         }
     </style>
     """, unsafe_allow_html=True)
@@ -69,10 +55,12 @@ num_numerical = df.select_dtypes(include='number').shape[1]
 response_variable = "Attrition"
 
 # Display the metrics
-st.markdown("<div class='metric-container'>No. of Data Points: " + str(num_data_points) + "</div>", unsafe_allow_html=True)
-st.markdown("<div class='metric-container'>No. of Categorical Variables: " + str(num_categorical) + "</div>", unsafe_allow_html=True)
-st.markdown("<div class='metric-container'>No. of Numerical Variables: " + str(num_numerical) + "</div>", unsafe_allow_html=True)
-st.markdown("<div class='metric-container'>Response Variable: " + response_variable + "</div>", unsafe_allow_html=True)
+col1, col2, col3, col4 = st.columns(4)
+col1.markdown(f"<div class='metric-box box1'>No. of Data Points<br><span style='font-size: 24px;'>{num_data_points}</span></div>", unsafe_allow_html=True)
+col2.markdown(f"<div class='metric-box box2'>No. of Categorical Variables<br><span style='font-size: 24px;'>{num_categorical}</span></div>", unsafe_allow_html=True)
+col3.markdown(f"<div class='metric-box box3'>No. of Numerical Variables<br><span style='font-size: 24px;'>{num_numerical}</span></div>", unsafe_allow_html=True)
+col4.markdown(f"<div class='metric-box box4'>Response Variable<br><span style='font-size: 24px;'>{response_variable}</span></div>", unsafe_allow_html=True)
+
 
 # Sidebar filters
 st.sidebar.header("Filters")
