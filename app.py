@@ -67,6 +67,14 @@ with col1:
 
 # Second Column
 with col2:
+    # Display the donut chart in a styled box
+    st.markdown(
+        """
+        <div style="background-color: #2b2b55; padding: 20px; border-radius: 10px;">
+            <h6 style="color: white;">Response Variable Distribution</h6>
+            """,
+        unsafe_allow_html=True
+    )
     # Prepare data for Altair chart
     response_counts = data[response_variable].value_counts().reset_index()
     response_counts.columns = [response_variable, 'count']
@@ -79,18 +87,9 @@ with col2:
                                         range=['#ff6666', '#00b3b3'])),
         tooltip=[response_variable, 'count']
     ).properties(
-        title='Response Variable Distribution',
+        
         width=300,
         height=300
-    )
-
-    # Display the donut chart in a styled box
-    st.markdown(
-        """
-        <div style="background-color: #2b2b55; padding: 20px; border-radius: 10px;">
-            <h6 style="color: white;">Response Variable Distribution</h6>
-            """,
-        unsafe_allow_html=True
     )
     
     # Display the Altair chart inside the box
