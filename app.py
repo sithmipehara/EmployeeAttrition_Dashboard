@@ -55,7 +55,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Create columns with different widths
-col1, col2, col3, col4 = st.columns([1, 1, 2, 2])  # Adjust ratios as needed
+col1, col2, col3, col4 = st.columns([1, 2, 2, 2])  # Adjust ratios as needed
 
 # First column: Metrics containers stacked vertically
 with col1:
