@@ -68,14 +68,25 @@ cat_var = st.sidebar.selectbox("Select Categorical Variable", options=df.select_
 num_var = st.sidebar.selectbox("Select Numerical Variable", options=df.select_dtypes(include='number').columns)
 
 
-# Response Variable Distribution (Donut Chart)
-response_data = df["Attrition"].value_counts().reset_index()
-response_data.columns = ["Attrition", "Count"]
-response_chart = alt.Chart(response_data).mark_arc(innerRadius=50).encode(
+# Donut chart base
+donut_chart = alt.Chart(response_data).mark_arc(innerRadius=50).encode(
     theta=alt.Theta(field="Count", type="quantitative"),
     color=alt.Color(field="Attrition", type="nominal", scale=alt.Scale(scheme="tableau20")),
     tooltip=["Attrition", "Count"]
 ).properties(width=200, height=200)
+
+# Center text overlay
+total_count = response_data["Count"].sum()
+text = alt.Chart(pd.DataFrame({'text': [total_count]})).mark_text(
+    text=str(total_count),
+    size=28,
+    dx=0, dy=-10
+).encode(
+    text='text:N'
+)
+
+# Combined chart
+response_donut_chart = donut_chart + text
 
 # Categorical Variable Bar Chart
 cat_data = df[cat_var].value_counts().reset_index()
@@ -112,7 +123,7 @@ box_plot = alt.Chart(df).mark_boxplot().encode(
 # Layout for visualizations
 col1, col2, col3 = st.columns(3)
 col1.markdown("<h4 style='text-align: center;'>Response variable Distribution</h4>", unsafe_allow_html=True)
-col1.altair_chart(response_chart, use_container_width=True)
+st.altair_chart(response_donut_chart, use_container_width=True)
 
 col2.markdown("<h4 style='text-align: center;'>Categorical Variables Distribution</h4>", unsafe_allow_html=True)
 col2.altair_chart(cat_chart, use_container_width=True)
