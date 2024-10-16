@@ -89,25 +89,25 @@ center_text = alt.Chart(pd.DataFrame({'text': [total_count]})).mark_text(
 )
 
 # Left label
-left_label = donut_chart.mark_text(radius=70, size=14, color="black").encode(
+left_label = donut_chart.mark_text(radius=70, size=14, color="white").encode(
     text=alt.Text('Count:Q'),
     x=alt.X('Count:Q', scale=alt.Scale(domain=[0, 40]), title=''),  # Adjust x position
     y=alt.Y('Count:Q', scale=alt.Scale(domain=[0, 40]), title='')   # Adjust y position
 ).transform_calculate(
     Count='datum.Count'
 ).transform_filter(
-    alt.datum.Category == 'A'  # Change this to select which segment to label
+    alt.datum.Category == 'Stayed'
 )
 
 # Right label
-right_label = donut_chart.mark_text(radius=70, size=14, color="black").encode(
+right_label = donut_chart.mark_text(radius=70, size=14, color="white").encode(
     text=alt.Text('Count:Q'),
     x=alt.X('Count:Q', scale=alt.Scale(domain=[0, 40]), title=''),  # Adjust x position
     y=alt.Y('Count:Q', scale=alt.Scale(domain=[0, 40]), title='')   # Adjust y position
 ).transform_calculate(
     Count='datum.Count'
 ).transform_filter(
-    alt.datum.Category == 'B'  # Change this to select which segment to label
+    alt.datum.Category == 'Left'  
 )
 # Combine the donut chart with center text and segment labels
 response_donut_chart = donut_chart + center_text + left_label + right_label
