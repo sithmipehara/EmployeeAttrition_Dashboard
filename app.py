@@ -153,7 +153,7 @@ with col3:
         tooltip=[selected_num_var, 'count()']
     ).properties(width=300, height=300)
     
-    st.altair_chart(histogram, use_container_width=True)
+    st.altair_chart(histogram, theme=None, use_container_width=True)
 
 
 # Fourth column of charts in one container
@@ -187,7 +187,7 @@ with col4:
         tooltip=['Attrition', selected_num_var_2]
     ).properties(width=300, height=300)
     
-    st.altair_chart(box_plot, use_container_width=Tr
+    st.altair_chart(box_plot, theme=None, use_container_width=True)
 
 st.write("")
 
