@@ -30,8 +30,7 @@ st.markdown("""
     background-color: #323267; /* Dark background for metric containers */
     padding: 20px;
     border-radius: 0px;
-    height: auto; /* Adjust height to auto for flexibility */
-    width: 200px;
+
     color: white; /* Text color */
     margin: 5px;
 }
@@ -83,7 +82,7 @@ with col2:
         theta=alt.Theta(field='Count', type='quantitative'),
         color=alt.Color(field='Attrition', type='nominal', legend=None),
         tooltip=['Attrition', 'Count']
-    ).properties(width=300,height=300
+    ).properties(width=200,height=200
     ).configure(background='#323267')
     
     st.altair_chart(donut_chart, theme=None, use_container_width=True)
