@@ -64,7 +64,7 @@ with col1:
 # Second column: Three containers for donut chart and response details
 with col2:
     # Container for Donut Chart
-    st.markdown("<div class='container'> , unsafe_allow_html=True)
+    st.markdown("<div class='container'>" , unsafe_allow_html=True)
     st.markdown("<h4 style='text-align: center;'>Attrition Distribution</h4>")
     
     attrition_counts = df['Attrition'].value_counts().reset_index()
