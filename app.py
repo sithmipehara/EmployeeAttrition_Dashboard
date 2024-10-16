@@ -94,7 +94,7 @@ with col2:
         color=alt.Color(field='Attrition', type='nominal', legend=None),
         tooltip=['Attrition', 'Count']
     ).properties(width=200,height=200
-    ).configure(background='#323267')
+    ).configure(background='#2b2b55')
     
     st.altair_chart(donut_chart, theme=None, use_container_width=True)
     
