@@ -90,7 +90,7 @@ center_text = alt.Chart(pd.DataFrame({'text': [total_count]})).mark_text(
 
 # Add percentage labels positioned near their respective segments
 text_labels = (
-    alt.Chart(data)
+    alt.Chart(response_data)
     .mark_text(size=14, color="black")
     .encode(
         text=alt.Text('Percentage:Q', format=".1f"),
