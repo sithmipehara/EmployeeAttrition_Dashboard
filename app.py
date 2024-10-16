@@ -61,7 +61,7 @@ num_numerical_vars = df.select_dtypes(include=['int64', 'float64']).shape[1]
 response_variable = "Attrition"
 
 # Create columns with different widths
-col1, spacer1, col2, spacer2, col3, spacer3, col4 = st.columns([1, 1, 1.5, 1, 2, 1, 2])
+col1, spacer1, col2, spacer2, col3, spacer3, col4 = st.columns([1, 0.01, 1.5, 0.01, 2, 0.01, 2])
 
 # First column: Metrics containers stacked vertically
 with col1:
