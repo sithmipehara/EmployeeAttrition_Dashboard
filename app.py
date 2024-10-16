@@ -30,7 +30,7 @@ st.markdown("""
     background-color: #323267; /* Dark background for metric containers */
     padding: 20px;
     border-radius: 0px;
-    height: 150px; /* Adjust height to auto for flexibility */
+    height: 160px; /* Adjust height to auto for flexibility */
     width: auto;
     color: white; /* Text color */
     margin: 5px;
@@ -39,11 +39,13 @@ st.markdown("""
     background-color: #323267; /* Darker background for donut chart */
     padding: 20px;
     border-radius: 0px;
+    margin: 5px;
 }
 .chart-container {
     background-color:#323267; /* Medium dark background for charts */
     padding: 20px;
     border-radius: 0px;
+    margin: 5px;
 }
 .response-container {
     background-color: #323267; /* Darker background for response details */
