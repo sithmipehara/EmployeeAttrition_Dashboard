@@ -28,11 +28,12 @@ st.markdown("""
 <style>
 .container {
     background-color: #323267; /* Dark background for metric containers */
-    padding: 120px;
+    padding: 20px;
     border-radius: 0px;
     height: 150px; /* Adjust height to auto for flexibility */
     width: 200px;
     color: white; /* Text color */
+    margin: 10px;
 }
 .donut-container {
     background-color: #323267; /* Darker background for donut chart */
