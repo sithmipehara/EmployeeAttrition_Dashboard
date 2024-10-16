@@ -84,8 +84,18 @@ with col2:
         height=300
     )
 
-    # Display the donut chart in Streamlit
+    # Display the donut chart in a styled box
+    st.markdown(
+        """
+        <div style="background-color: #2b2b55; padding: 20px; border-radius: 10px;">
+            <h6 style="color: white;">Response Variable Distribution</h6>
+            """,
+        unsafe_allow_html=True
+    )
+    
     st.altair_chart(donut_chart, use_container_width=True)
+
+    st.markdown("</div>", unsafe_allow_html=True)  # Close the styled box
 
     # Count and Percentage for each category of response variable
     for label in response_counts[response_variable]:
