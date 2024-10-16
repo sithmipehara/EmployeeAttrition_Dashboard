@@ -8,7 +8,36 @@ st.set_page_config(page_title="Employee Attrition Dashboard", layout="wide", ini
 st.markdown("""
 <style>
 .stApp {
-    background-color:#111122;  /* Change this to your desired color */
+    background-color: #111122;  /* Change this to your desired color */
+}
+.container {
+    background-color: #2b2b55; /* Dark background for metric containers */
+    padding: 10px;  /* Reduced padding */
+    border-radius: 0px;
+    height: 160px; /* Adjust height to auto for flexibility */
+    color: white; /* Text color */
+    margin: 5px;  /* Reduced margin */
+}
+.donut-container {
+    background-color: #2b2b55; /* Darker background for donut chart */
+    padding: 10px;  /* Reduced padding */
+    border-radius: 0px;
+}
+.chart-container {
+    background-color: #2b2b55; /* Medium dark background for charts */
+    padding: 10px;  /* Reduced padding */
+    border-radius: 0px;
+}
+.response-container {
+    background-color: #2b2b55; /* Darker background for response details */
+    padding: 10px;
+    border-radius: 0px;
+    margin: 5px;  /* Reduced margin */
+}
+.stSelectbox {
+    background-color: #2b2b55; /* Change this to your desired color */
+    border-radius: 0px; /* Optional: rounded corners */
+    padding: 10px; /* Optional: padding inside the selectbox */
 }
 </style>
 """, unsafe_allow_html=True)
@@ -30,45 +59,6 @@ num_data_points = df.shape[0]
 num_categorical_vars = df.select_dtypes(include=['object']).shape[1] - 1  # Exclude Attrition
 num_numerical_vars = df.select_dtypes(include=['int64', 'float64']).shape[1]
 response_variable = "Attrition"
-
-# Custom CSS for container styles
-st.markdown("""
-<style>
-.container {
-    background-color: #2b2b55; /* Dark background for metric containers */
-    padding: 20px;
-    border-radius: 0px;
-    height: 160px; /* Adjust height to auto for flexibility */
-    width: auto;
-    color: white; /* Text color */
-    margin: 5px;
-}
-.donut-container {
-    background-color: #2b2b55; /* Darker background for donut chart */
-    padding: 20px;
-    border-radius: 0px;
-    
-}
-.chart-container {
-    background-color:#2b2b55; /* Medium dark background for charts */
-    padding: 20px;
-    border-radius: 0px;
-    margin: 0px;
-}
-.response-container {
-    background-color: #2b2b55; /* Darker background for response details */
-    padding: 10px;
-    border-radius: 0px;
-    margin: 5px;
-}
-.stSelectbox {
-    background-color: #2b2b55; /* Change this to your desired color */
-    border-radius: 0px; /* Optional: rounded corners */
-    padding: 10px; /* Optional: padding inside the selectbox */
-    margin: 0px;
-}
-</style>
-""", unsafe_allow_html=True)
 
 # Create columns with different widths
 col1, col2, col3, col4 = st.columns([1, 1.5, 2, 2])  # Adjust ratios as needed
@@ -102,8 +92,7 @@ with col2:
                                     range=['#00b3b3', '#ff6666']),  # Custom colors for each category
                     legend=alt.Legend(title="Attrition Status")), 
         tooltip=['Attrition', 'Count']
-    ).properties(width=200,height=200
-    ).configure(background='#2b2b55')
+    ).properties(width=200, height=200).configure(background='#2b2b55')
     
     st.altair_chart(donut_chart, theme=None, use_container_width=True)
     
@@ -125,7 +114,7 @@ with col2:
     
     st.markdown("<div class='response-container'><h5 style='text-align: center;'><strong>{}</strong></h5>"
                 f"<h3 style='text-align: center;'>{second_response_category['Count']} <br> ({percentage_second:.2f}%) </h3></div>".format(second_response_category['Attrition']), unsafe_allow_html=True)
-
+    
 # Third column of charts in one container
 with col3:
     st.markdown("<div class='chart-container'><h4 style='text-align: center;'>Categorical Variable Distribution</h4></div>", unsafe_allow_html=True)
