@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+import altair as alt
 
 # Load dataset from GitHub
 data_url = "https://raw.githubusercontent.com/sithmipehara/EmployeeAttrition_Dashboard/refs/heads/main/train.csv"
@@ -67,36 +67,25 @@ with col1:
 
 # Second Column
 with col2:
-    # Donut Chart for Response Variable
+    # Prepare data for Altair chart
     response_counts = data[response_variable].value_counts().reset_index()
     response_counts.columns = [response_variable, 'count']
     
-    # Create a donut chart using Plotly
-    fig = px.pie(response_counts, 
-                 values='count', 
-                 names=response_variable,
-                 hole=0.5,
-                 color_discrete_sequence=['#00b3b3', '#ff6666'])
-
-    # Update layout to match dashboard theme
-    fig.update_layout(
-        title_text='Response Variable Distribution',
-        paper_bgcolor='#2b2b55',
-        plot_bgcolor='#2b2b55',
-        font_color='white'
+    # Create a donut chart using Altair
+    donut_chart = alt.Chart(response_counts).mark_arc(innerRadius=50).encode(
+        theta=alt.Theta(field='count', type='quantitative'),
+        color=alt.Color(field=response_variable, type='nominal', 
+                        scale=alt.Scale(domain=['Left', 'Stayed'], 
+                                        range=['#ff6666', '#00b3b3'])),
+        tooltip=[response_variable, 'count']
+    ).properties(
+        title='Response Variable Distribution',
+        width=300,
+        height=300
     )
 
-    st.markdown(
-        """
-        <div style="background-color: #2b2b55; padding: 20px; border-radius: 10px;">
-            <h6 style="color: white;">Response Variable Distribution</h6>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-    
     # Display the donut chart in Streamlit
-    st.plotly_chart(fig)
+    st.altair_chart(donut_chart, use_container_width=True)
 
     # Count and Percentage for each category of response variable
     for label in response_counts[response_variable]:
