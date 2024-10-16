@@ -30,10 +30,10 @@ st.markdown("""
             font-weight: bold;
         }
         
-        .box1 { background-color: #b3d9ff; }
-        .box2 { background-color: #66b3ff; }
-        .box3 { background-color: #ff6666; }
-        .box4 { background-color: #ff9999; }
+        .box1 { background-color: #b3d9ff;color: #000000; }
+        .box2 { background-color: #66b3ff;color: #000000; }
+        .box3 { background-color: #ff6666; color:#000000;}
+        .box4 { background-color: #ff9999;color: #000000; }
         
         /* Color Scheme for Main Title */
         .title {
