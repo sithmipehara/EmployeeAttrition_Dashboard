@@ -45,7 +45,7 @@ st.markdown("""
     background-color:#323267; /* Medium dark background for charts */
     padding: 20px;
     border-radius: 0px;
-    margin: 5px;
+    
 }
 .response-container {
     background-color: #323267; /* Darker background for response details */
