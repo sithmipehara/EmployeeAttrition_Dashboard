@@ -69,7 +69,7 @@ with col1:
 with col2:
     # Container for Donut Chart
     st.markdown("<div class='container'>" , unsafe_allow_html=True)
-    <h4>Attrition Distribution</h4>
+    st.write("Attrition Distribution")
     
     attrition_counts = df['Attrition'].value_counts().reset_index()
     attrition_counts.columns = ['Attrition', 'Count']
