@@ -67,6 +67,9 @@ st.sidebar.header("Filters")
 cat_var = st.sidebar.selectbox("Select Categorical Variable", options=df.select_dtypes(include='object').columns)
 num_var = st.sidebar.selectbox("Select Numerical Variable", options=df.select_dtypes(include='number').columns)
 
+# Response Variable Distribution (Donut Chart with Center Text)
+response_data = df["Attrition"].value_counts().reset_index()
+response_data.columns = ["Attrition", "Count"]
 
 # Donut chart base
 donut_chart = alt.Chart(response_data).mark_arc(innerRadius=50).encode(
