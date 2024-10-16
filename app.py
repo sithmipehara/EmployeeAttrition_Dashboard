@@ -5,6 +5,14 @@ import altair as alt
 # Set the theme to dark
 st.set_page_config(page_title="Employee Attrition Dashboard", layout="wide", initial_sidebar_state="expanded")
 
+st.markdown("""
+<style>
+.stApp {
+    background-color:#212145;  /* Change this to your desired color */
+}
+</style>
+""", unsafe_allow_html=True)
+
 # Load dataset from GitHub
 data_url = "https://raw.githubusercontent.com/sithmipehara/EmployeeAttrition_Dashboard/refs/heads/main/train.csv"
 
