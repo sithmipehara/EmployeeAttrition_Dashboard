@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
+import plotly.express as px
 
 # Load dataset from GitHub
 data_url = "https://raw.githubusercontent.com/sithmipehara/EmployeeAttrition_Dashboard/refs/heads/main/train.csv"
@@ -68,24 +68,24 @@ with col1:
 # Second Column
 with col2:
     # Donut Chart for Response Variable
-    response_counts = data[response_variable].value_counts()
-    labels = response_counts.index.tolist()
-    sizes = response_counts.values.tolist()
+    response_counts = data[response_variable].value_counts().reset_index()
+    response_counts.columns = [response_variable, 'count']
     
-    fig, ax = plt.subplots()
-    
-    # Set background color for the figure and axes
-    fig.patch.set_facecolor('#2b2b55')
-    ax.set_facecolor('#2b2b55')
-    
-    ax.pie(sizes, labels=labels, colors=['#00b3b3', '#ff6666'], startangle=90, counterclock=False, autopct='%1.1f%%')
-    
-    # Draw a circle at the center of pie to make it look like a donut
-    centre_circle = plt.Circle((0,0),0.70,fc='white')
-    fig.gca().add_artist(centre_circle)
-    
-    ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-    
+    # Create a donut chart using Plotly
+    fig = px.pie(response_counts, 
+                 values='count', 
+                 names=response_variable,
+                 hole=0.5,
+                 color_discrete_sequence=['#00b3b3', '#ff6666'])
+
+    # Update layout to match dashboard theme
+    fig.update_layout(
+        title_text='Response Variable Distribution',
+        paper_bgcolor='#2b2b55',
+        plot_bgcolor='#2b2b55',
+        font_color='white'
+    )
+
     st.markdown(
         """
         <div style="background-color: #2b2b55; padding: 20px; border-radius: 10px;">
@@ -95,11 +95,12 @@ with col2:
         unsafe_allow_html=True
     )
     
-    st.pyplot(fig)
+    # Display the donut chart in Streamlit
+    st.plotly_chart(fig)
 
     # Count and Percentage for each category of response variable
-    for label in labels:
-        count = response_counts[label]
+    for label in response_counts[response_variable]:
+        count = response_counts.loc[response_counts[response_variable] == label, 'count'].values[0]
         percentage = (count / num_data_points) * 100
         
         st.markdown(
