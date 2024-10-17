@@ -109,17 +109,17 @@ num_chart = alt.Chart(df).mark_bar().encode(
 
 # Response vs Categorical Variable (Stacked Bar Chart)
 stacked_bar = alt.Chart(df).mark_bar().encode(
-    x=alt.X("count()", title="Count"),
-    y=alt.Y("CategoricalVariable:N", title="Category"),  # Replace with actual categorical variable name
-    color=alt.Color("Attrition:N", scale=alt.Scale(domain=['Yes', 'No'], range=['#FF6347', '#4682B4'])),  # Custom colors
-    tooltip=["CategoricalVariable", "count()"]  # Replace with actual categorical variable name
+    y=alt.Y(cat_var, title=cat_var, sort='-x'),
+    x=alt.X('count()', title='Count'),
+    color=alt.Color('Attrition', scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4'])),  # Custom colors
+    tooltip=[cat_var, 'Attrition', 'count()']
 ).properties(width=300, height=300)
 
 # Response vs Numerical Variable (Box Plot)
 box_plot = alt.Chart(df).mark_boxplot(color='#FF6347').encode(
-    x=alt.X("NumericalVariable:Q", title="Value"),  # Replace with actual numerical variable name
-    y=alt.Y("Attrition:N", title="Attrition", scale=alt.Scale(domain=['Yes', 'No'])),
-    color=alt.Color("Attrition:N", scale=alt.Scale(domain=['Yes', 'No'], range=['#FF6347', '#4682B4']))  # Custom colors
+    x=alt.X("Attrition:N", title="Attrition"),
+    y=alt.Y(num_var, title=num_var),
+    color=alt.Color("Attrition", scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4']))  # Custom colors
 ).properties(width=300, height=300)
 
 # Layout for visualizations
