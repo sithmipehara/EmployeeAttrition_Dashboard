@@ -108,19 +108,18 @@ num_chart = alt.Chart(df).mark_bar().encode(
 ).properties(width=300, height=300)
 
 # Response vs Categorical Variable (Stacked Bar Chart)
-stacked_cat_chart = alt.Chart(df).mark_bar().encode(
-    y=alt.Y(cat_var, title=cat_var, sort='-x'),
-    x=alt.X('count()', title='Count'),
-    color=alt.Color('Attrition', scale=alt.Scale(scheme="tableau20")),
-    tooltip=[cat_var, 'Attrition', 'count()']
+stacked_bar = alt.Chart(df).mark_bar().encode(
+    x=alt.X("count()", title="Count"),
+    y=alt.Y("CategoricalVariable:N", title="Category"),  # Replace with actual categorical variable name
+    color=alt.Color("Attrition:N", scale=alt.Scale(domain=['Yes', 'No'], range=['#FF6347', '#4682B4'])),  # Custom colors
+    tooltip=["CategoricalVariable", "count()"]  # Replace with actual categorical variable name
 ).properties(width=300, height=300)
 
 # Response vs Numerical Variable (Box Plot)
-box_plot = alt.Chart(df).mark_boxplot().encode(
-    x=alt.X("Attrition:N", title="Attrition"),
-    y=alt.Y(num_var, title=num_var),
-    color=alt.Color("Attrition", scale=alt.Scale(scheme="tableau20")),
-    tooltip=["Attrition", num_var]
+box_plot = alt.Chart(df).mark_boxplot(color='#FF6347').encode(
+    x=alt.X("NumericalVariable:Q", title="Value"),  # Replace with actual numerical variable name
+    y=alt.Y("Attrition:N", title="Attrition", scale=alt.Scale(domain=['Yes', 'No'])),
+    color=alt.Color("Attrition:N", scale=alt.Scale(domain=['Yes', 'No'], range=['#FF6347', '#4682B4']))  # Custom colors
 ).properties(width=300, height=300)
 
 # Layout for visualizations
@@ -137,7 +136,7 @@ col3.altair_chart(num_chart, use_container_width=True)
 # Additional Row for New Graphs
 col4, col5, col6 = st.columns(3)
 col4.markdown("<h4 style='text-align: center;'>Data Preview</h4>", unsafe_allow_html=True)
-col4.dataframe(df.head(6), height=300)
+col4.dataframe(df.dropna(how='all').head(6), height=300)
 
 col5.markdown("<h4 style='text-align: center;'>Response vs Categorical Variables</h4>", unsafe_allow_html=True)
 col5.altair_chart(stacked_cat_chart, use_container_width=True)
