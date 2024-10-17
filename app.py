@@ -77,7 +77,7 @@ donut_chart = alt.Chart(response_data).mark_arc(innerRadius=30).encode(
     color=alt.Color('Attrition:N', scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4']),
                     legend=alt.Legend(orient="top", direction="horizontal")),
     tooltip=["Attrition", "Count"]
-).properties(width=200, height=200)
+).properties(width=30, height=300)
 
 # Center text overlay (total count)
 total_count = response_data["Count"].sum()
