@@ -95,14 +95,9 @@ with col_filter:
     st.markdown("<h5 style='text-align: center;'>Filters</h5>", unsafe_allow_html=True)
 
     # Categorical Variable Filter Container
-    st.markdown("<div style='background-color: #2b2b55; padding: 20px; border-radius: 10px;'>", unsafe_allow_html=True)
     cat_var = st.selectbox("Select Categorical Variable", options=df.select_dtypes(include='object').columns)
-    st.markdown("</div>", unsafe_allow_html=True)
-
     # Numerical Variable Filter Container
-    st.markdown("<div style='background-color: #2b2b55; padding: 20px; border-radius: 10px;'>", unsafe_allow_html=True)
     num_var = st.selectbox("Select Numerical Variable", options=df.select_dtypes(include='number').columns)
-    st.markdown("</div>", unsafe_allow_html=True)
 
 # Categorical Variable Bar Chart
 cat_data = df[cat_var].value_counts().reset_index()
