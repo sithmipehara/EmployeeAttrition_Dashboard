@@ -181,5 +181,4 @@ col5.markdown("<h5 style='text-align: center;'>Response vs Categorical Variables
 col5.altair_chart(stacked_cat_chart, use_container_width=True)
 
 col6.markdown("<h5 style='text-align: center;'>Response vs Numerical Variables</h5>", unsafe_allow_html=True)
-col6.altair_chart(box_plot, use_container_width=True)cal Variables</h5>", unsafe_allow_html=True)
 col6.altair_chart(box_plot, use_container_width=True)
