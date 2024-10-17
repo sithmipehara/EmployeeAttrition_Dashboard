@@ -105,20 +105,12 @@ center_text = alt.Chart(pd.DataFrame({'text': [total_count]})).mark_text(
     text='text:N'
 )
 
-# Calculate positions for labels
-response_data['Angle'] = (response_data['Percentage'] / 100) * 360
-response_data['LabelX'] = np.cos(np.radians(response_data['Angle'].cumsum() - response_data['Angle'] / 2)) * 70
-response_data['LabelY'] = np.sin(np.radians(response_data['Angle'].cumsum() - response_data['Angle'] / 2)) * -70
-
-# Create text labels for each category
-labels = alt.Chart(response_data).mark_text(size=14, color='white').encode(
-    x=alt.X('LabelX:Q', title=None),
-    y=alt.Y('LabelY:Q', title=None),
-    text=alt.Text('Attrition:N')
-)
+# Create text labels for each category positioned to the left and right
+left_label = f"Stayed: {response_data.loc[response_data['Attrition'] == 'Stayed', 'Count'].values[0]} ({response_data.loc[response_data['Attrition'] == 'Stayed', 'Percentage'].values[0]:.1f}%)"
+right_label = f"Left: {response_data.loc[response_data['Attrition'] == 'Left', 'Count'].values[0]} ({response_data.loc[response_data['Attrition'] == 'Left', 'Percentage'].values[0]:.1f}%)"
 
 # Combine the donut chart with center text and segment labels
-response_donut_chart = donut_chart + center_text + labels
+response_donut_chart = donut_chart + center_text 
 
 # Categorical Variable Bar Chart
 cat_data = df[cat_var].value_counts().reset_index()
