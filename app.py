@@ -150,6 +150,13 @@ with st.container():
     st.altair_chart(response_donut_chart, use_container_width=True)
 
     # Add labels for Left and Stayed categories
+    # Extracting details for each category
+    left_count = response_data.loc[response_data['Attrition'] == 'Left', 'Count'].values[0]
+    left_percentage = response_data.loc[response_data['Attrition'] == 'Left', 'Percentage'].values[0]
+    
+    stayed_count = response_data.loc[response_data['Attrition'] == 'Stayed', 'Count'].values[0]
+    stayed_percentage = response_data.loc[response_data['Attrition'] == 'Stayed', 'Percentage'].values[0]
+
     st.markdown(f"<h5 style='text-align: left;font-size: 12px;'>Stayed<br>{stayed_count}<br>({stayed_percentage:.1f}%)</h5>", unsafe_allow_html=True)
     st.markdown(f"<h5 style='text-align: right;font-size: 12px;'>Left<br>{left_count}<br>({left_percentage:.1f}%)</h5>", unsafe_allow_html=True)
     
