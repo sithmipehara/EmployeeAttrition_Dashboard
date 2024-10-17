@@ -153,7 +153,8 @@ box_plot = alt.Chart(df_filtered).mark_boxplot(size=40, color='white').encode(
 
 # Layout for visualizations
 col1, col2, col3 = st.columns(3)
-col1.markdown("<div class='chart-container'><h5 style='text-align: center;'>Response Variable Distribution</h5>", unsafe_allow_html=True)
+col1.markdown("<div class='chart-container'>", unsafe_allow_html=True)
+col1.markdown("<h5 style='text-align: center;'>Response Variable Distribution</h5>", unsafe_allow_html=True)
 
 # Create a container for the donut chart and labels
 with col1:
