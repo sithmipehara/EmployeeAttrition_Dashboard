@@ -74,7 +74,10 @@ response_data.columns = ["Attrition", "Count"]
 # Donut chart base
 donut_chart = alt.Chart(response_data).mark_arc(innerRadius=50).encode(
     theta=alt.Theta(field="Count", type="quantitative"),
-    color=alt.Color(field="Attrition", type="nominal", scale=alt.Scale(scheme="tableau20")),
+    color=alt.Color(field='Attrition', type='nominal', 
+                    scale=alt.Scale(domain=['Stayed', 'Left'], 
+                                    range=['#00b3b3', '#ff6666']),  # Custom colors for each category
+                    legend=alt.Legend(title="Attrition Status")),
     tooltip=["Attrition", "Count"]
 ).properties(width=200, height=200)
 
@@ -137,7 +140,7 @@ col3.altair_chart(num_chart, use_container_width=True)
 # Additional Row for New Graphs
 col4, col5, col6 = st.columns(3)
 col4.markdown("<h4 style='text-align: center;'>Data Preview</h4>", unsafe_allow_html=True)
-col4.dataframe(df.head(), height=300)
+col4.dataframe(df.head(6), height=300)
 
 col5.markdown("<h4 style='text-align: center;'>Response vs Categorical Variables</h4>", unsafe_allow_html=True)
 col5.altair_chart(stacked_cat_chart, use_container_width=True)
