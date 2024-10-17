@@ -123,7 +123,7 @@ st.markdown("## Response vs Numerical Variable")
 box_plot_base = alt.Chart(df).encode(
     x=alt.X("Attrition:N", title="Attrition"),
     y=alt.Y(num_var, title=num_var),
-    color=alt.Color("Attrition", scale=alt.Scale(domain=['Yes', 'No'], range=['#FF6347', '#4682B4']))
+    color=alt.Color("Attrition", scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4']))
 )
 
 # Boxes
@@ -139,7 +139,7 @@ whiskers = box_plot_base.mark_rule(color='white').encode(
 outliers = box_plot_base.mark_point().transform_filter(
     alt.datum[num_var] < alt.expr.quantile(num_var, 0.25) - 1.5 * alt.expr.iqr(num_var)
 ).encode(
-    color=alt.Color('Attrition', scale=alt.Scale(domain=['Yes', 'No'], range=['#FF6347', '#4682B4']))
+    color=alt.Color('Attrition', scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4']))
 )
 
 # Combine all layers
