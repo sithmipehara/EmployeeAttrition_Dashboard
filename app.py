@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import altair as alt
@@ -72,10 +73,6 @@ response_data = df["Attrition"].value_counts().reset_index()
 response_data.columns = ["Attrition", "Count"]
 response_data['Percentage'] = (response_data['Count'] / response_data['Count'].sum()) * 100
 
-# Response Variable Distribution (Donut Chart with Center Text)
-response_data = df["Attrition"].value_counts().reset_index()
-response_data.columns = ["Attrition", "Count"]
-
 # Donut chart base
 donut_chart = alt.Chart(response_data).mark_arc(innerRadius=50).encode(
     theta=alt.Theta(field="Count", type="quantitative"),
@@ -99,7 +96,7 @@ left_label = f"Stayed: {response_data.loc[response_data['Attrition'] == 'Stayed'
 right_label = f"Left: {response_data.loc[response_data['Attrition'] == 'Left', 'Count'].values[0]} ({response_data.loc[response_data['Attrition'] == 'Left', 'Percentage'].values[0]:.1f}%)"
 
 # Combine the donut chart with center text and segment labels
-response_donut_chart = donut_chart + center_text 
+response_donut_chart = donut_chart + center_text
 
 # Categorical Variable Bar Chart
 cat_data = df[cat_var].value_counts().reset_index()
@@ -163,3 +160,5 @@ col5.altair_chart(stacked_cat_chart, use_container_width=True)
 
 col6.markdown("<h4 style='text-align: center;'>Response vs Numerical Variables</h4>", unsafe_allow_html=True)
 col6.altair_chart(box_plot, use_container_width=True)
+
+# Run the app with: streamlit run app.py
