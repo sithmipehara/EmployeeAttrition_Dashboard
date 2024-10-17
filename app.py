@@ -30,11 +30,11 @@ st.markdown("""
             font-weight: bold;
         }
         
-        .box1 { background-color: #b3d9ff; color: #000000; }
-        .box2 { background-color: #66b3ff; color: #000000; }
-        .box3 { background-color: #ff6666; color: #000000; }
-        .box4 { background-color: #ff9999; color: #000000; }
-        
+        .box1 { background-color: #b3d9ff;color: #000000; }
+        .box2 { background-color: #66b3ff;color: #000000; }
+        .box3 { background-color: #ff6666; color:#000000;}
+        .box4 { background-color: #ff9999;color: #000000; }
+
         /* Color Scheme for Main Title */
         .title {
             color: #FFFFFF;
@@ -43,22 +43,16 @@ st.markdown("""
             text-align: center;
         }
 
-        /* Border Styles for columns */
-        .column {
-            border: 2px solid #FFFFFF; /* Set border color */
-            padding: 10px; /* Add padding */
+        /* Add borders to columns */
+        .stColumn {
+            border-right: 2px solid white; /* Right border for columns */
         }
 
-        /* Border for DataFrame */
-        .stDataFrame {
-            border: 2px solid #FFFFFF; /* Set border for DataFrame */
-            border-radius: 5px;
+        /* Add borders to rows */
+        .stButton, .stTextInput, .stSelectbox, .stSidebar {
+            border-bottom: 2px solid white; /* Bottom border for rows */
         }
 
-        /* Dataframe cell borders */
-        .stDataFrame tbody td {
-            border: 1px solid #FFFFFF; /* Cell border color */
-        }
     </style>
     """, unsafe_allow_html=True)
 
