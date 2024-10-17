@@ -118,7 +118,7 @@ stacked_cat_chart = alt.Chart(df).mark_bar().encode(
 
 # Response vs Numerical Variable (Box Plot) with custom colors
 st.markdown("## Response vs Numerical Variable")
-box_plot = alt.Chart(df).mark_boxplot().encode(
+box_plot = alt.Chart(df).mark_boxplot(size=40).encode(
     x=alt.X("Attrition:N", title="Attrition"),
     y=alt.Y(num_var, title=num_var),
     color=alt.Color("Attrition", scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4'])),  # Custom colors
