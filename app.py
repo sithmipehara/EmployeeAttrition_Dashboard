@@ -72,7 +72,7 @@ response_data = df["Attrition"].value_counts().reset_index()
 response_data.columns = ["Attrition", "Count"]
 
 # Donut chart base
-donut_chart = alt.Chart(response_data).mark_arc(innerRadius=30).encode(
+donut_chart = alt.Chart(response_data).mark_arc(innerRadius=50).encode(
     theta=alt.Theta(field="Count", type="quantitative"),
     color=alt.Color('Attrition:N', scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4']),
                     legend=alt.Legend(orient="top", direction="horizontal")),
@@ -99,7 +99,7 @@ cat_chart = alt.Chart(cat_data).mark_bar().encode(
     x=alt.X(cat_var, sort="-y"),
     y="Count:Q",
     tooltip=[cat_var, "Count"]
-).properties(width=300, height=300)
+).properties(width=250, height=250)
 
 # Numerical Variable Histogram
 num_chart = alt.Chart(df).mark_bar().encode(
