@@ -89,6 +89,21 @@ center_text = alt.Chart(pd.DataFrame({'text': [total_count]})).mark_text(
 # Combine the donut chart with center text and segment labels
 response_donut_chart = donut_chart + center_text
 
+col_filter ,col1, col2, col3 = st.columns(4)
+# Create containers for filters
+with col_filter:
+    st.markdown("<h5 style='text-align: center;'>Filters</h5>", unsafe_allow_html=True)
+
+    # Categorical Variable Filter Container
+    st.markdown("<div style='background-color: #2b2b55; padding: 20px; border-radius: 10px;'>", unsafe_allow_html=True)
+    cat_var = st.selectbox("Select Categorical Variable", options=df.select_dtypes(include='object').columns)
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    # Numerical Variable Filter Container
+    st.markdown("<div style='background-color: #2b2b55; padding: 20px; border-radius: 10px;'>", unsafe_allow_html=True)
+    num_var = st.selectbox("Select Numerical Variable", options=df.select_dtypes(include='number').columns)
+    st.markdown("</div>", unsafe_allow_html=True)
+
 # Categorical Variable Bar Chart
 cat_data = df[cat_var].value_counts().reset_index()
 cat_data.columns = [cat_var, "Count"]
@@ -131,22 +146,6 @@ box_plot = alt.Chart(df_filtered).mark_boxplot(size=40, color='white').encode(
 ).properties(width=300, height=300)
 
 # Layout for visualizations
-col_filter ,col1, col2, col3 = st.columns(4)
-# Create containers for filters
-with col_filter:
-    st.markdown("<h5 style='text-align: center;'>Filters</h5>", unsafe_allow_html=True)
-
-    # Categorical Variable Filter Container
-    st.markdown("<div style='background-color: #2b2b55; padding: 20px; border-radius: 10px;'>", unsafe_allow_html=True)
-    cat_var = st.selectbox("Select Categorical Variable", options=df.select_dtypes(include='object').columns)
-    st.markdown("</div>", unsafe_allow_html=True)
-
-    # Numerical Variable Filter Container
-    st.markdown("<div style='background-color: #2b2b55; padding: 20px; border-radius: 10px;'>", unsafe_allow_html=True)
-    num_var = st.selectbox("Select Numerical Variable", options=df.select_dtypes(include='number').columns)
-    st.markdown("</div>", unsafe_allow_html=True)
-
-
 with col1:
     st.markdown("<h5 style='text-align: center;'>Response Variable Distribution</h5>", unsafe_allow_html=True)
     st.altair_chart(response_donut_chart, use_container_width=True)
