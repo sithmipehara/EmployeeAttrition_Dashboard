@@ -108,7 +108,6 @@ num_chart = alt.Chart(df).mark_bar().encode(
 ).properties(width=300, height=300)
 
 # Response vs Categorical Variable (Stacked Bar Chart) with custom colors
-st.markdown("## Response vs Categorical Variable")
 stacked_cat_chart = alt.Chart(df).mark_bar().encode(
     y=alt.Y(cat_var, title=cat_var, sort='-x'),
     x=alt.X('count()', title='Count'),
@@ -125,7 +124,6 @@ iqr = q3 - q1
 df_filtered = df[(df[num_var] >= (q1 - 1.5 * iqr)) & (df[num_var] <= (q3 + 1.5 * iqr))]
 
 # Create Box Plot with white whiskers
-st.markdown("## Response vs Numerical Variable")
 box_plot = alt.Chart(df_filtered).mark_boxplot(size=40, color='white').encode(
     x=alt.X("Attrition:N", title="Attrition"),
     y=alt.Y(num_var, title=num_var),
