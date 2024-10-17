@@ -157,8 +157,8 @@ with col1:
     stayed_percentage = response_data.loc[response_data['Attrition'] == 'Stayed', 'Percentage'].values[0]
 
     # Displaying labels
-    st.markdown(f"<h5 style='text-align: left;font-size: 12px;margin-top: -220px;'>Stayed<br>{stayed_count}<br>({stayed_percentage:.1f}%)</h5>", unsafe_allow_html=True)
-    st.markdown(f"<h5 style='text-align: right;font-size: 12px;margin-top: -180px;'>Left<br>{left_count}<br>({left_percentage:.1f}%)</h5>", unsafe_allow_html=True)
+    st.markdown(f"<h5 style='text-align: left;font-size: 14px;margin-top: -220px;'>Stayed<br>{stayed_count}<br>({stayed_percentage:.1f}%)</h5>", unsafe_allow_html=True)
+    st.markdown(f"<h5 style='text-align: right;font-size: 14px;margin-top: -180px;'>Left<br>{left_count}<br>({left_percentage:.1f}%)</h5>", unsafe_allow_html=True)
 
 col2.markdown("<h5 style='text-align: center;'>Categorical Variables Distribution</h5>", unsafe_allow_html=True)
 col2.altair_chart(cat_chart, use_container_width=True)
@@ -176,13 +176,9 @@ def highlight_rows(row):
 styled_df = df.style.apply(highlight_rows, axis=1)
 
 # Display the styled DataFrame in Streamlit
-with col4:
-    st.markdown("<h5 style='text-align: center;'>Data Preview</h5>", unsafe_allow_html=True)
-    st.markdown("<div style='background-color: #2b2b55; padding: 20px; border-radius: 10px;'>", unsafe_allow_html=True)
-    
-    st.dataframe(styled_df, height=300)
-    
-    st.markdown("</div>", unsafe_allow_html=True)
+col4.markdown("<h5 style='text-align: center;'>Data Preview</h5>", unsafe_allow_html=True)
+col4.dataframe(styled_df.head(6), height=300)
+
 
 col5.markdown("<h5 style='text-align: center;'>Response vs Categorical Variables</h5>", unsafe_allow_html=True)
 col5.altair_chart(stacked_cat_chart, use_container_width=True)
