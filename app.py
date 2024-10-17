@@ -74,10 +74,7 @@ response_data.columns = ["Attrition", "Count"]
 # Donut chart base
 donut_chart = alt.Chart(response_data).mark_arc(innerRadius=50).encode(
     theta=alt.Theta(field="Count", type="quantitative"),
-    color=alt.Color(field='Attrition', type='nominal', 
-                    scale=alt.Scale(domain=['Stayed', 'Left'], 
-                                    range=['#00b3b3', '#ff6666']),  # Custom colors for each category
-                    legend=alt.Legend(title="Attrition Status")),
+    color=alt.Color('Attrition:N', scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4'])),
     tooltip=["Attrition", "Count"]
 ).properties(width=200, height=200)
 
