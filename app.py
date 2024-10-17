@@ -13,23 +13,7 @@ st.set_page_config(page_title="Employee Attrition Dashboard", layout="wide")
 # Custom CSS for styling
 st.markdown("""
     <style>
-        .stApp {
-    background-color: #111122;  /* Change this to your desired color */
-}
-.container {
-    background-color: #2b2b55; /* Dark background for metric containers */
-    padding: 10px;  /* Reduced padding */
-    border-radius: 0px;
-    height: 160px; /* Adjust height to auto for flexibility */
-    color: white; /* Text color */
-    margin: 5px;  /* Reduced margin */
-}
-.chart-container {
-    background-color: #2b2b55; /* Medium dark background for charts */
-    padding: 10px;  /* Reduced padding */
-    border-radius: 0px;
-}
-    /* Set Background color */
+        /* Set Background color */
         .reportview-container {
             background-color: #1A1A3D;
         }
@@ -119,12 +103,15 @@ cat_chart = alt.Chart(cat_data).mark_bar().encode(
     tooltip=[cat_var, "Count"]
 ).properties(width=300, height=300)
 
-# Numerical Variable Histogram
+# Numerical Variable Histogram with hover effect
 num_chart = alt.Chart(df).mark_bar().encode(
     x=alt.X(num_var, bin=True),
     y='count()',
-    tooltip=[num_var, 'count()']
-).properties(width=300, height=300)
+    tooltip=[num_var, 'count()'],
+    opacity=alt.condition(alt.selection_single(on='mouseover'), alt.value(0.7), alt.value(1))  # Hover effect
+).properties(width=300, height=300).add_selection(
+    alt.selection_single(on='mouseover', empty='none')
+)
 
 # Response vs Categorical Variable (Stacked Bar Chart) with custom colors
 stacked_cat_chart = alt.Chart(df).mark_bar().encode(
@@ -153,7 +140,6 @@ box_plot = alt.Chart(df_filtered).mark_boxplot(size=40, color='white').encode(
 
 # Layout for visualizations
 col1, col2, col3 = st.columns(3)
-col1.markdown("<div class='chart-container'>", unsafe_allow_html=True)
 col1.markdown("<h5 style='text-align: center;'>Response Variable Distribution</h5>", unsafe_allow_html=True)
 
 # Create a container for the donut chart and labels
@@ -177,26 +163,19 @@ with col1:
     st.markdown(f"<h5 style='text-align: left;font-size: 12px;margin-top: -220px;'>Stayed<br>{stayed_count}<br>({stayed_percentage:.1f}%)</h5>", unsafe_allow_html=True)
     st.markdown(f"<h5 style='text-align: right;font-size: 12px;margin-top: -180px;'>Left<br>{left_count}<br>({left_percentage:.1f}%)</h5>", unsafe_allow_html=True)
 
-st.markdown("</div>", unsafe_allow_html=True)
-
-col2.markdown("<div class='chart-container'><h5 style='text-align: center;'>Categorical Variables Distribution</h5>", unsafe_allow_html=True)
+col2.markdown("<h5 style='text-align: center;'>Categorical Variables Distribution</h5>", unsafe_allow_html=True)
 col2.altair_chart(cat_chart, use_container_width=True)
-st.markdown("</div>", unsafe_allow_html=True)
 
-col3.markdown("<div class='chart-container'><h5 style='text-align: center;'>Numerical Variables Distribution</h5>", unsafe_allow_html=True)
+col3.markdown("<h5 style='text-align: center;'>Numerical Variables Distribution</h5>", unsafe_allow_html=True)
 col3.altair_chart(num_chart, use_container_width=True)
-st.markdown("</div>", unsafe_allow_html=True)
 
 # Additional Row for New Graphs
 col4, col5, col6 = st.columns(3)
-col4.markdown("<div class='chart-container'><h5 style='text-align: center;'>Data Preview</h5>", unsafe_allow_html=True)
+col4.markdown("<h5 style='text-align: center;'>Data Preview</h5>", unsafe_allow_html=True)
 col4.dataframe(df.dropna(how='all').head(6), height=300)
-st.markdown("</div>", unsafe_allow_html=True)
 
-col5.markdown("<div class='chart-container'><h5 style='text-align: center;'>Response vs Categorical Variables</h5>", unsafe_allow_html=True)
+col5.markdown("<h5 style='text-align: center;'>Response vs Categorical Variables</h5>", unsafe_allow_html=True)
 col5.altair_chart(stacked_cat_chart, use_container_width=True)
-st.markdown("</div>", unsafe_allow_html=True)
 
-col6.markdown("<div class='chart-container'><h5 style='text-align: center;'>Response vs Numerical Variables</h5>", unsafe_allow_html=True)
+col6.markdown("<h5 style='text-align: center;'>Response vs Numerical Variables</h5>", unsafe_allow_html=True)
 col6.altair_chart(box_plot, use_container_width=True)
-st.markdown("</div>", unsafe_allow_html=True)
