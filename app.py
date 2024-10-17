@@ -92,8 +92,6 @@ response_donut_chart = donut_chart + center_text
 col_filter ,col1, col2, col3 = st.columns(4)
 # Create containers for filters
 with col_filter:
-    st.markdown("<h5 style='text-align: center;'>Filters</h5>", unsafe_allow_html=True)
-
     # Categorical Variable Filter Container
     cat_var = st.selectbox("Select Categorical Variable", options=df.select_dtypes(include='object').columns)
     # Numerical Variable Filter Container
@@ -140,6 +138,20 @@ box_plot = alt.Chart(df_filtered).mark_boxplot(size=40, color='white').encode(
                     legend=alt.Legend(orient="top", direction="horizontal"))
 ).properties(width=300, height=300)
 
+# Prepare data for heatmap
+heatmap_data = df.groupby(['Department', 'Attrition']).size().reset_index(name='Count')
+
+# Create heatmap
+heatmap = alt.Chart(heatmap_data).mark_rect().encode(
+    x=alt.X('Department:N', title='Department'),
+    y=alt.Y('Attrition:N', title='Attrition'),
+    color=alt.Color('Count:Q', scale=alt.Scale(scheme='blues'), title='Count'),
+    tooltip=['Department:N', 'Attrition:N', 'Count:Q']
+).properties(
+    width=300,
+    height=300
+)
+
 # Layout for visualizations
 with col1:
     st.markdown("<h5 style='text-align: center;'>Response Variable Distribution</h5>", unsafe_allow_html=True)
@@ -162,7 +174,7 @@ col3.markdown("<h5 style='text-align: center;'>Numerical Variables Distribution<
 col3.altair_chart(num_chart, use_container_width=True)
 
 # Additional Row for New Graphs
-col4, col5, col6 = st.columns(3)
+col8,col4, col5, col6 = st.columns(3)
 col4.markdown("<h5 style='text-align: center;'>Data Preview</h5>", unsafe_allow_html=True)
 col4.dataframe(df.dropna(how='all').head(6), height=300)
 
