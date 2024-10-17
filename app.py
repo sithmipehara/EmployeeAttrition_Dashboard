@@ -142,7 +142,7 @@ col1.markdown("<h4 style='text-align: center;'>Response Variable Distribution</h
 # Create a container for the donut chart and labels
 with col1:
     # Display Donut Chart
-    col1.altair_chart(response_donut_chart, use_container_width=True)
+    st.altair_chart(response_donut_chart, use_container_width=True)
 
     # Add labels for Left and Stayed categories
     response_data = df["Attrition"].value_counts().reset_index()
@@ -150,12 +150,15 @@ with col1:
     response_data['Percentage'] = (response_data['Count'] / response_data['Count'].sum()) * 100
 
     # Extracting details for each category
-    left_label = f"Left: {response_data.loc[response_data['Attrition'] == 'Left', 'Count'].values[0]} ({response_data.loc[response_data['Attrition'] == 'Left', 'Percentage'].values[0]:.1f}%)"
-    stayed_label = f"Stayed: {response_data.loc[response_data['Attrition'] == 'Stayed', 'Count'].values[0]} ({response_data.loc[response_data['Attrition'] == 'Stayed', 'Percentage'].values[0]:.1f}%)"
+    left_count = response_data.loc[response_data['Attrition'] == 'Left', 'Count'].values[0]
+    left_percentage = response_data.loc[response_data['Attrition'] == 'Left', 'Percentage'].values[0]
+    
+    stayed_count = response_data.loc[response_data['Attrition'] == 'Stayed', 'Count'].values[0]
+    stayed_percentage = response_data.loc[response_data['Attrition'] == 'Stayed', 'Percentage'].values[0]
 
     # Displaying labels
-    st.markdown(f"<h5 style='text-align: left;'>{stayed_label}</h5>", unsafe_allow_html=True)
-    st.markdown(f"<h5 style='text-align: right;'>{left_label}</h5>", unsafe_allow_html=True)
+    st.markdown(f"<h5 style='text-align: left;'>Stayed: {stayed_count} ({stayed_percentage:.1f}%)</h5>", unsafe_allow_html=True)
+    st.markdown(f"<h5 style='text-align: right;'>Left: {left_count} ({left_percentage:.1f}%)</h5>", unsafe_allow_html=True)
 
 col2.markdown("<h4 style='text-align: center;'>Categorical Variables Distribution</h4>", unsafe_allow_html=True)
 col2.altair_chart(cat_chart, use_container_width=True)
@@ -173,5 +176,3 @@ col5.altair_chart(stacked_cat_chart, use_container_width=True)
 
 col6.markdown("<h4 style='text-align: center;'>Response vs Numerical Variables</h4>", unsafe_allow_html=True)
 col6.altair_chart(box_plot, use_container_width=True)
-
-# Run the app with: streamlit run app.py
