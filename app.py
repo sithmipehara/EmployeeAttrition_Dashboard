@@ -157,8 +157,8 @@ with col1:
     stayed_percentage = response_data.loc[response_data['Attrition'] == 'Stayed', 'Percentage'].values[0]
 
     # Displaying labels
-    st.markdown(f"<h5 style='text-align: left;font-size: 12px;margin-top: -220px;'>Stayed<br> {stayed_count}<br> ({stayed_percentage:.1f}%)</h5>", unsafe_allow_html=True)
-    st.markdown(f"<h5 style='text-align: right;font-size: 12px;margin-top: -180px;'>Left<br> {left_count} <br>({left_percentage:.1f}%)</h5>", unsafe_allow_html=True)
+    st.markdown(f"<h5 style='text-align: left;font-size: 12px;margin-top: -220px;'>Stayed<br>{stayed_count}<br>({stayed_percentage:.1f}%)</h5>", unsafe_allow_html=True)
+    st.markdown(f"<h5 style='text-align: right;font-size: 12px;margin-top: -180px;'>Left<br>{left_count}<br>({left_percentage:.1f}%)</h5>", unsafe_allow_html=True)
 
 col2.markdown("<h4 style='text-align: center;'>Categorical Variables Distribution</h4>", unsafe_allow_html=True)
 col2.altair_chart(cat_chart, use_container_width=True)
