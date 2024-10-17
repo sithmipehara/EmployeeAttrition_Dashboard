@@ -171,6 +171,7 @@ col4, col5, col6 = st.columns(3)
 col4.markdown("<h5 style='text-align: center;'>Data Preview</h5>", unsafe_allow_html=True)
 col4.markdown("<div style='background-color: #2eb8b8; padding: 20px; border-radius: 10px;'>", unsafe_allow_html=True)
 col4.dataframe(df.dropna(how='all').head(6), height=300)
+col4.markdown("</div>", unsafe_allow_html=True)
 
 col5.markdown("<h5 style='text-align: center;'>Response vs Categorical Variables</h5>", unsafe_allow_html=True)
 col5.altair_chart(stacked_cat_chart, use_container_width=True)
