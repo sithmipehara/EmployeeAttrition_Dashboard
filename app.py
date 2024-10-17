@@ -103,15 +103,12 @@ cat_chart = alt.Chart(cat_data).mark_bar().encode(
     tooltip=[cat_var, "Count"]
 ).properties(width=300, height=300)
 
-# Numerical Variable Histogram with hover effect
+# Numerical Variable Histogram
 num_chart = alt.Chart(df).mark_bar().encode(
     x=alt.X(num_var, bin=True),
     y='count()',
-    tooltip=[num_var, 'count()'],
-    opacity=alt.condition(alt.selection_single(on='mouseover'), alt.value(0.7), alt.value(1))  # Hover effect
-).properties(width=300, height=300).add_selection(
-    alt.selection_single(on='mouseover', empty='none')
-)
+    tooltip=[num_var, 'count()']
+).properties(width=300, height=300)
 
 # Response vs Categorical Variable (Stacked Bar Chart) with custom colors
 stacked_cat_chart = alt.Chart(df).mark_bar().encode(
@@ -172,6 +169,7 @@ col3.altair_chart(num_chart, use_container_width=True)
 # Additional Row for New Graphs
 col4, col5, col6 = st.columns(3)
 col4.markdown("<h5 style='text-align: center;'>Data Preview</h5>", unsafe_allow_html=True)
+col4.markdown("<div style='background-color: #2eb8b8; padding: 20px; border-radius: 10px;'>", unsafe_allow_html=True)
 col4.dataframe(df.dropna(how='all').head(6), height=300)
 
 col5.markdown("<h5 style='text-align: center;'>Response vs Categorical Variables</h5>", unsafe_allow_html=True)
