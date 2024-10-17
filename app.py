@@ -126,13 +126,11 @@ df_filtered = df[(df[num_var] >= (q1 - 1.5 * iqr)) & (df[num_var] <= (q3 + 1.5 *
 
 # Create Box Plot with white whiskers
 st.markdown("## Response vs Numerical Variable")
-box_plot = alt.Chart(df_filtered).mark_boxplot(size=40, color='#FF6347').encode(
+box_plot = alt.Chart(df_filtered).mark_boxplot(size=40, color='white').encode(
     x=alt.X("Attrition:N", title="Attrition"),
     y=alt.Y(num_var, title=num_var),
     color=alt.Color("Attrition", scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4']))
 ).properties(width=300, height=300)
-
-st.altair_chart(box_plot, use_container_width=True)
 
 # Layout for visualizations
 col1, col2, col3 = st.columns(3)
