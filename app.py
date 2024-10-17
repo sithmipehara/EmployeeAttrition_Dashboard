@@ -99,7 +99,7 @@ cat_chart = alt.Chart(cat_data).mark_bar().encode(
     x=alt.X(cat_var, sort="-y"),
     y="Count:Q",
     tooltip=[cat_var, "Count"]
-).properties(width=250, height=250)
+).properties(width=300, height=300)
 
 # Numerical Variable Histogram
 num_chart = alt.Chart(df).mark_bar().encode(
