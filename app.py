@@ -34,7 +34,7 @@ st.markdown("""
         .box2 { background-color: #66b3ff;color: #000000; }
         .box3 { background-color: #ff6666; color:#000000;}
         .box4 { background-color: #ff9999;color: #000000; }
-
+        
         /* Color Scheme for Main Title */
         .title {
             color: #FFFFFF;
@@ -42,17 +42,6 @@ st.markdown("""
             font-weight: bold;
             text-align: center;
         }
-
-        /* Add borders to columns */
-        .stColumn {
-            border-right: 2px solid white; /* Right border for columns */
-        }
-
-        /* Add borders to rows */
-        .stButton, .stTextInput, .stSelectbox, .stSidebar {
-            border-bottom: 2px solid white; /* Bottom border for rows */
-        }
-
     </style>
     """, unsafe_allow_html=True)
 
