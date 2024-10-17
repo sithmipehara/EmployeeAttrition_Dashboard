@@ -116,14 +116,36 @@ stacked_cat_chart = alt.Chart(df).mark_bar().encode(
     tooltip=[cat_var, 'Attrition', 'count()']
 ).properties(width=300, height=300)
 
-# Response vs Numerical Variable (Box Plot) with custom colors
+# Response vs Numerical Variable (Custom Box Plot) with white whiskers and custom colors
 st.markdown("## Response vs Numerical Variable")
-box_plot = alt.Chart(df).mark_boxplot(size=40).encode(
+
+# Base chart for the box plot
+box_plot_base = alt.Chart(df).encode(
     x=alt.X("Attrition:N", title="Attrition"),
     y=alt.Y(num_var, title=num_var),
-    color=alt.Color("Attrition", scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4'])),  # Custom colors
-    tooltip=["Attrition", num_var]
-).properties(width=300, height=300)
+    color=alt.Color("Attrition", scale=alt.Scale(domain=['Yes', 'No'], range=['#FF6347', '#4682B4']))
+)
+
+# Boxes
+box = box_plot_base.mark_boxplot(size=40)
+
+# Whiskers - set them to white
+whiskers = box_plot_base.mark_rule(color='white').encode(
+    y=alt.Y(f"q1({num_var}):Q", title=num_var),
+    y2=f"q3({num_var}):Q"
+)
+
+# Outliers
+outliers = box_plot_base.mark_point().transform_filter(
+    alt.datum[num_var] < alt.expr.quantile(num_var, 0.25) - 1.5 * alt.expr.iqr(num_var)
+).encode(
+    color=alt.Color('Attrition', scale=alt.Scale(domain=['Yes', 'No'], range=['#FF6347', '#4682B4']))
+)
+
+# Combine all layers
+custom_box_plot = (box + whiskers + outliers).properties(width=300, height=300)
+
+st.altair_chart(custom_box_plot, use_container_width=True)
 
 # Layout for visualizations
 col1, col2, col3 = st.columns(3)
