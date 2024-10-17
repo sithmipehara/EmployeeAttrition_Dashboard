@@ -43,10 +43,16 @@ st.markdown("""
             font-weight: bold;
             text-align: center;
         }
+
+        /* Custom container style */
+        .custom-container {
+            background-color: #2b2b55; 
+            padding: 20px; 
+            border-radius: 10px; 
+            margin-bottom: 20px;
+        }
     </style>
     """, unsafe_allow_html=True)
-
-# Dashboard title
 
 # Header metrics
 num_data_points = df.shape[0]
@@ -91,7 +97,7 @@ center_text = alt.Chart(pd.DataFrame({'text': [total_count]})).mark_text(
     text='text:N'
 )
 
-# Combine the donut chart with center text and segment labels
+# Combine the donut chart with center text
 response_donut_chart = donut_chart + center_text
 
 # Categorical Variable Bar Chart
@@ -135,44 +141,58 @@ box_plot = alt.Chart(df_filtered).mark_boxplot(size=40, color='white').encode(
                     legend=alt.Legend(orient="top", direction="horizontal"))
 ).properties(width=300, height=300)
 
-# Layout for visualizations
-col1, col2, col3 = st.columns(3)
-col1.markdown("<h4 style='text-align: center;'>Response Variable Distribution</h4>", unsafe_allow_html=True)
-
-# Create a container for the donut chart and labels
-with col1:
+# Layout for visualizations inside containers
+with st.container():
+    st.markdown("<h5 style='text-align: center;'>Response Variable Distribution</h5>", unsafe_allow_html=True)
+    st.markdown("<div class='custom-container'>", unsafe_allow_html=True)
+    
     # Display Donut Chart
     st.altair_chart(response_donut_chart, use_container_width=True)
 
     # Add labels for Left and Stayed categories
-    response_data = df["Attrition"].value_counts().reset_index()
-    response_data.columns = ["Attrition", "Count"]
-    response_data['Percentage'] = (response_data['Count'] / response_data['Count'].sum()) * 100
-
-    # Extracting details for each category
-    left_count = response_data.loc[response_data['Attrition'] == 'Left', 'Count'].values[0]
-    left_percentage = response_data.loc[response_data['Attrition'] == 'Left', 'Percentage'].values[0]
+    st.markdown(f"<h5 style='text-align: left;font-size: 12px;'>Stayed<br>{stayed_count}<br>({stayed_percentage:.1f}%)</h5>", unsafe_allow_html=True)
+    st.markdown(f"<h5 style='text-align: right;font-size: 12px;'>Left<br>{left_count}<br>({left_percentage:.1f}%)</h5>", unsafe_allow_html=True)
     
-    stayed_count = response_data.loc[response_data['Attrition'] == 'Stayed', 'Count'].values[0]
-    stayed_percentage = response_data.loc[response_data['Attrition'] == 'Stayed', 'Percentage'].values[0]
+    st.markdown("</div>", unsafe_allow_html=True)
 
-    # Displaying labels
-    st.markdown(f"<h5 style='text-align: left;font-size: 12px;margin-top: -220px;'>Stayed<br>{stayed_count}<br>({stayed_percentage:.1f}%)</h5>", unsafe_allow_html=True)
-    st.markdown(f"<h5 style='text-align: right;font-size: 12px;margin-top: -180px;'>Left<br>{left_count}<br>&nbsp({left_percentage:.1f}%)</h5>", unsafe_allow_html=True)
+with st.container():
+    st.markdown("<h5 style='text-align: center;'>Categorical Variables Distribution</h5>", unsafe_allow_html=True)
+    st.markdown("<div class='custom-container'>", unsafe_allow_html=True)
+    
+    col2.altair_chart(cat_chart, use_container_width=True)
+    
+    st.markdown("</div>", unsafe_allow_html=True)
 
-col2.markdown("<h4 style='text-align: center;'>Categorical Variables Distribution</h4>", unsafe_allow_html=True)
-col2.altair_chart(cat_chart, use_container_width=True)
+with st.container():
+    st.markdown("<h5 style='text-align: center;'>Numerical Variables Distribution</h5>", unsafe_allow_html=True)
+    st.markdown("<div class='custom-container'>", unsafe_allow_html=True)
+    
+    col3.altair_chart(num_chart, use_container_width=True)
+    
+    st.markdown("</div>", unsafe_allow_html=True)
 
-col3.markdown("<h4 style='text-align: center;'>Numerical Variables Distribution</h4>", unsafe_allow_html=True)
-col3.altair_chart(num_chart, use_container_width=True)
-
-# Additional Row for New Graphs
+# Additional Row for New Graphs inside containers
 col4, col5, col6 = st.columns(3)
-col4.markdown("<h4 style='text-align: center;'>Data Preview</h4>", unsafe_allow_html=True)
-col4.dataframe(df.dropna(how='all').head(6), height=300)
+with col4:
+    st.markdown("<h5 style='text-align: center;'>Data Preview</h5>", unsafe_allow_html=True)
+    st.markdown("<div class='custom-container'>", unsafe_allow_html=True)
+    
+    col4.dataframe(df.dropna(how='all').head(6), height=300)
+    
+    st.markdown("</div>", unsafe_allow_html=True)
 
-col5.markdown("<h4 style='text-align: center;'>Response vs Categorical Variables</h4>", unsafe_allow_html=True)
-col5.altair_chart(stacked_cat_chart, use_container_width=True)
+with col5:
+    st.markdown("<h5 style='text-align: center;'>Response vs Categorical Variables</h5>", unsafe_allow_html=True)
+    st.markdown("<div class='custom-container'>", unsafe_allow_html=True)
+    
+    col5.altair_chart(stacked_cat_chart, use_container_width=True)
+    
+    st.markdown("</div>", unsafe_allow_html=True)
 
-col6.markdown("<h4 style='text-align: center;'>Response vs Numerical Variables</h4>", unsafe_allow_html=True)
-col6.altair_chart(box_plot, use_container_width=True)
+with col6:
+    st.markdown("<h5 style='text-align: center;'>Response vs Numerical Variables</h5>", unsafe_allow_html=True)
+    st.markdown("<div class='custom-container'>", unsafe_allow_html=True)
+    
+    col6.altair_chart(box_plot, use_container_width=True)
+    
+    st.markdown("</div>", unsafe_allow_html=True)
