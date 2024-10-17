@@ -72,7 +72,7 @@ response_data = df["Attrition"].value_counts().reset_index()
 response_data.columns = ["Attrition", "Count"]
 
 # Donut chart base
-donut_chart = alt.Chart(response_data).mark_arc(innerRadius=50).encode(
+donut_chart = alt.Chart(response_data).mark_arc(innerRadius=30).encode(
     theta=alt.Theta(field="Count", type="quantitative"),
     color=alt.Color('Attrition:N', scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4']),
                     legend=alt.Legend(orient="top", direction="horizontal")),
