@@ -30,10 +30,10 @@ st.markdown("""
             font-weight: bold;
         }
         
-        .box1 { background-color: #b3d9ff;color: #000000; }
-        .box2 { background-color: #66b3ff;color: #000000; }
-        .box3 { background-color: #ff6666; color:#000000;}
-        .box4 { background-color: #ff9999;color: #000000; }
+        .box1 { background-color: #b3d9ff; color: #000000; }
+        .box2 { background-color: #66b3ff; color: #000000; }
+        .box3 { background-color: #ff6666; color: #000000; }
+        .box4 { background-color: #ff9999; color: #000000; }
         
         /* Color Scheme for Main Title */
         .title {
@@ -41,6 +41,23 @@ st.markdown("""
             font-size: 30px;
             font-weight: bold;
             text-align: center;
+        }
+
+        /* Border Styles for columns */
+        .column {
+            border: 2px solid #FFFFFF; /* Set border color */
+            padding: 10px; /* Add padding */
+        }
+
+        /* Border for DataFrame */
+        .stDataFrame {
+            border: 2px solid #FFFFFF; /* Set border for DataFrame */
+            border-radius: 5px;
+        }
+
+        /* Dataframe cell borders */
+        .stDataFrame tbody td {
+            border: 1px solid #FFFFFF; /* Cell border color */
         }
     </style>
     """, unsafe_allow_html=True)
@@ -154,5 +171,3 @@ col5.altair_chart(stacked_cat_chart, use_container_width=True)
 
 col6.markdown("<h4 style='text-align: center;'>Response vs Numerical Variables</h4>", unsafe_allow_html=True)
 col6.altair_chart(box_plot, use_container_width=True)
-
-# Run the app with: streamlit run app.py
