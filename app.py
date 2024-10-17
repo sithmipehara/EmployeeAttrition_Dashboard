@@ -177,7 +177,7 @@ styled_df = df.style.apply(highlight_rows, axis=1)
 
 # Display the styled DataFrame in Streamlit
 col4.markdown("<h5 style='text-align: center;'>Data Preview</h5>", unsafe_allow_html=True)
-col4.dataframe(styled_df.head(6), height=300)
+col4.dataframe(styled_df, height=300)
 
 
 col5.markdown("<h5 style='text-align: center;'>Response vs Categorical Variables</h5>", unsafe_allow_html=True)
