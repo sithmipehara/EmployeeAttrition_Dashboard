@@ -78,6 +78,11 @@ st.sidebar.header("Filters")
 cat_var = st.sidebar.selectbox("Select Categorical Variable", options=df.select_dtypes(include='object').columns)
 num_var = st.sidebar.selectbox("Select Numerical Variable", options=df.select_dtypes(include='number').columns)
 
+# Calculate response variable distribution
+response_data = df["Attrition"].value_counts().reset_index()
+response_data.columns = ["Attrition", "Count"]
+response_data['Percentage'] = (response_data['Count'] / response_data['Count'].sum()) * 100
+
 # Response Variable Distribution (Donut Chart with Center Text)
 response_data = df["Attrition"].value_counts().reset_index()
 response_data.columns = ["Attrition", "Count"]
@@ -100,8 +105,20 @@ center_text = alt.Chart(pd.DataFrame({'text': [total_count]})).mark_text(
     text='text:N'
 )
 
+# Calculate positions for labels
+response_data['Angle'] = (response_data['Percentage'] / 100) * 360
+response_data['LabelX'] = np.cos(np.radians(response_data['Angle'].cumsum() - response_data['Angle'] / 2)) * 70
+response_data['LabelY'] = np.sin(np.radians(response_data['Angle'].cumsum() - response_data['Angle'] / 2)) * -70
+
+# Create text labels for each category
+labels = alt.Chart(response_data).mark_text(size=14, color='white').encode(
+    x=alt.X('LabelX:Q', title=None),
+    y=alt.Y('LabelY:Q', title=None),
+    text=alt.Text('Attrition:N')
+)
+
 # Combine the donut chart with center text and segment labels
-response_donut_chart = donut_chart + center_text
+response_donut_chart = donut_chart + center_text + labels
 
 # Categorical Variable Bar Chart
 cat_data = df[cat_var].value_counts().reset_index()
