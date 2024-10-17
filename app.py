@@ -136,7 +136,16 @@ box_plot = alt.Chart(df_filtered).mark_boxplot(size=40, color='white').encode(
 ).properties(width=300, height=300)
 
 # Layout for visualizations
-col1, col2, col3 = st.columns(3)
+col7,col1, col2, col3 = st.columns(4)
+col7.markdown("<h5 style='text-align: center;'>Select Categorical Variable</h5>", unsafe_allow_html=True)
+col7.markdown("<div style='background-color: #2b2b55; padding: 20px; border-radius: 10px;'>", unsafe_allow_html=True)
+cat_var = st.selectbox( options=df.select_dtypes(include='object').columns)
+col7.markdown("</div>", unsafe_allow_html=True)
+col7.markdown("<br>", unsafe_allow_html=True)
+col7.markdown("<div style='background-color: #2b2b55; padding: 20px; border-radius: 10px;'>", unsafe_allow_html=True)
+num_var = st.selectbox("Select Numerical Variable", options=df.select_dtypes(include='number').columns)
+col7.markdown("</div>", unsafe_allow_html=True)
+
 col1.markdown("<h5 style='text-align: center;'>Response Variable Distribution</h5>", unsafe_allow_html=True)
 
 # Create a container for the donut chart and labels
@@ -167,7 +176,7 @@ col3.markdown("<h5 style='text-align: center;'>Numerical Variables Distribution<
 col3.altair_chart(num_chart, use_container_width=True)
 
 # Additional Row for New Graphs
-col4, col5, col6 = st.columns(3)
+col8,col4, col5, col6 = st.columns(4)
 col4.markdown("<h5 style='text-align: center;'>Data Preview</h5>", unsafe_allow_html=True)
 col4.dataframe(df.dropna(how='all').head(6), height=300)
 
