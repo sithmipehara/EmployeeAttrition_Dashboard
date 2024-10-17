@@ -91,10 +91,6 @@ center_text = alt.Chart(pd.DataFrame({'text': [total_count]})).mark_text(
     text='text:N'
 )
 
-# Create text labels for each category positioned to the left and right
-left_label = f"Stayed: {response_data.loc[response_data['Attrition'] == 'Stayed', 'Count'].values[0]} ({response_data.loc[response_data['Attrition'] == 'Stayed', 'Percentage'].values[0]:.1f}%)"
-right_label = f"Left: {response_data.loc[response_data['Attrition'] == 'Left', 'Count'].values[0]} ({response_data.loc[response_data['Attrition'] == 'Left', 'Percentage'].values[0]:.1f}%)"
-
 # Combine the donut chart with center text and segment labels
 response_donut_chart = donut_chart + center_text
 
@@ -141,8 +137,25 @@ box_plot = alt.Chart(df_filtered).mark_boxplot(size=40, color='white').encode(
 
 # Layout for visualizations
 col1, col2, col3 = st.columns(3)
-col1.markdown("<h4 style='text-align: center;'>Response variable Distribution</h4>", unsafe_allow_html=True)
-col1.altair_chart(response_donut_chart, use_container_width=True)
+col1.markdown("<h4 style='text-align: center;'>Response Variable Distribution</h4>", unsafe_allow_html=True)
+
+# Create a container for the donut chart and labels
+with col1:
+    # Display Donut Chart
+    col1.altair_chart(response_donut_chart, use_container_width=True)
+
+    # Add labels for Left and Stayed categories
+    response_data = df["Attrition"].value_counts().reset_index()
+    response_data.columns = ["Attrition", "Count"]
+    response_data['Percentage'] = (response_data['Count'] / response_data['Count'].sum()) * 100
+
+    # Extracting details for each category
+    left_label = f"Left: {response_data.loc[response_data['Attrition'] == 'Left', 'Count'].values[0]} ({response_data.loc[response_data['Attrition'] == 'Left', 'Percentage'].values[0]:.1f}%)"
+    stayed_label = f"Stayed: {response_data.loc[response_data['Attrition'] == 'Stayed', 'Count'].values[0]} ({response_data.loc[response_data['Attrition'] == 'Stayed', 'Percentage'].values[0]:.1f}%)"
+
+    # Displaying labels
+    st.markdown(f"<h5 style='text-align: left;'>{stayed_label}</h5>", unsafe_allow_html=True)
+    st.markdown(f"<h5 style='text-align: right;'>{left_label}</h5>", unsafe_allow_html=True)
 
 col2.markdown("<h4 style='text-align: center;'>Categorical Variables Distribution</h4>", unsafe_allow_html=True)
 col2.altair_chart(cat_chart, use_container_width=True)
