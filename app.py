@@ -138,7 +138,7 @@ with col3:
     
     cat_data = df[cat_var].value_counts().reset_index()
     cat_data.columns = [cat_var, "Count"]
-    cat_chart = alt.Chart(cat_data).mark_bar(color='#66c2ff').encode(
+    cat_chart = alt.Chart(cat_data).mark_bar(color='#80bfff').encode(
         x=alt.X(cat_var, sort="-y"),
         y="Count:Q",
         tooltip=[cat_var, "Count"]
@@ -152,7 +152,7 @@ with col3:
 with col4:
     st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Numerical Variables Distribution</h5>", unsafe_allow_html=True)
     
-    num_chart = alt.Chart(df).mark_bar(color='#66c2ff').encode(
+    num_chart = alt.Chart(df).mark_bar(color='#80bfff').encode(
         x=alt.X(num_var, bin=True),
         y='count()',
         tooltip=[num_var, 'count()']
