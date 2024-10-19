@@ -24,21 +24,26 @@ st.markdown("""
 
 /* Chart containers */
 .chart-container {
-    padding: 10px;
-    border-radius: 0px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.element-container {
+    position: relative; /* Make the container relative to apply an overlay on hover */
     padding: 10px;
     border-radius: 8px;
-    background-color: transparent; /* Ensure transparent background */
+    transition: box-shadow 0.3s ease;
 }
 
-/* Hover effect on chart containers */
+.chart-container:hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1); /* Transparent white overlay */
+    border-radius: 8px;
+    z-index: 1; /* Ensures the overlay is above the chart background but below the chart content */
+}
+
 .chart-container:hover {
-    background-color: rgba(255, 128, 128, 0.1);  /* Subtle transparent white */
-    box-shadow: 0px 0px 10px rgba(255, 128, 128, 0.2);  /* Optional shadow */
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3); /* Optional shadow */
 }
 
 /* Donut container hover effect */
@@ -47,10 +52,27 @@ st.markdown("""
     box-shadow: 0px 0px 10px rgba(255, 128, 128, 0.2);  /* Optional shadow */
 }
 
-/* Streamlit specific container for Altair chart */
+.element-container {
+    position: relative; /* Ensure proper positioning for hover effect */
+    padding: 10px;
+    border-radius: 8px;
+    background-color: transparent; /* Ensure the default background is still visible */
+}
+
+.element-container:hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1); /* Transparent white overlay */
+    border-radius: 8px;
+    z-index: 1;
+}
+
 .element-container:hover {
-    background-color: rgba(255, 128, 128, 0.1); /* Hover effect on the entire chart box */
-    box-shadow: 0px 0px 10px rgba(255, 128, 128, 0.2);
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3); /* Optional shadow */
 }
 
 /* Sidebar selectbox style */
