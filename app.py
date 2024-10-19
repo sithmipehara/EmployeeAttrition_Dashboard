@@ -8,37 +8,43 @@ st.set_page_config(page_title="Employee Attrition Dashboard", layout="wide", ini
 st.markdown("""
 <style>
 /* Style for individual metric boxes */
-        .metric-box {
-            padding: 20px;
-            border-radius: 8px;
-            color: white;
-            text-align: center;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        
-        .box1 { background-color: #b3d9ff;color: #000000; }
-        .box2 { background-color: #66b3ff;color: #000000; }
-        .box3 { background-color: #ff6666; color:#000000;}
-        .box4 { background-color: #ff9999;color: #000000; }
-.container {
-    padding: 10px;  /* Reduced padding */
-    border-radius: 0px;
-    height: 160px; /* Adjust height to auto for flexibility */
-    color: white; /* Text color */
-    margin: 5px;  /* Reduced margin */
+.metric-box {
+    padding: 20px;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
 }
-.donut-container {
-    padding: 10px;  /* Reduced padding */
-    border-radius: 0px;
-}
+
+.box1 { background-color: #b3d9ff;color: #000000; }
+.box2 { background-color: #66b3ff;color: #000000; }
+.box3 { background-color: #ff6666; color:#000000;}
+.box4 { background-color: #ff9999;color: #000000; }
+
+/* Chart containers */
 .chart-container {
-    padding: 10px;  /* Reduced padding */
+    padding: 10px;
     border-radius: 0px;
+    transition: background-color 0.3s ease;
 }
+
+/* Hover effect on chart containers */
+.chart-container:hover {
+    background-color: rgba(255, 255, 255, 0.1);  /* Subtle transparent white */
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);  /* Optional shadow */
+}
+
+/* Donut container hover effect */
+.donut-container:hover {
+    background-color: rgba(255, 255, 255, 0.1);  /* Subtle transparent white */
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);  /* Optional shadow */
+}
+
+/* Sidebar selectbox style */
 .stSelectbox {
     text-align: center;
-    background-color:#3c3c44; /* Change this to your desired color */
+    background-color: #3c3c44; /* Change this to your desired color */
     border-radius: 10px; /* Optional: rounded corners */
     padding: 10px; /* Optional: padding inside the selectbox */
 }
