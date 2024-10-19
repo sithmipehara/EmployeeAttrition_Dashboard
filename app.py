@@ -7,9 +7,6 @@ st.set_page_config(page_title="Employee Attrition Dashboard", layout="wide", ini
 
 st.markdown("""
 <style>
-.stApp {
-    background-color: #111122;  /* Change this to your desired color */
-}
 /* Style for individual metric boxes */
         .metric-box {
             padding: 20px;
@@ -25,7 +22,6 @@ st.markdown("""
         .box3 { background-color: #ff6666; color:#000000;}
         .box4 { background-color: #ff9999;color: #000000; }
 .container {
-    background-color: #2b2b55; /* Dark background for metric containers */
     padding: 10px;  /* Reduced padding */
     border-radius: 0px;
     height: 160px; /* Adjust height to auto for flexibility */
@@ -33,20 +29,12 @@ st.markdown("""
     margin: 5px;  /* Reduced margin */
 }
 .donut-container {
-    background-color: #2b2b55; /* Darker background for donut chart */
     padding: 10px;  /* Reduced padding */
     border-radius: 0px;
 }
 .chart-container {
-    background-color: #2b2b55; /* Medium dark background for charts */
     padding: 10px;  /* Reduced padding */
     border-radius: 0px;
-}
-.response-container {
-    background-color: #2b2b55; /* Darker background for response details */
-    padding: 10px;
-    border-radius: 0px;
-    margin: 5px;  /* Reduced margin */
 }
 .stSelectbox {
     background-color: #2b2b55; /* Change this to your desired color */
