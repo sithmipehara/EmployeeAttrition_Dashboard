@@ -51,7 +51,6 @@ st.markdown("""
 .stSelectbox:focus {
     outline: none; 
     border: 2px solid #66ccff; 
-    box-shadow: 0 0 10px rgba(102, 204, 255, 0.8); 
 }
 
 </style>
