@@ -59,7 +59,7 @@ st.markdown("""
 }
 
 .stSelectbox:hover {
-        background-color: #ff9999;
+        background-color: #ff9999 !important;
     }
     
 </style>
