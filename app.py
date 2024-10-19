@@ -137,7 +137,7 @@ with col3:
     
     cat_data = df[cat_var].value_counts().reset_index()
     cat_data.columns = [cat_var, "Count"]
-    cat_chart = alt.Chart(cat_data).mark_bar().encode(
+    cat_chart = alt.Chart(cat_data).mark_bar(color='#66b3ff').encode(
         x=alt.X(cat_var, sort="-y"),
         y="Count:Q",
         tooltip=[cat_var, "Count"]
