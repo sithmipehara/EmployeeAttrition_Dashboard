@@ -48,11 +48,6 @@ st.markdown("""
     padding: 10px; /* Optional: padding inside the selectbox */
 }
 
-.stSelectbox:focus {
-    outline: none; 
-    border: 2px solid #66ccff; 
-}
-
 </style>
 """, unsafe_allow_html=True)
 
