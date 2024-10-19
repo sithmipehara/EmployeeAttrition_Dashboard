@@ -32,19 +32,19 @@ st.markdown("""
 /* Hover effect on chart containers */
 .chart-container:hover {
     background-color: rgba(255, 128, 128, 0.1);  /* Subtle transparent white */
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);  /* Optional shadow */
+    box-shadow: 0px 0px 10px rgba(255, 128, 128, 0.2);  /* Optional shadow */
 }
 
 /* Donut container hover effect */
 .donut-container:hover {
     background-color: rgba(255, 128, 128, 0.1);  /* Subtle transparent white */
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);  /* Optional shadow */
+    box-shadow: 0px 0px 10px rgba(255, 128, 128, 0.2);  /* Optional shadow */
 }
 
 /* Streamlit specific container for Altair chart */
 .element-container:hover {
     background-color: rgba(255, 128, 128, 0.1); /* Hover effect on the entire chart box */
-    box-shadow: 0px 0px 10px rgba(2255, 128, 128, 0.2);
+    box-shadow: 0px 0px 10px rgba(255, 128, 128, 0.2);
 }
 
 /* Sidebar selectbox style */
