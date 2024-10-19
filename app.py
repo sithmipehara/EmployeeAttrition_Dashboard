@@ -49,9 +49,11 @@ st.markdown("""
 
 /* Sidebar selectbox style */
 .stSelectbox {
+    height: 50px; 
+    line-height: 50px;
     text-align: center;
     background-color: #3c3c44; /* Change this to your desired color */
-    border-radius: 10px; /* Optional: rounded corners */
+    border-radius: 20px; /* Optional: rounded corners */
     padding: 10px; /* Optional: padding inside the selectbox */
 }
 </style>
@@ -83,13 +85,14 @@ col3.markdown(f"<div class='metric-box box3'>No. of Numerical Variables<br><span
 col4.markdown(f"<div class='metric-box box4'>Response Variable<br><span style='font-size: 24px;'>{response_variable}</span></div>", unsafe_allow_html=True)
 
 st.write(" ")
+st.write(" ")
 
 # Create columns with different widths
 col1, col2, col3, col4 = st.columns(4)  
 
 # First column: Metrics containers stacked vertically
 with col1:
-    st.markdown("<div class='donut-container'><h5 style='text-align: center;'>Filters</h5>", unsafe_allow_html=True)
+    st.markdown("<div class='donut-container'>", unsafe_allow_html=True)
     cat_var = st.selectbox("Select Categorical Variable", options=df.select_dtypes(include='object').columns)
     num_var = st.selectbox("Select Numerical Variable", options=df.select_dtypes(include='number').columns)
 
