@@ -151,7 +151,7 @@ with col3:
 with col4:
     st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Numerical Variables Distribution</h5>", unsafe_allow_html=True)
     
-    num_chart = alt.Chart(df).mark_bar(color='#4682B4').encode(
+    num_chart = alt.Chart(df).mark_bar(color='#66b3ff').encode(
         x=alt.X(num_var, bin=True),
         y='count()',
         tooltip=[num_var, 'count()']
