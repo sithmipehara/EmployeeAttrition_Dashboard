@@ -38,7 +38,7 @@ st.markdown("""
 }
 .stSelectbox {
     text-align: center;
-    background-color:  #3c3c44; /* Change this to your desired color */
+    background-color:#3c3c44; /* Change this to your desired color */
     border-radius: 10px; /* Optional: rounded corners */
     padding: 10px; /* Optional: padding inside the selectbox */
 }
