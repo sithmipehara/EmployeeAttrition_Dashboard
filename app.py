@@ -49,6 +49,7 @@ st.markdown("""
 
 /* Sidebar selectbox style */
 .stSelectbox {
+    line-height: 50px;
     height: 150px; 
     text-align: center;
     background-color: #3c3c44; /* Change this to your desired color */
