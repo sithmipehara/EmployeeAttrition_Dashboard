@@ -56,6 +56,11 @@ st.markdown("""
     border-radius: 20px; /* Optional: rounded corners */
     padding: 10px; /* Optional: padding inside the selectbox */
 }
+
+.stSelectbox:hover {
+        background-color: #4a4a54; /* Change this to your desired hover color */
+    }
+    
 </style>
 """, unsafe_allow_html=True)
 
