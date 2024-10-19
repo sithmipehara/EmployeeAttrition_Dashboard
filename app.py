@@ -119,12 +119,12 @@ with col2:
     ).encode(
         text='text:N'
     )
-
+    
     # Combine the donut chart with center text and segment labels
     response_donut_chart = donut_chart + center_text
     
     st.altair_chart(response_donut_chart, theme=None, use_container_width=True)
-    
+    st.markdown("</div>", unsafe_allow_html=True)
     # Add labels for Left and Stayed categories
     response_data = df["Attrition"].value_counts().reset_index()
     response_data.columns = ["Attrition", "Count"]
@@ -141,7 +141,7 @@ with col2:
     st.markdown(f"<h5 style='text-align: left;font-size: 12px;margin-top: -220px;'>Stayed<br>{stayed_count}<br>({stayed_percentage:.1f}%)</h5>", unsafe_allow_html=True)
     st.markdown(f"<h5 style='text-align: right;font-size: 12px;margin-top: -180px;'>Left<br>{left_count}<br>({left_percentage:.1f}%)</h5>", unsafe_allow_html=True)
 
-    st.markdown("</div>", unsafe_allow_html=True)
+    
     
 # Third column of charts in one container
 with col3:
