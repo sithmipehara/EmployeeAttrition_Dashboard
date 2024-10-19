@@ -41,6 +41,12 @@ st.markdown("""
     box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);  /* Optional shadow */
 }
 
+/* Streamlit specific container for Altair chart */
+.element-container:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Hover effect on the entire chart box */
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+}
+
 /* Sidebar selectbox style */
 .stSelectbox {
     text-align: center;
