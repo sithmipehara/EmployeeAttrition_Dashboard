@@ -26,7 +26,13 @@ st.markdown("""
 .chart-container {
     padding: 10px;
     border-radius: 0px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.element-container {
+    padding: 10px;
+    border-radius: 8px;
+    background-color: transparent; /* Ensure transparent background */
 }
 
 /* Hover effect on chart containers */
