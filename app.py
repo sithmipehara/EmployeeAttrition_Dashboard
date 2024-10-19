@@ -176,7 +176,6 @@ with col4:
 # Additional Row for New Graphs
 col5, col6, col7, col8 = st.columns(4)  
 
-with col5:
     
 with col6:
     st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Data Preview</h5>", unsafe_allow_html=True)
