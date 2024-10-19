@@ -22,60 +22,22 @@ st.markdown("""
 .box3 { background-color: #ff6666; color:#000000;}
 .box4 { background-color: #ff9999;color: #000000; }
 
-/* Chart containers */
+.container {
+    padding: 10px;  /* Reduced padding */
+    border-radius: 0px;
+    height: 160px; /* Adjust height to auto for flexibility */
+    color: white; /* Text color */
+    margin: 5px;  /* Reduced margin */
+}
+.donut-container {
+    padding: 10px;  /* Reduced padding */
+    border-radius: 0px;
+}
 .chart-container {
-    position: relative; /* Make the container relative to apply an overlay on hover */
-    padding: 10px;
-    border-radius: 8px;
-    transition: box-shadow 0.3s ease;
+    padding: 10px;  /* Reduced padding */
+    border-radius: 0px;
 }
 
-.chart-container:hover::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.1); /* Transparent white overlay */
-    border-radius: 8px;
-    z-index: 1; /* Ensures the overlay is above the chart background but below the chart content */
-}
-
-.chart-container:hover {
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3); /* Optional shadow */
-}
-
-/* Donut container hover effect */
-.donut-container:hover {
-    background-color: rgba(255, 128, 128, 0.1);  /* Subtle transparent white */
-    box-shadow: 0px 0px 10px rgba(255, 128, 128, 0.2);  /* Optional shadow */
-}
-
-.element-container {
-    position: relative; /* Ensure proper positioning for hover effect */
-    padding: 10px;
-    border-radius: 8px;
-    background-color: transparent; /* Ensure the default background is still visible */
-}
-
-.element-container:hover::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.1); /* Transparent white overlay */
-    border-radius: 8px;
-    z-index: 1;
-}
-
-.element-container:hover {
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3); /* Optional shadow */
-}
-
-/* Sidebar selectbox style */
 .stSelectbox {
     transition: background-color 0.3s;
     line-height: 50px;
@@ -86,10 +48,12 @@ st.markdown("""
     padding: 10px; /* Optional: padding inside the selectbox */
 }
 
-.stSelectbox:hover {
-        background-color: #ff9999 !important;
-    }
-    
+.stSelectbox:focus {
+    outline: none; 
+    border: 2px solid #66ccff; 
+    box-shadow: 0 0 10px rgba(102, 204, 255, 0.8); 
+}
+
 </style>
 """, unsafe_allow_html=True)
 
