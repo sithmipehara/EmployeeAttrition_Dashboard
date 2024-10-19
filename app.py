@@ -58,7 +58,7 @@ st.markdown("""
 }
 
 .stSelectbox:hover {
-        background-color: #4a4a54; /* Change this to your desired hover color */
+        background-color: #ff9999;
     }
     
 </style>
