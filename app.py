@@ -101,7 +101,7 @@ with col2:
     # Donut chart base
     donut_chart = alt.Chart(response_data).mark_arc(innerRadius=60).encode(
         theta=alt.Theta(field="Count", type="quantitative"),
-        color=alt.Color('Attrition:N', scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4']),
+        color=alt.Color('Attrition:N', scale=alt.Scale(domain=['Left', 'Stayed'], range=['#339999', '#4682B4']),
                     legend=alt.Legend(orient="top", direction="horizontal")),
         tooltip=["Attrition", "Count"]
     ).properties(width=30, height=300)
@@ -185,7 +185,7 @@ with col7:
     stacked_cat_chart = alt.Chart(df).mark_bar().encode(
         y=alt.Y(cat_var, title=cat_var, sort='-x'),
         x=alt.X('count()', title='Count'),
-        color=alt.Color('Attrition', scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4']),
+        color=alt.Color('Attrition', scale=alt.Scale(domain=['Left', 'Stayed'], range=['#339999', '#4682B4']),
                     legend=alt.Legend(orient="top", direction="horizontal")),
         tooltip=[cat_var, 'Attrition', 'count()']
     ).properties(width=300, height=300)
@@ -210,7 +210,7 @@ with col8:
     box_plot = alt.Chart(df_filtered).mark_boxplot(size=40, color='white').encode(
         x=alt.X("Attrition:N", title="Attrition"),
         y=alt.Y(num_var, title=num_var),
-        color=alt.Color("Attrition", scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4']),
+        color=alt.Color("Attrition", scale=alt.Scale(domain=['Left', 'Stayed'], range=['#339999', '#4682B4']),
                     legend=alt.Legend(orient="top", direction="horizontal"))
     ).properties(width=300, height=300)
 
