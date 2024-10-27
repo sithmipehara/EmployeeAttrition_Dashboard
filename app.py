@@ -47,6 +47,7 @@ st.markdown("""
     border-radius: 0px; /* Optional: rounded corners */
     padding-left: 15px; /* Optional: padding inside the selectbox */
     padding-right: 15px;
+    padding-bottom: 10px;
 }
 
 </style>
