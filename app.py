@@ -42,6 +42,7 @@ st.markdown("""
     transition: background-color 0.3s;
     line-height: 50px;
     height: 80px; 
+    width: 100px;
     text-align: center;
     background-color: #3c3c44; /* Change this to your desired color */
     border-radius: 0px; /* Optional: rounded corners */
@@ -84,7 +85,7 @@ st.write(" ")
 st.write(" ")
 
 # Create columns with different widths
-col1, col2, col3, col4 = st.columns([1.2,1,1,1])  
+col1, col2, col3, col4 = st.columns(4)  
 
 # First column: Metrics containers stacked vertically
 with col1:
