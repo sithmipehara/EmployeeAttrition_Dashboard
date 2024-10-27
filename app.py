@@ -30,7 +30,7 @@ st.markdown("""
     margin: 5px;  /* Reduced margin */
 }
 .donut-container {
-    padding: 10px;  /* Reduced padding */
+    padding: 20px;  /* Reduced padding */
     border-radius: 0px;
 }
 .chart-container {
@@ -42,7 +42,6 @@ st.markdown("""
     transition: background-color 0.3s;
     line-height: 50px;
     height: 80px; 
-    width: 100px;
     text-align: center;
     background-color: #3c3c44; /* Change this to your desired color */
     border-radius: 0px; /* Optional: rounded corners */
