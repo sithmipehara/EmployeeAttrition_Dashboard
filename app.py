@@ -84,7 +84,7 @@ st.write(" ")
 st.write(" ")
 
 # Create columns with different widths
-col1, col2, col3, col4 = st.columns(4)  
+col1, col2, col3, col4 = st.columns([1.2,1,1,1])  
 
 # First column: Metrics containers stacked vertically
 with col1:
