@@ -41,10 +41,10 @@ st.markdown("""
 .stSelectbox {
     transition: background-color 0.3s;
     line-height: 50px;
-    height: 150px; 
+    height: 70px; 
     text-align: center;
     background-color: #3c3c44; /* Change this to your desired color */
-    border-radius: 20px; /* Optional: rounded corners */
+    border-radius: 0px; /* Optional: rounded corners */
     padding: 10px; /* Optional: padding inside the selectbox */
 }
 
@@ -87,14 +87,22 @@ with col1:
     st.markdown("<div class='donut-container'><h5 style='text-align: center;'>Input Parameters</h5></div>", unsafe_allow_html=True)
     st.markdown("<div class='donut-container'>", unsafe_allow_html=True)
     selectbox_style = """
-    <div style='background-color: #3c3c44; padding: 10px; border: 1px solid #e6e9ef; border-radius: 20px;'>
+    <div style='background-color: #3c3c44; padding: 10px;'>
         <h6 style='margin: 0; padding-bottom: 5px;'>Bar Chart 1 & Stack Bar Chart 1 Parameters</h6>
         <p style="font-size:14px; margin: 0;">Select Categorical Variable</p>
     </div>
     """
     st.markdown(selectbox_style, unsafe_allow_html=True)
     cat_var = st.selectbox("", options=df.select_dtypes(include='object').columns)
-    num_var = st.selectbox("Select Numerical Variable", options=df.select_dtypes(include='number').columns)
+
+    selectbox_style = """
+    <div style='background-color: #3c3c44; padding: 10px;'>
+        <h6 style='margin: 0; padding-bottom: 5px;'>Bar Chart 2 & Stack Bar Chart 2 Parameters</h6>
+        <p style="font-size:14px; margin: 0;">Select Numerical Variable</p>
+    </div>
+    """
+    st.markdown(selectbox_style, unsafe_allow_html=True)
+    num_var = st.selectbox("", options=df.select_dtypes(include='number').columns)
 
 # Second column: Three containers for donut chart and response details
 with col2:
