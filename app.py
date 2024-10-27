@@ -89,7 +89,7 @@ with col1:
     selectbox_style = """
     <div style='background-color: #3c3c44; padding: 10px;'>
         <h6 style='margin: 0; padding-bottom: 5px;text-align: center;'>Bar Chart 1 & Stack Bar Chart 1 Parameters</h6>
-        <p style="font-size:14px; margin: 0;">Select Categorical Variable</p>
+        <p style="font-size:14px; margin: 10;text-align: center;">Select Categorical Variable</p>
     </div>
     """
     st.markdown(selectbox_style, unsafe_allow_html=True)
@@ -98,7 +98,7 @@ with col1:
     selectbox_style = """
     <div style='background-color: #3c3c44; padding: 10px;'>
         <h6 style='margin: 0; padding-bottom: 5px;text-align: center;'>Bar Chart 2 & Stack Bar Chart 2 Parameters</h6>
-        <p style="font-size:14px; margin: 0;">Select Numerical Variable</p>
+        <p style="font-size:14px; margin: 10;text-align: center;">Select Numerical Variable</p>
     </div>
     """
     st.markdown(selectbox_style, unsafe_allow_html=True)
