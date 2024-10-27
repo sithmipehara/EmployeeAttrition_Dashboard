@@ -90,7 +90,7 @@ with col1:
     st.markdown("<div class='donut-container'>", unsafe_allow_html=True)
     selectbox_style = """
     <div style='background-color: #3c3c44; padding: 10px;'>
-        <h6 style='margin: 10; padding: 10px;text-align: center;'>Bar Chart 1 & Stack Bar Chart 1 Parameters</h6>
+        <h6 style='margin: 0; padding: 10px;text-align: center;'>Bar Chart 1 & Stack Bar Chart 1 Parameters</h6>
         <p style="font-size:14px; margin: 10;text-align: center;">Select Categorical Variable</p>
     </div>
     """
@@ -99,7 +99,7 @@ with col1:
 
     selectbox_style = """
     <div style='background-color: #3c3c44; padding: 10px;'>
-        <h6 style='margin: 10; padding: 10px;text-align: center;'>Bar Chart 2 & Stack Bar Chart 2 Parameters</h6>
+        <h6 style='margin: 0; padding: 10px;text-align: center;'>Bar Chart 2 & Stack Bar Chart 2 Parameters</h6>
         <p style="font-size:14px; margin: 10;text-align: center;">Select Numerical Variable</p>
     </div>
     """
