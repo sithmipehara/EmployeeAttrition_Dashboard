@@ -99,15 +99,6 @@ with col1:
     st.markdown(selectbox_style, unsafe_allow_html=True)
     cat_var = st.selectbox("", options=df.select_dtypes(include='object').columns)
 
-    selectbox_style = """
-    <div style='background-color: #3c3c44; padding: 10px;'>
-        <h6 style='margin: 0; padding: 10px;text-align: center;'>Bar Chart 2 & Stack Bar Chart 2 Parameters</h6>
-        <p style="font-size:14px; margin: 10;text-align: center;">Select Numerical Variable</p>
-    </div>
-    """
-    st.markdown(selectbox_style, unsafe_allow_html=True)
-    num_var = st.selectbox("", options=df.select_dtypes(include='number').columns)
-
 # Second column: Three containers for donut chart and response details
 with col2:
     # Container for Donut Chart
@@ -200,7 +191,17 @@ with col4:
     
 # Additional Row for New Graphs
 col5, col6, col7, col8 = st.columns(4)  
-
+# First column: Metrics containers stacked vertically
+with col5:
+    st.markdown("<div class='donut-container'>", unsafe_allow_html=True)
+    selectbox_style = """
+    <div style='background-color: #3c3c44; padding: 10px;'>
+        <h6 style='margin: 0; padding: 10px;text-align: center;'>Bar Chart 2 & Stack Bar Chart 2 Parameters</h6>
+        <p style="font-size:14px; margin: 10;text-align: center;">Select Numerical Variable</p>
+    </div>
+    """
+    st.markdown(selectbox_style, unsafe_allow_html=True)
+    num_var = st.selectbox("", options=df.select_dtypes(include='number').columns)
     
 with col6:
     st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Data Preview</h5>", unsafe_allow_html=True)
