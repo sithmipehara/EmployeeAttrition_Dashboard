@@ -41,7 +41,7 @@ st.markdown("""
 .stSelectbox {
     transition: background-color 0.3s;
     line-height: 50px;
-    height: 70px; 
+    height: 80px; 
     text-align: center;
     background-color: #3c3c44; /* Change this to your desired color */
     border-radius: 0px; /* Optional: rounded corners */
