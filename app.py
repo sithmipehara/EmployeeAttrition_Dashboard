@@ -45,7 +45,7 @@ st.markdown("""
     text-align: center;
     background-color: #3c3c44; /* Change this to your desired color */
     border-radius: 0px; /* Optional: rounded corners */
-    padding: 0px; /* Optional: padding inside the selectbox */
+    padding-left: 10px; /* Optional: padding inside the selectbox */
 }
 
 </style>
