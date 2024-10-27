@@ -80,6 +80,8 @@ col4.markdown(f"<div class='metric-box box4'>Response Variable<br><span style='f
 
 st.write(" ")
 st.write(" ")
+st.write(" ")
+st.write(" ")
 
 # Create columns with different widths
 col1, col2, col3, col4 = st.columns(4)  
