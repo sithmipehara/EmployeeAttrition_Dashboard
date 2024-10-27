@@ -183,6 +183,15 @@ with col4:
         tooltip=[num_var, 'count()']
     ).properties(width=300, height=300)
 
+    border_layer = alt.Chart(df).mark_bar(
+    color='none',  # No fill color for bars
+    stroke='#003366',  # Border color
+    strokeWidth=1  # Border width
+).encode(
+    x=alt.X(num_var, bin=True),
+    y='count()'
+)
+    num_chart = num_chart + border_layer
     st.altair_chart(num_chart, theme=None, use_container_width=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
