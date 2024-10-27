@@ -177,7 +177,7 @@ with col3:
 with col4:
     st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Numerical Variables Distribution</h5>", unsafe_allow_html=True)
     
-    num_chart = alt.Chart(df).mark_bar(color='black').encode(
+    num_chart = alt.Chart(df).mark_bar(color='#80bfff').encode(
         x=alt.X(num_var, bin=True),
         y='count()',
         tooltip=[num_var, 'count()']
@@ -185,7 +185,7 @@ with col4:
 
     border_layer = alt.Chart(df).mark_bar(
     color='none',  # No fill color for bars
-    stroke='#003366',  # Border color
+    stroke='black',  # Border color
     strokeWidth=1  # Border width
     ).encode(
     x=alt.X(num_var, bin=True),
