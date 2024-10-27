@@ -168,25 +168,19 @@ with col3:
     
 # Fourth column of charts in one container
 with col4:
-    st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Numerical Variables Distribution</h5>", unsafe_allow_html=True)
-    
-    num_chart = alt.Chart(df).mark_bar(color='#80bfff').encode(
-        x=alt.X(num_var, bin=True),
-        y='count()',
-        tooltip=[num_var, 'count()']
+    st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Response vs Categorical Variables</h5>", unsafe_allow_html=True)
+
+    # Response vs Categorical Variable (Stacked Bar Chart) with custom colors
+    stacked_cat_chart = alt.Chart(df).mark_bar().encode(
+        y=alt.Y(cat_var, title=cat_var, sort='-x'),
+        x=alt.X('count()', title='Count'),
+        color=alt.Color('Attrition', scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4']),
+                    legend=alt.Legend(orient="top", direction="horizontal")),
+        tooltip=[cat_var, 'Attrition', 'count()']
     ).properties(width=300, height=300)
 
-    border_layer = alt.Chart(df).mark_bar(
-    color='none',  # No fill color for bars
-    stroke='black',  # Border color
-    strokeWidth=1  # Border width
-).encode(
-    x=alt.X(num_var, bin=True),
-    y='count()'
-)
-    num_chart = num_chart + border_layer
-    st.altair_chart(num_chart, theme=None, use_container_width=True)
-
+    st.altair_chart(stacked_cat_chart, theme=None, use_container_width=True)
+    
     st.markdown("</div>", unsafe_allow_html=True)
     
 # Additional Row for New Graphs
@@ -208,19 +202,25 @@ with col6:
     st.markdown("</div>", unsafe_allow_html=True)
     
 with col7:
-    st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Response vs Categorical Variables</h5>", unsafe_allow_html=True)
-
-    # Response vs Categorical Variable (Stacked Bar Chart) with custom colors
-    stacked_cat_chart = alt.Chart(df).mark_bar().encode(
-        y=alt.Y(cat_var, title=cat_var, sort='-x'),
-        x=alt.X('count()', title='Count'),
-        color=alt.Color('Attrition', scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4']),
-                    legend=alt.Legend(orient="top", direction="horizontal")),
-        tooltip=[cat_var, 'Attrition', 'count()']
+    st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Numerical Variables Distribution</h5>", unsafe_allow_html=True)
+    
+    num_chart = alt.Chart(df).mark_bar(color='#80bfff').encode(
+        x=alt.X(num_var, bin=True),
+        y='count()',
+        tooltip=[num_var, 'count()']
     ).properties(width=300, height=300)
 
-    st.altair_chart(stacked_cat_chart, theme=None, use_container_width=True)
-    
+    border_layer = alt.Chart(df).mark_bar(
+    color='none',  # No fill color for bars
+    stroke='black',  # Border color
+    strokeWidth=1  # Border width
+).encode(
+    x=alt.X(num_var, bin=True),
+    y='count()'
+)
+    num_chart = num_chart + border_layer
+    st.altair_chart(num_chart, theme=None, use_container_width=True)
+
     st.markdown("</div>", unsafe_allow_html=True)
     
 # Fourth column of charts in one container
