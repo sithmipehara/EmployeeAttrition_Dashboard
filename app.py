@@ -30,8 +30,10 @@ st.markdown("""
     margin: 5px;  /* Reduced margin */
 }
 .donut-container {
-    padding: 30px;  /* Reduced padding */
+    padding: 10px;  /* Reduced padding */
     border-radius: 0px;
+    padding-left: 10px;
+    padding-right:10px;
 }
 .chart-container {
     padding: 10px;  /* Reduced padding */
