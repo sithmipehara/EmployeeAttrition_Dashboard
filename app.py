@@ -91,8 +91,7 @@ with col1:
 <p style="font-size:14px;">Select Categorical Variable</p>
 """
     cat_var = st.selectbox(label=selectbox_label, options=df.select_dtypes(include='object').columns, format_func=lambda x: x, label_visibility="collapsed")
-    st.markdown(selectbox_label, unsafe_allow_html=True)
-    cat_var = st.selectbox("", options=df.select_dtypes(include='object').columns)
+
     num_var = st.selectbox("Select Numerical Variable", options=df.select_dtypes(include='number').columns)
 
 # Second column: Three containers for donut chart and response details
