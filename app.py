@@ -86,7 +86,11 @@ col1, col2, col3, col4 = st.columns(4)
 with col1:
     st.markdown("<div class='donut-container'><h5 style='text-align: center;'>Input Parameters</h5></div>", unsafe_allow_html=True)
     st.markdown("<div class='donut-container'>", unsafe_allow_html=True)
-    cat_var = st.selectbox("Select Categorical Variable", options=df.select_dtypes(include='object').columns)
+    selectbox_label = """
+<h6>Bar Chart 1 & Stack Bar Chart 1 Parameters</h6>
+<p style="font-size:14px;">Select Categorical Variable</p>
+"""
+    cat_var = st.selectbox(label=selectbox_label, options=df.select_dtypes(include='object').columns)
     num_var = st.selectbox("Select Numerical Variable", options=df.select_dtypes(include='number').columns)
 
 # Second column: Three containers for donut chart and response details
