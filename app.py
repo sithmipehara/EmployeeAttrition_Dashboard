@@ -38,19 +38,17 @@ st.markdown("""
     padding: 10px;  /* Reduced padding */
     border-radius: 0px;
 }
-
 .stSelectbox [data-baseweb="select"] {
         background-color: #f0f5ff;
         color: #333;
-        border-radius: 5px;
         padding: 5px;
     }
-    .stSelectbox [data-baseweb="select"] .css-1j6p17q {
+ .stSelectbox [data-baseweb="select"] .css-1j6p17q {
         background-color: #f0f5ff;
         color: #333;
     }
-    .stSelectbox [data-baseweb="select"] .css-1j6p17q:hover, 
-    .stSelectbox [data-baseweb="select"] .css-1j6p17q:focus {
+  .stSelectbox [data-baseweb="select"] .css-1j6p17q:hover, 
+  .stSelectbox [data-baseweb="select"] .css-1j6p17q:focus {
         background-color: #80bfff;
         color: #fff;
     }
@@ -94,7 +92,8 @@ categorical_columns = df.select_dtypes(include='object').columns
 cat_var = st.sidebar.selectbox("Select Data", options=categorical_columns, index=0)
 
 st.sidebar.header("Bar Chart 2 & Stack Bar Chart 2 Parameters")
-num_var=st.sidebar.multiselect("Select Data",df.select_dtypes(include='number').columns,df.select_dtypes(include='number').columns)
+numerical_columns = df.select_dtypes(include='number').columns
+num_var = st.sidebar.selectbox("Select Data", options=numerical_columns, index=0)
 
 # Create columns with different widths
 col2, col3, col4 = st.columns(3)  
@@ -215,6 +214,26 @@ with col7:
     
 # Fourth column of charts in one container
 with col8:
+    st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Numerical Variables Distribution</h5>", unsafe_allow_html=True)
+    
+    num_chart = alt.Chart(df).mark_bar(color='#80bfff').encode(
+        x=alt.X(num_var, bin=True),
+        y='count()',
+        tooltip=[num_var, 'count()']
+    ).properties(width=300, height=300)
+
+    border_layer = alt.Chart(df).mark_bar(
+    color='none',  # No fill color for bars
+    stroke='black',  # Border color
+    strokeWidth=1  # Border width
+).encode(
+    x=alt.X(num_var, bin=True),
+    y='count()'
+)
+    num_chart = num_chart + border_layer
+    st.altair_chart(num_chart, theme=None, use_container_width=True)
+
+    st.markdown("</div>", unsafe_allow_html=True)
     st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Response vs Numerical Variables</h5>", unsafe_allow_html=True)
     
     # Calculate necessary quantiles and IQR for numerical variable
