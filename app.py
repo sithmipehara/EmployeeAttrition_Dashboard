@@ -214,26 +214,6 @@ with col7:
     
 # Fourth column of charts in one container
 with col8:
-    st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Numerical Variables Distribution</h5>", unsafe_allow_html=True)
-    
-    num_chart = alt.Chart(df).mark_bar(color='#80bfff').encode(
-        x=alt.X(num_var, bin=True),
-        y='count()',
-        tooltip=[num_var, 'count()']
-    ).properties(width=300, height=300)
-
-    border_layer = alt.Chart(df).mark_bar(
-    color='none',  # No fill color for bars
-    stroke='black',  # Border color
-    strokeWidth=1  # Border width
-).encode(
-    x=alt.X(num_var, bin=True),
-    y='count()'
-)
-    num_chart = num_chart + border_layer
-    st.altair_chart(num_chart, theme=None, use_container_width=True)
-
-    st.markdown("</div>", unsafe_allow_html=True)
     st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Response vs Numerical Variables</h5>", unsafe_allow_html=True)
     
     # Calculate necessary quantiles and IQR for numerical variable
