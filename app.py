@@ -38,11 +38,12 @@ st.markdown("""
     padding: 10px;  /* Reduced padding */
     border-radius: 0px;
 } 
-.stSelectbox [data-baseweb="select"] .css-1j6p17q:valid {
-        background-color: #80bfff;
-        color: #fff;
-    }
-    
+.custom-sidebar-header {
+        text-align: center;
+        font-size: 24px; /* Adjust font size as needed */
+        font-weight: bold;
+        margin-bottom: 15px;
+ }
 </style>
 """, unsafe_allow_html=True)
 
@@ -76,7 +77,8 @@ st.write(" ")
 st.write(" ")
 st.write(" ")
 
-st.sidebar.header("Input Parameters")
+st.sidebar.markdown("<div class='custom-sidebar-header'>Input Parameters</div>", unsafe_allow_html=True)
+st.write(" ")
 st.sidebar.header("Bar Chart 1 & Stack Bar Chart 1 Parameters")
 categorical_columns = df.select_dtypes(include='object').columns
 cat_var = st.sidebar.selectbox("Select Data", options=categorical_columns, index=0)
