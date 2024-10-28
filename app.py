@@ -39,7 +39,7 @@ st.markdown("""
     border-radius: 0px;
 }
 .stSelectbox [data-baseweb="select"] {
-        background-color: #f0f5ff;
+        background-color: #ff4d4d;
         color: #333;
         padding: 5px;
         border-radius: 0px;
