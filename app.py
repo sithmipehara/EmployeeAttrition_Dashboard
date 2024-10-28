@@ -42,9 +42,11 @@ st.markdown("""
         background-color: #f0f5ff;
         color: #333;
         padding: 5px;
+        border-radius: 0px;
+        border: none;
     }
  .stSelectbox [data-baseweb="select"] .css-1j6p17q {
-        background-color: #f0f5ff;
+        background-color: #ff4b4b;
         color: #333;
     }
   .stSelectbox [data-baseweb="select"] .css-1j6p17q:hover, 
