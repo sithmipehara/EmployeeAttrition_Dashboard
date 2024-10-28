@@ -97,8 +97,8 @@ st.sidebar.header("Bar Chart 2 & Stack Bar Chart 2 Parameters")
 numerical_columns = df.select_dtypes(include='number').columns
 num_var = st.sidebar.selectbox("Select Data", options=numerical_columns, index=0)
 
-st.sidebar.markdown(f"<div class='selected-variable-box'>Selected Categorical: {cat_var}</div>", unsafe_allow_html=True)
-st.sidebar.markdown(f"<div class='selected-variable-box'>Selected Numerical: {num_var}</div>", unsafe_allow_html=True)
+st.sidebar.markdown(f"<div class='selected-variable-box'>Selected Categorical Variable:<br> {cat_var}</div>", unsafe_allow_html=True)
+st.sidebar.markdown(f"<div class='selected-variable-box'>Selected Numerical variable: <br>{num_var}</div>", unsafe_allow_html=True)
 
 # Create columns with different widths
 col2, col3, col4 = st.columns(3)  
