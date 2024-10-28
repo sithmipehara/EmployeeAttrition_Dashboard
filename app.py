@@ -39,18 +39,22 @@ st.markdown("""
     border-radius: 0px;
 }
 
-.stSelectbox {
-    transition: background-color 0.3s;
-    line-height: 50px;
-    height: 80px; 
-    text-align: center;
-    background-color: #3c3c44; /* Change this to your desired color */
-    border-radius: 0px; /* Optional: rounded corners */
-    padding-left: 15px; /* Optional: padding inside the selectbox */
-    padding-right: 15px;
-    padding-bottom: 20px;
-}
-
+.stSelectbox [data-baseweb="select"] {
+        background-color: #f0f5ff;
+        color: #333;
+        border-radius: 5px;
+        padding: 5px;
+    }
+    .stSelectbox [data-baseweb="select"] .css-1j6p17q {
+        background-color: #f0f5ff;
+        color: #333;
+    }
+    .stSelectbox [data-baseweb="select"] .css-1j6p17q:hover, 
+    .stSelectbox [data-baseweb="select"] .css-1j6p17q:focus {
+        background-color: #80bfff;
+        color: #fff;
+    }
+    
 </style>
 """, unsafe_allow_html=True)
 
@@ -86,7 +90,8 @@ st.write(" ")
 
 st.sidebar.header("Input Parameters")
 st.sidebar.header("Bar Chart 1 & Stack Bar Chart 1 Parameters")
-cat_var=st.sidebar.multiselect("Select Data",df.select_dtypes(include='object').columns,df.select_dtypes(include='object').columns)
+categorical_columns = df.select_dtypes(include='object').columns
+cat_var = st.sidebar.selectbox("Select Data", options=categorical_columns, index=0)
 
 st.sidebar.header("Bar Chart 2 & Stack Bar Chart 2 Parameters")
 num_var=st.sidebar.multiselect("Select Data",df.select_dtypes(include='number').columns,df.select_dtypes(include='number').columns)
@@ -147,19 +152,19 @@ with col2:
     
 # Third column of charts in one container
 with col3:
-    st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Categorical Variable Distribution</h5>", unsafe_allow_html=True)
-    
-    cat_data = df[cat_var].value_counts().reset_index()
-    cat_data.columns = [cat_var, "Count"]
-    cat_chart = alt.Chart(cat_data).mark_bar(color='#80bfff').encode(
-        x=alt.X(cat_var, sort="-y"),
-        y="Count:Q",
-        tooltip=[cat_var, "Count"]
-    ).properties(width=300, height=300)
- 
-    st.altair_chart(cat_chart, theme=None, use_container_width=True)
-
-    st.markdown("</div>", unsafe_allow_html=True)
+    if cat_var:
+        cat_data = df[cat_var].value_counts().reset_index()
+        cat_data.columns = [cat_var, "Count"]
+        cat_chart = alt.Chart(cat_data).mark_bar(color='#80bfff').encode(
+            x=alt.X(cat_var, sort="-y"),
+            y="Count:Q",
+            tooltip=[cat_var, "Count"]
+        ).properties(width=300, height=300)
+        st.markdown(f"<div class='chart-container'><h5 style='text-align: center;'>{cat_var} Distribution</h5>", unsafe_allow_html=True)
+        st.altair_chart(cat_chart, theme=None, use_container_width=True)
+        st.markdown("</div>", unsafe_allow_html=True)
+    else:
+        st.warning("Please select a categorical variable.")
     
 # Fourth column of charts in one container
 with col4:
