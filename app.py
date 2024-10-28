@@ -37,8 +37,11 @@ st.markdown("""
 .chart-container {
     padding: 10px;  /* Reduced padding */
     border-radius: 0px;
-}
-
+} 
+.stSelectbox [data-baseweb="select"] .css-1j6p17q:valid {
+        background-color: #80bfff;
+        color: #fff;
+    }
     
 </style>
 """, unsafe_allow_html=True)
