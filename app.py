@@ -89,11 +89,11 @@ st.write(" ")
 st.sidebar.markdown("<div class='custom-sidebar-header'>Input Parameters</div>", unsafe_allow_html=True)
 st.write(" ")
 st.write(" ")
-st.sidebar.header("Bar Chart 1 & Stack Bar Chart 1 Parameters")
+st.sidebar.header("Bar Chart & Stack Bar Chart 1 Parameters")
 categorical_columns = df.select_dtypes(include='object').columns
 cat_var = st.sidebar.selectbox("Select Data", options=categorical_columns, index=0)
 
-st.sidebar.header("Bar Chart 2 & Stack Bar Chart 2 Parameters")
+st.sidebar.header("Histogram & Stack Bar Chart 2 Parameters")
 numerical_columns = df.select_dtypes(include='number').columns
 num_var = st.sidebar.selectbox("Select Data", options=numerical_columns, index=0)
 
