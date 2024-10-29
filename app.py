@@ -101,10 +101,10 @@ st.sidebar.markdown(f"<div class='selected-variable-box'>Selected Categorical Va
 st.sidebar.markdown(f"<div class='selected-variable-box'>Selected Numerical variable: <br>{num_var}</div>", unsafe_allow_html=True)
 
 # Create columns with different widths
-col2, col3, col4 = st.columns(3)  
+col1, col2, col3 = st.columns(3)  
 
 # Second column: Three containers for donut chart and response details
-with col2:
+with col1:
     # Container for Donut Chart
     st.markdown("<div class='donut-container'><h5 style='text-align: center;'>Response Variable Distribution</h5>", unsafe_allow_html=True)
     
@@ -117,7 +117,7 @@ with col2:
     donut_chart = alt.Chart(response_data).mark_arc(innerRadius=60).encode(
         theta=alt.Theta(field="Count", type="quantitative"),
         color=alt.Color('Attrition:N', scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4']),
-                    legend=alt.Legend(orient="top", direction="horizontal")),
+                    legend=alt.Legend(orient="bottom", direction="horizontal")),
         tooltip=["Attrition", "Count"]
     ).properties(width=30, height=300)
 
@@ -155,7 +155,7 @@ with col2:
     st.markdown("</div>", unsafe_allow_html=True)
     
 # Third column of charts in one container
-with col3:
+with col2:
     if cat_var:
         cat_data = df[cat_var].value_counts().reset_index()
         cat_data.columns = [cat_var, "Count"]
@@ -171,7 +171,7 @@ with col3:
         st.warning("Please select a categorical variable.")
     
 # Fourth column of charts in one container
-with col4:
+with col3:
     st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Response vs Categorical Variables</h5>", unsafe_allow_html=True)
 
     # Response vs Categorical Variable (Stacked Bar Chart) with custom colors
@@ -179,7 +179,7 @@ with col4:
         y=alt.Y(cat_var, title=cat_var, sort='-x'),
         x=alt.X('count()', title='Count'),
         color=alt.Color('Attrition', scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4']),
-                    legend=alt.Legend(orient="top", direction="horizontal")),
+                    legend=alt.Legend(orient="bottom", direction="horizontal")),
         tooltip=[cat_var, 'Attrition', 'count()']
     ).properties(width=300, height=300)
 
@@ -188,14 +188,14 @@ with col4:
     st.markdown("</div>", unsafe_allow_html=True)
     
 # Additional Row for New Graphs
-col6, col7, col8 = st.columns(3)  
+col4, col5, col6 = st.columns(3)  
 
-with col6:
+with col4:
     st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Data Preview</h5>", unsafe_allow_html=True)
     st.dataframe(df.dropna(how='all').head(6), height=300)
     st.markdown("</div>", unsafe_allow_html=True)
     
-with col7:
+with col5:
     st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Numerical Variables Distribution</h5>", unsafe_allow_html=True)
     
     num_chart = alt.Chart(df).mark_bar(color='#80bfff').encode(
@@ -218,7 +218,7 @@ with col7:
     st.markdown("</div>", unsafe_allow_html=True)
     
 # Fourth column of charts in one container
-with col8:
+with col6:
     st.markdown("<div class='chart-container'><h5 style='text-align: center;'>Response vs Numerical Variables</h5>", unsafe_allow_html=True)
     
     # Calculate necessary quantiles and IQR for numerical variable
@@ -234,7 +234,7 @@ with col8:
         x=alt.X("Attrition:N", title="Attrition"),
         y=alt.Y(num_var, title=num_var),
         color=alt.Color("Attrition", scale=alt.Scale(domain=['Left', 'Stayed'], range=['#FF6347', '#4682B4']),
-                    legend=alt.Legend(orient="top", direction="horizontal"))
+                    legend=alt.Legend(orient="bottom", direction="horizontal"))
     ).properties(width=300, height=300)
 
     st.altair_chart(box_plot, theme=None, use_container_width=True)
